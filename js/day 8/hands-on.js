@@ -29,14 +29,50 @@ const bankAccount = {
     balance : 5000
 }
 function deposit(amount){
-amount +=1;
-return amount;
+    bankAccount.balance += amount;
+    return bankAccount.balance
 }
 function withdraw(amount){
-if(amount>0){
+    if(bankAccount.balance - amount > 0 ){
+        bankAccount.balance -= amount
+        return bankAccount.balance;
+    }
+    else
+    {console.log("Insufficient funds");
+    }
+}
+console.log(deposit(1000));
+console.log(withdraw(2000));
+console.log(withdraw(10000));
 
+/*Task 3 Destructuring
+Use this object: const product = { id: 101, name: "Laptop", price: 60000, brand: "Dell", stock: 5 };
+Destructure name and price into variables and log them.
+Destructure brand but rename it to make. Log it.
+Destructure warranty with a default value of "1 year" (since the property doesn't exist). Log it.*/
+const product = { id: 101, name: "Laptop", price: 60000, brand: "Dell", stock: 5 };
+const {name , price} = product;
+console.log(name);
+console.log(price);
+const {brand :make} = product;
+console.log(make);
+const {warranty = "1 year"} = product;
+console.log(warranty);
+
+/*Bonus Object as Iterable
+Use the student object from Task 1 (after modifications).
+Use Object.keys to log all keys.
+Use Object.values to log all values.
+Use Object.entries with forEach to log each property as "key: value".
+Bonus: count how many properties the object has.*/
+const student1 = {
+    name: 'Anaya',
+    age: 22,
+    course: 'B.Tech',
+    marks: [ 56, 78, 65 ],
+    email: 'anaya@example.com'
 }
-else
-{console.log("Insufficient funds")}
-}
-console.log(deposit(bankAccount.balance));
+console.log(Object.keys(student1))
+console.log(Object.values(student1))
+console.log(Object.entries(student1))
+console.log("Total properties:", Object.keys(student1).length);

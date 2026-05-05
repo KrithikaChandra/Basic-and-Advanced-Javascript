@@ -95,8 +95,8 @@ console.log(showInfo({ role: "SuperAdmin" }));
 // console.log(showInfo());                      // "User: Guest"
 // console.log(showInfo({ name: "Riya", role: "User" })); // "User: Riya"
 // const u = { a: 1, b: 2, c: 3 };
-const { a, ...rest } = u;
-console.log(rest);
+// const { a, ...rest } = u;
+// console.log(rest);
 
 //Topic 4 Rest Parameters
 function sum(...numbers) {
@@ -145,7 +145,7 @@ console.log(null ?? "default");     // "default"
 console.log(undefined ?? "default"); // "default"
 
 // Real example — count of items
-const count = userInputCount ?? 1; 
+// const count = userInputCount ?? 1; 
 
 //Topic 7 Computed Property Names
 const fieldName = "email";
