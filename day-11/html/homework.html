@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 11 Events | JavaScript Curriculum</title>
+    <link rel="stylesheet" href="../../shared/css/style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <h1>DAY 11 EVENTS</h1>
+            <p class="subtitle">Homework: Take-home Practice</p>
+        </header>
+        <main class="site-content">
+            <article>
+                <h2>Homework Exercises</h2>
+                
+                <section>
+                    <h3>Exercise 1: Form Validation with preventDefault</h3>
+                    <p><strong>What to do:</strong></p>
+                    <ul>
+                        <li>Grab the form, name input, email input, and result paragraph</li>
+                        <li>On form submit, use <code>preventDefault()</code> to stop page reload</li>
+                        <li>Check if both fields are filled. Show success or error message</li>
+                    </ul>
+                    <form id="login-form" style="padding: 15px; background: #FFF3E0; border-radius: 4px; margin-bottom: 15px;">
+                        <input id="form-name" type="text" placeholder="Name" style="padding: 8px; margin-bottom: 10px; width: 100%; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                        <input id="form-email" type="email" placeholder="Email" style="padding: 8px; margin-bottom: 10px; width: 100%; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                        <button type="submit" style="padding: 10px 20px; cursor: pointer; background: #FF9800; color: white; border: none; border-radius: 4px;">Submit</button>
+                    </form>
+                    <p id="form-result" style="color: #666; font-size: 12px;"></p>
+                    <pre><code>let loginForm = document.querySelector("#login-form");
+let formResult = document.querySelector("#form-result");
+
+loginForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  
+  let name = document.querySelector("#form-name").value;
+  let email = document.querySelector("#form-email").value;
+  
+  if (name === "" || email === "") {
+    formResult.innerHTML = "<span style='color: red;'>? All fields required!</span>";
+    console.log("All fields required!");
+  } else {
+    formResult.innerHTML = "<span style='color: green;'>? Form valid, submitted successfully!</span>";
+    console.log("Form valid, submitting...");
+  }
+});</code></pre>
+                </section>
+
+                <section>
+                    <h3>Exercise 2: Multiple Event Listeners</h3>
+                    <p><strong>What to do:</strong></p>
+                    <ul>
+                        <li>Select all items with class <code>item</code></li>
+                        <li>Add a <code>click</code> listener that logs item text and changes background</li>
+                        <li>Add <code>mouseenter</code> and <code>mouseleave</code> listeners for hover effects</li>
+                    </ul>
+                    <div style="padding: 15px; background: #E8F5E9; border-radius: 4px; margin-bottom: 15px;">
+                        <div class="item" style="padding: 10px; margin: 5px 0; background: white; border-radius: 4px; cursor: pointer; user-select: none;">Item 1 - Click me!</div>
+                        <div class="item" style="padding: 10px; margin: 5px 0; background: white; border-radius: 4px; cursor: pointer; user-select: none;">Item 2 - Click me!</div>
+                        <div class="item" style="padding: 10px; margin: 5px 0; background: white; border-radius: 4px; cursor: pointer; user-select: none;">Item 3 - Click me!</div>
+                    </div>
+                    <pre><code>let items = document.querySelectorAll(".item");
+
+items.forEach((item) => {
+  item.addEventListener("click", function() {
+    console.log("Clicked:", this.textContent);
+    this.style.backgroundColor = "#C8E6C9";
+  });
+  
+  item.addEventListener("mouseenter", function() {
+    this.style.transform = "scale(1.05)";
+    this.style.boxShadow = "0 2px 8px rgba(0,0,0,0.1)";
+  });
+  
+  item.addEventListener("mouseleave", function() {
+    this.style.transform = "scale(1)";
+    this.style.boxShadow = "none";
+  });
+});</code></pre>
+                </section>
+
+                <section>
+                    <h3>Exercise 3: Keyboard Events</h3>
+                    <p><strong>What to do:</strong></p>
+                    <ul>
+                        <li>Listen for <code>keydown</code> events on the document</li>
+                        <li>Check which key was pressed using <code>e.key</code></li>
+                        <li>Display different messages for Enter, Escape, and other keys</li>
+                    </ul>
+                    <div style="padding: 15px; background: #E1F5FE; border-radius: 4px; margin-bottom: 15px;">
+                        <p style="font-size: 12px; color: #555; margin-bottom: 10px;">Press keys to see events (check console):</p>
+                        <p id="key-display" style="color: #1976D2; font-weight: bold;">Press any key...</p>
+                    </div>
+                    <pre><code>let keyDisplay = document.querySelector("#key-display");
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    keyDisplay.textContent = "? Enter key pressed!";
+    console.log("Enter pressed");
+  } else if (e.key === "Escape") {
+    keyDisplay.textContent = "? Escape key pressed!";
+    console.log("Escape pressed");
+  } else {
+    keyDisplay.textContent = "?? Key pressed: " + e.key;
+    console.log("Pressed:", e.key);
+  }
+});</code></pre>
+                </section>
+
+            </article>
+        </main>
+
+                <aside class="site-outline">
+            <h2>Curriculum</h2>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Overview</a></li>
+                    
+                    <details >
+                        <summary>Day 1 �" Basics</summary>
+                        <ul>
+                            <li><a href="../../day-1/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-1/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-1/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 2 �" Variables</summary>
+                        <ul>
+                            <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-2/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-2/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 3 �" Operators</summary>
+                        <ul>
+                            <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-3/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-3/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 4 �" Control Flow</summary>
+                        <ul>
+                            <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-4/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-4/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 5 �" Loops</summary>
+                        <ul>
+                            <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-5/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-5/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 6 �" Functions</summary>
+                        <ul>
+                            <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-6/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-6/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 7 �" Arrays</summary>
+                        <ul>
+                            <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-7/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-7/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 8 �" Objects</summary>
+                        <ul>
+                            <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-8/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-8/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 9 �" Modern Syntax</summary>
+                        <ul>
+                            <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-9/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-9/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 10 �" DOM Basics</summary>
+                        <ul>
+                            <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-10/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-10/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details open>
+                        <summary>Day 11 �" Events</summary>
+                        <ul>
+                            <li><a href="lesson.html">Lesson</a></li>
+                            <li><a href="hands-on.html">Hands-on</a></li>
+                            <li><a href="homework.html" aria-current="page">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 12 �" Error Handling</summary>
+                        <ul>
+                            <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-12/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-12/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 13 �" Hoisting and TDZ</summary>
+                        <ul>
+                            <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-13/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </ul>
+            </nav>
+        </aside>
+    </div>
+    <script src="../js/homework.js"></script>
+</body>
+</html>

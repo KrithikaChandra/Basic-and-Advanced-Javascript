@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 2 Variables | JavaScript Curriculum</title>
+    <link rel="stylesheet" href="../../shared/css/style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <h1>Day 2: Variables</h1>
+            <p class="subtitle">Homework: Take-home Practice</p>
+        </header>
+
+        <main class="site-content">
+            <article>
+                <h2>Homework Exercises</h2>
+                
+                <section>
+                    <h3>Exercise 1: Declare All Primitive Types</h3>
+                    <p><strong>What to do:</strong></p>
+                    <ul>
+                        <li>In a <code>day2.js</code> file, declare one variable of EACH primitive type</li>
+                        <li>Log each value AND its <code>typeof</code></li>
+                    </ul>
+                    <pre><code>const str = "Hello";
+const num = 42;
+const bigNum = 1000n;
+const bool = true;
+const sym = Symbol("unique");
+let undefinedVal;
+const nullVal = null;
+
+console.log(str, typeof str);               // Hello string
+console.log(num, typeof num);               // 42 number
+console.log(bigNum, typeof bigNum);         // 1000n bigint
+console.log(bool, typeof bool);             // true boolean
+console.log(sym, typeof sym);               // Symbol(unique) symbol
+console.log(undefinedVal, typeof undefinedVal);   // undefined undefined
+console.log(nullVal, typeof nullVal);       // null object</code></pre>
+                </section>
+
+                <section>
+                    <h3>Exercise 2: Five Sentences with Template Literals</h3>
+                    <p><strong>What to do:</strong></p>
+                    <ul>
+                        <li>Take three variables (name, age, city)</li>
+                        <li>Write FIVE different sentences about them using template literals</li>
+                    </ul>
+                    <pre><code>const name = "Priya";
+const age = 23;
+const city = "Bangalore";
+
+console.log(`My name is ${name}.`);
+console.log(`I am ${age} years old.`);
+console.log(`I live in ${city}.`);
+console.log(`${name} is from ${city} and is ${age} years young.`);
+console.log(`Next year, ${name} will be ${age + 1} years old!`);</code></pre>
+                </section>
+
+                <section>
+                    <h3>Exercise 3: The 0.1 + 0.2 Problem</h3>
+                    <p><strong>What to do:</strong></p>
+                    <ul>
+                        <li>Compute <code>0.1 + 0.2</code>. Log the result</li>
+                        <li>Use the multiply-to-paise trick: compute <code>(10 + 20) / 100</code> and confirm you get exactly 0.3</li>
+                    </ul>
+                    <pre><code>// The JavaScript surprise!
+let result = 0.1 + 0.2;
+console.log(result);                        // 0.30000000000000004 (surprise!)
+console.log(result === 0.3);                // false
+
+// The solution: work with integers (paise)
+let paise1 = 10;   // 0.10 rupees
+let paise2 = 20;   // 0.20 rupees
+let total = (paise1 + paise2) / 100;
+console.log(total);                         // 0.3 (exactly!)
+console.log(total === 0.3);                 // true
+
+// Why? Floating-point numbers in binary can't represent 0.1 and 0.2 exactly.</code></pre>
+                </section>
+
+                <section>
+                    <h3>Exercise 4: User Card with Multi-line Template Literal</h3>
+                    <p><strong>What to do:</strong></p>
+                    <ul>
+                        <li>Build a "user card" string using a multi-line template literal</li>
+                        <li>Include name, age, city, and one fact about you</li>
+                        <li>In a comment, explain when YOU should use null vs let it be undefined</li>
+                    </ul>
+                    <pre><code>const name = "Rahul";
+const age = 24;
+const city = "Delhi";
+const fact = "I love coding!";
+
+const userCard = `
+========== USER CARD ==========
+Name: ${name}
+Age: ${age}
+City: ${city}
+Fun Fact: ${fact}
+================================
+`;
+
+console.log(userCard);
+
+// When to use null vs undefined:
+// undefined: "I didn't set a value" (automatic, like uninitialized variables)
+// null: "I explicitly set this to empty" (intentional choice by programmer)
+// Use null when you want to say "this value is intentionally empty"
+// Let it be undefined when a value hasn't been assigned yet.</code></pre>
+                </section>
+
+                <section>
+                    <h3>Bonus: Number Quirks</h3>
+                    <p><strong>What to observe:</strong></p>
+                    <ul>
+                        <li>Compute <code>0.1 + 0.2</code>. Log the result and compare to <code>0.3</code> with <code>===</code>. Note the surprise.</li>
+                        <li>Try <code>Number.isInteger(5)</code>, <code>Number.isInteger(5.0)</code>, <code>Number.isInteger(5.5)</code></li>
+                        <li>Try <code>1 / 0</code> and <code>"abc" * 2</code>. Note the special values</li>
+                    </ul>
+                    <pre><code>// 0.1 + 0.2 surprise
+console.log(0.1 + 0.2);                     // 0.30000000000000004
+console.log(0.1 + 0.2 === 0.3);             // false!
+
+// Number.isInteger checks
+console.log(Number.isInteger(5));           // true
+console.log(Number.isInteger(5.0));         // true (5.0 is same as 5)
+console.log(Number.isInteger(5.5));         // false
+
+// Special values
+console.log(1 / 0);                         // Infinity
+console.log("abc" * 2);                     // NaN (Not a Number)
+console.log(typeof Infinity);               // "number"
+console.log(typeof NaN);                    // "number"
+
+// Cool fact: NaN is never equal to itself!
+console.log(NaN === NaN);                   // false
+console.log(Number.isNaN(NaN));             // true (correct way to check)</code></pre>
+                </section>
+
+            </article>
+        </main>
+
+                <aside class="site-outline">
+            <h2>Curriculum</h2>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Overview</a></li>
+                    
+                    <details >
+                        <summary>Day 1 — Basics</summary>
+                        <ul>
+                            <li><a href="../../day-1/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-1/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-1/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details open>
+                        <summary>Day 2 — Variables</summary>
+                        <ul>
+                            <li><a href="lesson.html">Lesson</a></li>
+                            <li><a href="hands-on.html">Hands-on</a></li>
+                            <li><a href="homework.html" aria-current="page">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 3 — Operators</summary>
+                        <ul>
+                            <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-3/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-3/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 4 — Control Flow</summary>
+                        <ul>
+                            <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-4/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-4/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 5 — Loops</summary>
+                        <ul>
+                            <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-5/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-5/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 6 — Functions</summary>
+                        <ul>
+                            <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-6/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-6/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 7 — Arrays</summary>
+                        <ul>
+                            <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-7/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-7/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 8 — Objects</summary>
+                        <ul>
+                            <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-8/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-8/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 9 — Modern Syntax</summary>
+                        <ul>
+                            <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-9/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-9/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 10 — DOM Basics</summary>
+                        <ul>
+                            <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-10/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-10/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 11 — Events</summary>
+                        <ul>
+                            <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-11/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-11/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 12 — Error Handling</summary>
+                        <ul>
+                            <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-12/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-12/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 13 — Hoisting and TDZ</summary>
+                        <ul>
+                            <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-13/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </ul>
+            </nav>
+        </aside>
+    </div>
+
+    <script src="../js/homework.js"></script>
+</body>
+</html>
+
+
+
