@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 12: Error Handling | JavaScript Curriculum</title>
+    <link rel="stylesheet" href="../../shared/css/style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <h1>Day 12: Error Handling</h1>
+            <p class="subtitle">Hands-on: In-class Tasks</p>
+        </header>
+        <main class="site-content">
+            <article>
+                <h2>Hands-on Tasks</h2>
+                
+                <section>
+                    <h3>Task 1: Safe JSON Parse</h3>
+                    <p><strong>What to do:</strong> Write <code>safeParse(str)</code> that uses try/catch around <code>JSON.parse(str)</code>. On success return the object; on failure log <code>"Invalid JSON:"</code> plus the error message and return <code>null</code>. Test with <code>'{"name":"Priya"}'</code> (valid) and <code>'{"name":"Priya"'</code> (broken). Expected return values and logs are noted as comments in <code>hands-on.js</code>.</p>
+                    <div style="padding: 15px; background: #E1F5FE; border-radius: 4px; margin-bottom: 15px;">
+                        <textarea id="json-input" placeholder='Paste JSON, e.g. {"name":"Priya"}' style="padding: 8px; width: 100%; height: 80px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; font-family: monospace;"></textarea>
+                        <button id="safe-parse-btn" type="button" style="padding: 10px 20px; cursor: pointer; width: 100%; margin-top: 10px; background: #2196F3; color: white; border: none; border-radius: 4px;">Parse safely</button>
+                        <div style="display: flex; gap: 8px; margin-top: 8px;">
+                            <button id="json-valid-sample" type="button" style="flex:1; padding: 8px; cursor: pointer; background: #4CAF50; color: white; border: none; border-radius: 4px;">Load valid sample</button>
+                            <button id="json-broken-sample" type="button" style="flex:1; padding: 8px; cursor: pointer; background: #f44336; color: white; border: none; border-radius: 4px;">Load broken sample</button>
+                        </div>
+                    </div>
+                    <p id="json-output" style="color: #666; font-size: 12px;"></p>
+                    <pre><code>function safeParse(str) {
+  try {
+    return JSON.parse(str);
+  } catch (e) {
+    console.log("Invalid JSON: " + e.message);
+    return null;
+  }
+}</code></pre>
+                </section>
+
+                <section>
+                    <h3>Task 2: Throw on Bad Age</h3>
+                    <p><strong>What to do:</strong> Write <code>setAge(age)</code> that throws if <code>typeof age !== "number"</code> ("Age must be a number"), throws if age is not 0-120 ("Age must be 0-120"), else returns age. Wrap calls in try/catch. Test <code>setAge(25)</code>, <code>setAge("twenty")</code>, <code>setAge(200)</code>. Below: enter a number, or type <code>twenty</code> to simulate a non-number. Expected outcomes are comments in <code>hands-on.js</code>.</p>
+                    <div style="padding: 15px; background: #F3E5F5; border-radius: 4px; margin-bottom: 15px;">
+                        <input id="age-input" type="text" placeholder="e.g. 25, 200, or twenty" style="padding: 8px; margin-bottom: 10px; width: 100%; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                        <button id="age-test-btn" type="button" style="padding: 10px 20px; cursor: pointer; width: 100%; background: #9C27B0; color: white; border: none; border-radius: 4px;">Run setAge</button>
+                    </div>
+                    <p id="age-output" style="color: #666; font-size: 12px;"></p>
+                    <pre><code>function setAge(age) {
+  if (typeof age !== "number" || Number.isNaN(age)) {
+    throw new Error("Age must be a number");
+  }
+  if (age &lt; 0 || age &gt; 120) {
+    throw new Error("Age must be 0-120");
+  }
+  return age;
+}</code></pre>
+                </section>
+
+                <section>
+                    <h3>Task 3: Custom ValidationError on Email</h3>
+                    <p><strong>What to do:</strong> Define <code>class ValidationError extends Error</code> with <code>this.name = "ValidationError"</code>. Write <code>validateEmail(email)</code> that throws <code>ValidationError</code> if the email does not include <code>@</code>. Wrap in try/catch and branch on <code>err instanceof ValidationError</code>. Try <code>priya@example.com</code> and <code>priya-no-at</code>. Expected outcomes are comments in <code>hands-on.js</code>.</p>
+                    <div style="padding: 15px; background: #E8F5E9; border-radius: 4px; margin-bottom: 15px;">
+                        <input id="email-validate-input" type="text" placeholder="Email" style="padding: 8px; margin-bottom: 10px; width: 100%; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box;">
+                        <button id="email-validate-btn" type="button" style="padding: 10px 20px; cursor: pointer; width: 100%; background: #4CAF50; color: white; border: none; border-radius: 4px;">Validate email</button>
+                    </div>
+                    <p id="email-validate-output" style="color: #666; font-size: 12px;"></p>
+                    <pre><code>class ValidationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "ValidationError";
+  }
+}
+
+function validateEmail(email) {
+  if (!email.includes("@")) {
+    throw new ValidationError("Email must include @");
+  }
+  return email;
+}</code></pre>
+                </section>
+
+                <section>
+                    <h3>Bonus: ES modules (two files)</h3>
+                    <p><strong>Files:</strong> <code>day-12/js/mathUtils.js</code> exports <code>PI</code>, <code>add</code>, <code>multiply</code> (named) and default <code>formatPrice(n)</code> (returns a string like rupee symbol plus n). <code>day-12/js/app.js</code> imports and uses them. This page loads the module with:</p>
+                    <pre><code>&lt;script type="module" src="../js/app.js"&gt;&lt;/script&gt;</code></pre>
+                    <p style="font-size: 13px; color: #555;">Expected values from <code>app.js</code> are written as comments in that file. Use a local HTTP server if <code>import</code> fails on <code>file://</code>.</p>
+                </section>
+
+            </article>
+        </main>
+
+        <aside class="site-outline">
+            <h2>Curriculum</h2>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Overview</a></li>
+                    
+                    <details >
+                        <summary>Day 1 — Basics</summary>
+                        <ul>
+                            <li><a href="../../day-1/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-1/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-1/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 2 — Variables</summary>
+                        <ul>
+                            <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-2/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-2/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 3 — Operators</summary>
+                        <ul>
+                            <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-3/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-3/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 4 — Control Flow</summary>
+                        <ul>
+                            <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-4/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-4/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 5 — Loops</summary>
+                        <ul>
+                            <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-5/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-5/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 6 — Functions</summary>
+                        <ul>
+                            <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-6/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-6/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 7 — Arrays</summary>
+                        <ul>
+                            <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-7/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-7/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 8 — Objects</summary>
+                        <ul>
+                            <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-8/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-8/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 9 — Modern Syntax</summary>
+                        <ul>
+                            <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-9/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-9/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 10 — DOM Basics</summary>
+                        <ul>
+                            <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-10/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-10/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 11 — Events</summary>
+                        <ul>
+                            <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-11/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-11/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details open>
+                        <summary>Day 12 — Error Handling</summary>
+                        <ul>
+                            <li><a href="lesson.html">Lesson</a></li>
+                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
+                            <li><a href="homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 13 — Hoisting and TDZ</summary>
+                        <ul>
+                            <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-13/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </ul>
+            </nav>
+        </aside>
+    </div>
+    <script src="../js/hands-on.js"></script>
+    <script type="module" src="../js/app.js"></script>
+</body>
+</html>
+
+
+
+

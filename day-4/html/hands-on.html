@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 4 Control Flow | JavaScript Curriculum</title>
+    <link rel="stylesheet" href="../../shared/css/style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <h1>Day 4: Control Flow</h1>
+            <p class="subtitle">Hands-on: In-class Tasks</p>
+        </header>
+
+        <main class="site-content">
+            <article>
+                <h2>Hands-on Tasks</h2>
+                
+                <section>
+                    <h3>Task 1: Grading System</h3>
+                    <p><strong>What to do:</strong></p>
+                    <ul>
+                        <li>Declare <code>const marks = 72;</code></li>
+                        <li>Use if / else if / else to log a grade based on these ranges:</li>
+                        <ul>
+                            <li>90+ → "A"</li>
+                            <li>75–89 → "B"</li>
+                            <li>60–74 → "C"</li>
+                            <li>below 60 → "F"</li>
+                        </ul>
+                        <li>Test by changing marks to 95, 50, and 75 — confirm each prints the right grade</li>
+                        <li>Bonus: add a check at the top — if marks is negative or above 100, log "Invalid marks" and stop</li>
+                    </ul>
+                    <pre><code>const marks = 72;
+
+// Bonus: Validate marks first
+if (marks < 0 || marks > 100) {
+  console.log("Invalid marks");
+} else if (marks >= 90) {
+  console.log("Grade: A");
+} else if (marks >= 75) {
+  console.log("Grade: B");
+} else if (marks >= 60) {
+  console.log("Grade: C");
+} else {
+  console.log("Grade: F");
+}
+
+// Test with different values
+// marks = 95 → Grade: A
+// marks = 50 → Grade: F
+// marks = 75 → Grade: B
+// marks = 105 → Invalid marks</code></pre>
+                </section>
+
+                <section>
+                    <h3>Task 2: Day Type with switch</h3>
+                    <p><strong>What to do:</strong></p>
+                    <ul>
+                        <li>Declare <code>const day = "Wednesday";</code></li>
+                        <li>Write a switch statement that logs:</li>
+                        <ul>
+                            <li>"Weekday" for Monday–Friday</li>
+                            <li>"Weekend" for Saturday and Sunday</li>
+                            <li>"Invalid day" for anything else</li>
+                        </ul>
+                        <li>Use intentional fall-through to group the weekday cases — don't repeat code</li>
+                        <li>Test with: "Monday", "Saturday", "Holiday"</li>
+                    </ul>
+                    <pre><code>const day = "Wednesday";
+
+switch(day) {
+  case "Monday":
+  case "Tuesday":
+  case "Wednesday":
+  case "Thursday":
+  case "Friday":
+    console.log("Weekday");
+    break;
+  case "Saturday":
+  case "Sunday":
+    console.log("Weekend");
+    break;
+  default:
+    console.log("Invalid day");
+}
+
+// Test cases:
+// "Monday" → Weekday
+// "Saturday" → Weekend
+// "Holiday" → Invalid day</code></pre>
+                </section>
+
+                <section>
+                    <h3>Task 3: Truthy and Falsy Detective</h3>
+                    <p><strong>What to do:</strong></p>
+                    <ul>
+                        <li>Predict whether each value is truthy or falsy, write your guess as a comment</li>
+                        <li>Then verify with <code>if (value) { ... } else { ... }</code></li>
+                        <li>Test: <code>0</code>, <code>"0"</code>, <code>""</code>, <code>" "</code> (single space), <code>null</code>, <code>undefined</code>, <code>NaN</code>, <code>[]</code>, <code>{}</code>, <code>"false"</code></li>
+                        <li>Below your code, write a short comment listing the 6 falsy values from memory</li>
+                    </ul>
+                    <pre><code>// Predict: 0 is falsy
+console.log(0 ? "truthy" : "falsy");              // falsy ✓
+
+// Predict: "0" is truthy (it's a non-empty string)
+console.log("0" ? "truthy" : "falsy");            // truthy ✓
+
+// Predict: "" is falsy (empty string)
+console.log("" ? "truthy" : "falsy");             // falsy ✓
+
+// Predict: " " is truthy (non-empty string, even with space)
+console.log(" " ? "truthy" : "falsy");            // truthy ✓
+
+// Predict: null is falsy
+console.log(null ? "truthy" : "falsy");           // falsy ✓
+
+// Predict: undefined is falsy
+console.log(undefined ? "truthy" : "falsy");      // falsy ✓
+
+// Predict: NaN is falsy
+console.log(NaN ? "truthy" : "falsy");            // falsy ✓
+
+// Predict: [] is truthy (arrays are objects, objects are truthy)
+console.log([] ? "truthy" : "falsy");             // truthy ✓
+
+// Predict: {} is truthy (objects are truthy)
+console.log({} ? "truthy" : "falsy");             // truthy ✓
+
+// Predict: "false" is truthy (non-empty string)
+console.log("false" ? "truthy" : "falsy");        // truthy ✓
+
+// The 6 falsy values in JavaScript (memorize these!):
+// 1. false (boolean)
+// 2. 0 (number)
+// 3. "" (empty string)
+// 4. null
+// 5. undefined
+// 6. NaN</code></pre>
+                </section>
+
+                <section>
+                    <h3>Bonus: Guard Clauses Refactor</h3>
+                    <p><strong>What to do:</strong></p>
+                    <ul>
+                        <li>Refactor the nested function below using guard clauses — flip each condition and return early</li>
+                        <li>Test with: a valid user, a user with isBanned = true, and null</li>
+                    </ul>
+                    <pre><code>// BEFORE: Nested if statements (hard to read)
+function canPostComment_old(user) {
+  if (user) {
+    if (!user.isBanned) {
+      if (user.email) {
+        console.log("Can post comment");
+        return true;
+      }
+    }
+  }
+}
+
+// AFTER: Guard clauses (cleaner, early return)
+function canPostComment(user) {
+  // Guard: user must exist
+  if (!user) {
+    console.log("User does not exist");
+    return false;
+  }
+  
+  // Guard: user must not be banned
+  if (user.isBanned) {
+    console.log("User is banned");
+    return false;
+  }
+  
+  // Guard: user must have email
+  if (!user.email) {
+    console.log("User has no email");
+    return false;
+  }
+  
+  // If all guards pass
+  console.log("Can post comment");
+  return true;
+}
+
+// Test cases
+const validUser = { isBanned: false, email: "user@example.com" };
+canPostComment(validUser);              // Can post comment
+
+const bannedUser = { isBanned: true, email: "bad@example.com" };
+canPostComment(bannedUser);             // User is banned
+
+canPostComment(null);                   // User does not exist</code></pre>
+                </section>
+
+            </article>
+        </main>
+
+                <aside class="site-outline">
+            <h2>Curriculum</h2>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Overview</a></li>
+                    
+                    <details >
+                        <summary>Day 1 — Basics</summary>
+                        <ul>
+                            <li><a href="../../day-1/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-1/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-1/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 2 — Variables</summary>
+                        <ul>
+                            <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-2/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-2/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 3 — Operators</summary>
+                        <ul>
+                            <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-3/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-3/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details open>
+                        <summary>Day 4 — Control Flow</summary>
+                        <ul>
+                            <li><a href="lesson.html">Lesson</a></li>
+                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
+                            <li><a href="homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 5 — Loops</summary>
+                        <ul>
+                            <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-5/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-5/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 6 — Functions</summary>
+                        <ul>
+                            <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-6/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-6/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 7 — Arrays</summary>
+                        <ul>
+                            <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-7/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-7/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 8 — Objects</summary>
+                        <ul>
+                            <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-8/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-8/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 9 — Modern Syntax</summary>
+                        <ul>
+                            <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-9/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-9/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 10 — DOM Basics</summary>
+                        <ul>
+                            <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-10/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-10/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 11 — Events</summary>
+                        <ul>
+                            <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-11/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-11/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 12 — Error Handling</summary>
+                        <ul>
+                            <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-12/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-12/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
+                        <summary>Day 13 — Hoisting and TDZ</summary>
+                        <ul>
+                            <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-13/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </ul>
+            </nav>
+        </aside>
+    </div>
+
+    <script src="../js/hands-on.js"></script>
+</body>
+</html>
+
+
+
