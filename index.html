@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript — HTML practice (curriculum)</title>
+  <style>
+    :root {
+      --bg: #0f1419;
+      --panel: #1a2332;
+      --border: #2d3a4d;
+      --text: #e7eef8;
+      --muted: #9fb0c8;
+      --accent: #5b9bd5;
+      --accent-dim: #3d6f9c;
+      --link-hover: #8ec4ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr min(320px, 34vw);
+      min-height: 100vh;
+    }
+    @media (max-width: 800px) {
+      .layout { grid-template-columns: 1fr; }
+      aside { border-left: none; border-top: 1px solid var(--border); }
+    }
+    main {
+      padding: 2rem clamp(1.25rem, 4vw, 3rem);
+      max-width: 52rem;
+    }
+    aside {
+      background: var(--panel);
+      border-left: 1px solid var(--border);
+      padding: 1.5rem 1.25rem 2rem;
+      position: sticky;
+      top: 0;
+      align-self: start;
+      max-height: 100vh;
+      overflow-y: auto;
+    }
+    h1 {
+      font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+      font-weight: 600;
+      margin: 0 0 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .lede {
+      color: var(--muted);
+      margin: 0 0 1.75rem;
+      font-size: 0.95rem;
+    }
+    h2 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin: 1.75rem 0 0.75rem;
+      font-weight: 600;
+    }
+    h2:first-of-type { margin-top: 0; }
+    ol.steps {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    ol.steps li { margin-bottom: 0.35rem; }
+    .curriculum-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin: 0 0 1rem;
+      font-weight: 600;
+    }
+    details.day {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      background: rgba(0, 0, 0, 0.2);
+    }
+    details.day summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 0.65rem 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    details.day summary::-webkit-details-marker { display: none; }
+    details.day summary::after {
+      content: "";
+      width: 0.5rem;
+      height: 0.5rem;
+      border-right: 2px solid var(--muted);
+      border-bottom: 2px solid var(--muted);
+      transform: rotate(45deg);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+    details.day[open] summary::after { transform: rotate(-135deg); }
+    details.day summary:hover { color: var(--link-hover); }
+    .day-links {
+      padding: 0 0.85rem 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .day-links a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.9rem;
+      padding: 0.35rem 0.5rem;
+      border-radius: 6px;
+      border: 1px solid transparent;
+    }
+    .day-links a:hover {
+      color: var(--link-hover);
+      background: rgba(91, 155, 213, 0.12);
+      border-color: var(--accent-dim);
+    }
+    .day-links a.missing {
+      color: var(--muted);
+      pointer-events: none;
+      opacity: 0.45;
+    }
+    .overview-link {
+      display: block;
+      margin-bottom: 1rem;
+      padding: 0.6rem 0.85rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      background: rgba(91, 155, 213, 0.08);
+    }
+    .overview-link:hover {
+      border-color: var(--accent);
+      color: var(--link-hover);
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <main id="overview">
+      <h1>JavaScript — HTML practice days</h1>
+      <p class="lede">
+        Each day can include a <strong>Lesson</strong> (topics and demo code in <code>exercise.js</code>),
+        <strong>Hands-on</strong> (<code>hands-on.js</code>), and <strong>Homework</strong> (<code>hw.js</code>).
+        Pick a day and page from the curriculum on the right, or use the links below after you start Live Server.
+      </p>
+      <h2>Run with Live Server</h2>
+      <ol class="steps">
+        <li>Open this project folder in VS Code / Cursor.</li>
+        <li>Right-click <code>index.html</code> (this file) → <strong>Open with Live Server</strong>.</li>
+        <li>Open the browser DevTools console (<kbd>F12</kbd> → Console) to see script output.</li>
+      </ol>
+      <h2>Quick links (same as sidebar)</h2>
+      <p class="lede" style="margin-bottom: 0.75rem;">Day 6 — Functions</p>
+      <p style="margin: 0 0 1rem;">
+        <a href="html/day-view.html?day=6&type=lesson" style="color: var(--accent);">Lesson</a>
+        &nbsp;·&nbsp;
+        <a href="html/day-view.html?day=6&type=hands-on" style="color: var(--accent);">Hands-on</a>
+        &nbsp;·&nbsp;
+        <a href="html/day-view.html?day=6&type=homework" style="color: var(--accent);">Homework</a>
+      </p>
+      <p class="lede" style="margin-bottom: 0.75rem;">Day 7 — Arrays</p>
+      <p style="margin: 0 0 1rem;">
+        <a href="html/day-view.html?day=7&type=lesson" style="color: var(--accent);">Lesson</a>
+        &nbsp;·&nbsp;
+        <a href="html/day-view.html?day=7&type=hands-on" style="color: var(--accent);">Hands-on</a>
+        &nbsp;·&nbsp;
+        <a href="html/day-view.html?day=7&type=homework" style="color: var(--accent);">Homework</a>
+      </p>
+      <p class="lede" style="margin-bottom: 0.75rem;">Day 8 — Objects</p>
+      <p style="margin: 0;">
+        <a href="html/day-view.html?day=8&type=lesson" style="color: var(--accent);">Lesson</a>
+        &nbsp;·&nbsp;
+        <a href="html/day-view.html?day=8&type=hands-on" style="color: var(--accent);">Hands-on</a>
+        &nbsp;·&nbsp;
+        <a href="html/day-view.html?day=8&type=homework" style="color: var(--accent);">Homework</a>
+      </p>
+    </main>
+    <aside aria-label="Curriculum">
+      <p class="curriculum-title">Curriculum</p>
+      <a class="overview-link" href="#overview">Overview</a>
+
+      <details class="day" open>
+        <summary>Day 6 — Functions</summary>
+        <div class="day-links">
+          <a href="html/day-view.html?day=6&type=lesson">Lesson</a>
+          <a href="html/day-view.html?day=6&type=hands-on">Hands-on</a>
+          <a href="html/day-view.html?day=6&type=homework">Homework</a>
+        </div>
+      </details>
+      <details class="day" open>
+        <summary>Day 7 — Arrays</summary>
+        <div class="day-links">
+          <a href="html/day-view.html?day=7&type=lesson">Lesson</a>
+          <a href="html/day-view.html?day=7&type=hands-on">Hands-on</a>
+          <a href="html/day-view.html?day=7&type=homework">Homework</a>
+        </div>
+      </details>
+      <details class="day" open>
+        <summary>Day 8 — Objects</summary>
+        <div class="day-links">
+          <a href="html/day-view.html?day=8&type=lesson">Lesson</a>
+          <a href="html/day-view.html?day=8&type=hands-on">Hands-on</a>
+          <a href="html/day-view.html?day=8&type=homework">Homework</a>
+        </div>
+      </details>
+
+      <details class="day">
+        <summary>Day 4</summary>
+        <div class="day-links">
+          <a class="missing" href="#" aria-disabled="true" title="No exercise.js in folder">Lesson</a>
+          <a href="html/day-view.html?day=4&type=hands-on">Hands-on</a>
+          <a class="missing" href="#" aria-disabled="true" title="No hw.js in folder">Homework</a>
+        </div>
+      </details>
+      <details class="day">
+        <summary>Day 5</summary>
+        <div class="day-links">
+          <a class="missing" href="#" aria-disabled="true">Lesson</a>
+          <a href="html/day-view.html?day=5&type=hands-on">Hands-on</a>
+          <a class="missing" href="#" aria-disabled="true">Homework</a>
+        </div>
+      </details>
+      <details class="day">
+        <summary>Day 9</summary>
+        <div class="day-links">
+          <a href="html/day-view.html?day=9&type=lesson">Lesson</a>
+          <a href="html/day-view.html?day=9&type=hands-on">Hands-on</a>
+          <a href="html/day-view.html?day=9&type=homework">Homework</a>
+        </div>
+      </details>
+      <details class="day">
+        <summary>Day 10</summary>
+        <div class="day-links">
+          <a href="html/day-view.html?day=10&type=lesson">Lesson</a>
+          <a class="missing" href="#" aria-disabled="true">Hands-on</a>
+          <a href="html/day-view.html?day=10&type=homework">Homework</a>
+        </div>
+      </details>
+      <details class="day">
+        <summary>Day 11</summary>
+        <div class="day-links">
+          <a href="html/day-view.html?day=11&type=lesson">Lesson</a>
+          <a href="html/day-view.html?day=11&type=hands-on">Hands-on</a>
+          <a href="html/day-view.html?day=11&type=homework">Homework</a>
+        </div>
+      </details>
+      <details class="day">
+        <summary>Day 12</summary>
+        <div class="day-links">
+          <a href="html/day-view.html?day=12&type=lesson">Lesson</a>
+          <a href="html/day-view.html?day=12&type=hands-on">Hands-on</a>
+          <a href="html/day-view.html?day=12&type=homework">Homework</a>
+        </div>
+      </details>
+      <details class="day">
+        <summary>Day 13</summary>
+        <div class="day-links">
+          <a href="html/day-view.html?day=13&type=lesson">Lesson</a>
+          <a href="html/day-view.html?day=13&type=hands-on">Hands-on</a>
+          <a href="html/day-view.html?day=13&type=homework">Homework</a>
+        </div>
+      </details>
+      <details class="day">
+        <summary>Day 14</summary>
+        <div class="day-links">
+          <a href="html/day-view.html?day=14&type=lesson">Lesson</a>
+          <a href="html/day-view.html?day=14&type=hands-on">Hands-on</a>
+          <a class="missing" href="#" aria-disabled="true">Homework</a>
+        </div>
+      </details>
+    </aside>
+  </div>
+</body>
+</html>
