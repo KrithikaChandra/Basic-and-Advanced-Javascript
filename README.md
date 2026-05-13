@@ -2,16 +2,17 @@ JavaScript curriculum
 Materials for a full JavaScript track for beginners through advanced topics, ending in a small vanilla-JS capstone project (DeskHub — a support-style ticket dashboard).
 
 Browser practice pages
-Live site: https://github.com/KrithikaChandra/Basic-and-Advanced-Javascript/
 
-Locally, open index.html in your browser (double-click or “Open with…” from your editor). Use the Curriculum panel on the right to jump between days and pages.
+**GitHub Pages (live site)** — after you push to `main`, wait for the **Publish GitHub Pages** workflow to finish, then on GitHub go to **Settings → Pages → Build and deployment**, set **Source** to **Deploy from a branch**, choose branch **`gh-pages`**, folder **`/ (root)`**, and save. Your site will be at `https://<your-username>.github.io/<repository-name>/` (same pattern as [this example](https://gokul211468.github.io/Basic-and-Advanced-Javascript/)).
+
+**Locally:** open `index.html` in your browser (double-click or “Open with…” from your editor), or run `python -m http.server 5501` from the repo root and visit `http://localhost:5501/`. Use the Curriculum panel to jump between days and pages.
 
 Each published practice day has:
 
 lesson.html — Topics and examples you can read and try in DevTools.
 hands-on.html — Short tasks for class time.
 homework.html — Take-home practice.
-Scripts live next to the HTML under day-N/js/. Shared styling is shared/css/styles.css. Each page includes a page-shell grid and the Curriculum links are plain HTML in <aside class="site-outline"> (no script)—duplicate/update that block on every page when you add a day.
+Scripts live next to the HTML under `day-N/js/`. Shared styling is `shared/css/style.css`. Each page includes a page-shell grid and the Curriculum links are plain HTML in <aside class="site-outline"> (no script)—duplicate/update that block on every page when you add a day.
 
 To add another practice day: create day-N/html/ and day-N/js/ from an existing day, then edit the Curriculum <aside> on every HTML page (index.html and each day-*/html/*.html) so the new day appears with correct hrefs, <details open> on the first day and on the day being viewed, and aria-current="page" on the active link only.
 

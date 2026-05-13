@@ -1,13 +1,12 @@
-# Publish the curriculum site to GitHub Pages (static HTML/CSS/JS).
+# Publishes the repo root to the orphan branch `gh-pages`.
 #
-# Before the first run works:
-#   Repo → Settings → Pages → Build and deployment → Source: "GitHub Actions"
-# (One-time. Skip if you already picked GitHub Actions there.)
+# After the first successful run:
+#   Repo → Settings → Pages → Build and deployment → Source: "Deploy from a branch"
+#   Branch: gh-pages   Folder: / (root)   → Save
 #
-# Do NOT add actions/configure-pages unless Pages is enabled first — otherwise
-# the workflow fails with "Get Pages site failed" / HTTP 404.
+# Site URL: https://<your-username>.github.io/<repository-name>/
 
-name: Deploy to GitHub Pages
+name: Publish GitHub Pages
 
 on:
   push:
@@ -16,29 +15,24 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: pages-publish
+  cancel-in-progress: true
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+      - name: Push site to gh-pages branch
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          path: .
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          branch: gh-pages
+          folder: .
+          clean: true
+          exclude: |
+            .github/**
