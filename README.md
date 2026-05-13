@@ -2,7 +2,7 @@ JavaScript curriculum
 Materials for a full JavaScript track for beginners through advanced topics, ending in a small vanilla-JS capstone project (DeskHub — a support-style ticket dashboard).
 
 Browser practice pages
-Live site: [https://iamlegendchamp.github.io/JS_Curriculum_Exercises/](https://github.com/KrithikaChandra/Basic-and-Advanced-Javascript/
+Live site: https://github.com/KrithikaChandra/Basic-and-Advanced-Javascript/
 
 Locally, open index.html in your browser (double-click or “Open with…” from your editor). Use the Curriculum panel on the right to jump between days and pages.
 
