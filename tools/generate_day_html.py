@@ -68,6 +68,9 @@ def sync_js(n: int) -> None:
         shutil.copy2(ho, dst / "hands-on.js")
     if hw.is_file():
         shutil.copy2(hw, dst / "homework.js")
+    # Legacy layout (e.g. Gokul): homework lived in day-N/js/hw.js
+    if not (dst / "homework.js").is_file() and (dst / "hw.js").is_file():
+        shutil.copy2(dst / "hw.js", dst / "homework.js")
 
 
 def render_aside(current_day: int, current_page: str) -> str:
