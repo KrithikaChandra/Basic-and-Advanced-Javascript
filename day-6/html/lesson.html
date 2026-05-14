@@ -14,11 +14,18 @@
         </header>
         <main class="site-content">
             <article>
-                <h2>Lesson script</h2>
-                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
-                <section>
-                    <h3>Source (lesson.js)</h3>
-                    <pre><code>&#x27;use strict&#x27;
+                <h2>Lesson</h2>
+                <div class="lab-intro">
+                    <p>Same source as <code>lesson.js</code> (loaded at the bottom of this page). <strong>Tasks</strong> are in comments in the script; <strong>code</strong> is below. Open <strong>DevTools (F12) → Console</strong> for output.</p>
+                </div>
+                <section class="task-section">
+                    <div class="task-instructions">
+                        <h3>Lesson overview</h3>
+                        <p>Read the <strong>task</strong> notes in comments, then study the <strong>code</strong> in the panel below.</p>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Code — lesson.js</span>
+                        <pre><code>&#x27;use strict&#x27;
 greet(&quot;Priya&quot;);
 greet(&quot;Aarav&quot;);
 function greet(name) {
@@ -57,6 +64,7 @@ console.log(add(2, 3));
 console.log(square(4));
 console.log(greet());
 </code></pre>
+                    </div>
                 </section>
             </article>
         </main>

@@ -14,11 +14,18 @@
         </header>
         <main class="site-content">
             <article>
-                <h2>Lesson script</h2>
-                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
-                <section>
-                    <h3>Source (lesson.js)</h3>
-                    <pre><code>const fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;mango&quot;];
+                <h2>Lesson</h2>
+                <div class="lab-intro">
+                    <p>Same source as <code>lesson.js</code> (loaded at the bottom of this page). <strong>Tasks</strong> are in comments in the script; <strong>code</strong> is below. Open <strong>DevTools (F12) → Console</strong> for output.</p>
+                </div>
+                <section class="task-section">
+                    <div class="task-instructions">
+                        <h3>Lesson overview</h3>
+                        <p>Read the <strong>task</strong> notes in comments, then study the <strong>code</strong> in the panel below.</p>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Code — lesson.js</span>
+                        <pre><code>const fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;mango&quot;];
 
 console.log(fruits[0]);                   
 console.log(fruits[2]);                   
@@ -132,6 +139,7 @@ console.log(Math.max(...a));
 
 [...[1, 2, 3], ...[4, 5, 6]]
 Math.max(...[3, 1, 4, 1, 5])</code></pre>
+                    </div>
                 </section>
             </article>
         </main>

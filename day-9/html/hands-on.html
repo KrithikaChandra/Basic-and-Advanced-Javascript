@@ -14,11 +14,18 @@
         </header>
         <main class="site-content">
             <article>
-                <h2>Hands-on script</h2>
-                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
-                <section>
-                    <h3>Source (hands-on.js)</h3>
-                    <pre><code>/*Task 1 Template Literal Sentence Builder
+                <h2>Hands-on</h2>
+                <div class="lab-intro">
+                    <p>Same source as <code>hands-on.js</code>. <strong>Tasks</strong> are in comments; <strong>code</strong> is below. Use <strong>DevTools (F12) → Console</strong> where needed.</p>
+                </div>
+                <section class="task-section">
+                    <div class="task-instructions">
+                        <h3>Hands-on overview</h3>
+                        <p>Read the <strong>task</strong> notes in comments, then study the <strong>code</strong> in the panel below.</p>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Code — hands-on.js</span>
+                        <pre><code>/*Task 1 Template Literal Sentence Builder
 Declare: const item = &quot;Laptop&quot;;, const price = 60000;, const tax = 0.18;.
 Use a template literal to build the sentence: &quot;The Laptop costs ₹60000 + ₹10800 GST = ₹70800.&quot;
 Compute the GST and total inside the template literal — don&#x27;t pre-compute.
@@ -85,6 +92,7 @@ function applyPrefs(defaults, prefs){
     return {...defaults,...prefs};
 }
 console.log(applyPrefs({theme: &quot;light&quot;, lang: &quot;en&quot;}, { theme: &quot;dark&quot;, fontSize: 16 }))</code></pre>
+                    </div>
                 </section>
             </article>
         </main>

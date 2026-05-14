@@ -14,11 +14,18 @@
         </header>
         <main class="site-content">
             <article>
-                <h2>Hands-on script</h2>
-                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
-                <section>
-                    <h3>Source (hands-on.js)</h3>
-                    <pre><code>/*Task 1 Grading System
+                <h2>Hands-on</h2>
+                <div class="lab-intro">
+                    <p>Same source as <code>hands-on.js</code>. <strong>Tasks</strong> are in comments; <strong>code</strong> is below. Use <strong>DevTools (F12) → Console</strong> where needed.</p>
+                </div>
+                <section class="task-section">
+                    <div class="task-instructions">
+                        <h3>Hands-on overview</h3>
+                        <p>Read the <strong>task</strong> notes in comments, then study the <strong>code</strong> in the panel below.</p>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Code — hands-on.js</span>
+                        <pre><code>/*Task 1 Grading System
 Declare a const marks = 72;.
 Use if / else if / else to log a grade based on these ranges:
 90+ → &quot;A&quot;, 75–89 → &quot;B&quot;, 60–74 → &quot;C&quot;, below 60 → &quot;F&quot;.
@@ -137,6 +144,7 @@ function canComment(user) {
 
   console.log(&quot;Comment allowed&quot;);
 }</code></pre>
+                    </div>
                 </section>
             </article>
         </main>

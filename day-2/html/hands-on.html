@@ -16,8 +16,12 @@
         <main class="site-content">
             <article>
                 <h2>Hands-on Tasks</h2>
-                
-                <section>
+                <div class="lab-intro">
+                    <p>Each block splits <strong>what to do</strong> from <strong>example or starter code</strong> below.</p>
+                </div>
+
+                <section class="task-section">
+                    <div class="task-instructions">
                     <h3>Task 1: typeof Exploration</h3>
                     <p><strong>What to do:</strong></p>
                     <ul>
@@ -25,6 +29,9 @@
                         <li>Note which one returns a SURPRISING type</li>
                         <li>In a comment, write down which one and why</li>
                     </ul>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Example code</span>
                     <pre><code>console.log(typeof 42);                 // "number"
 console.log(typeof "hello");            // "string"
 console.log(typeof true);               // "boolean"
@@ -35,9 +42,11 @@ console.log(typeof Symbol("x"));        // "symbol"
 
 // Interesting fact: null returns "object" due to a quirk in JavaScript!
 // This is a historical bug that couldn't be fixed without breaking code.</code></pre>
+                    </div>
                 </section>
 
-                <section>
+                <section class="task-section">
+                    <div class="task-instructions">
                     <h3>Task 2: Template Literals</h3>
                     <p><strong>What to do:</strong></p>
                     <ul>
@@ -46,6 +55,9 @@ console.log(typeof Symbol("x"));        // "symbol"
                         <li>Build the same string using a TEMPLATE LITERAL</li>
                         <li>Then build a 3-line "card" using a multi-line template literal</li>
                     </ul>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Example code</span>
                     <pre><code>const name = "Aarav";
 const age = 22;
 const city = "Jaipur";
@@ -63,9 +75,11 @@ let card = `Name: ${name}
 Age: ${age}
 City: ${city}`;
 console.log(card);</code></pre>
+                    </div>
                 </section>
 
-                <section>
+                <section class="task-section">
+                    <div class="task-instructions">
                     <h3>Task 3: null vs undefined</h3>
                     <p><strong>What to do:</strong></p>
                     <ul>
@@ -73,6 +87,9 @@ console.log(card);</code></pre>
                         <li>Now set <code>user = null</code>. Log it. Log its <code>typeof</code></li>
                         <li>Compare: <code>null == undefined</code> and <code>null === undefined</code>. Note the difference.</li>
                     </ul>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Example code</span>
                     <pre><code>let user;
 console.log(user);                      // undefined
 console.log(typeof user);               // "undefined"
@@ -90,6 +107,7 @@ console.log(null === undefined);        // false
 // Key difference:
 // undefined = "no value was set"
 // null = "I intentionally set this to no value"</code></pre>
+                    </div>
                 </section>
 
             </article>
