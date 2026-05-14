@@ -14,11 +14,19 @@
         </header>
         <main class="site-content">
             <article>
-                <h2>Hands-on script</h2>
-                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
-                <section>
-                    <h3>Source (hands-on.js)</h3>
-                    <pre><code>/*Task 1 Predict the `this`
+                <h2>Hands-on: <code>this</code> and binding</h2>
+                <div class="lab-intro">
+                    <p><strong>Step 1 — Tasks.</strong> Read each <code>/* Task … */</code> block in the script.</p>
+                    <p><strong>Step 2 — Code.</strong> The panel below is the full <code>hands-on.js</code> source. <strong>Step 3 — Run.</strong> Open <strong>DevTools (F12) → Console</strong> for output.</p>
+                </div>
+                <section class="task-section">
+                    <div class="task-instructions">
+                        <h3>Tasks in this lab</h3>
+                        <p>Task 1 (predicting <code>this</code>), Task 2 (Timer + <code>setInterval</code>), Task 3 (<code>call</code> / <code>apply</code> / <code>bind</code>), and a bonus comparing regular vs arrow methods in <code>forEach</code>.</p>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Code — hands-on.js</span>
+                        <pre><code>/*Task 1 Predict the `this`
 Type the following snippet exactly: a user object with name: &quot;Priya&quot; and a method greet()
 { console.log(this.name); } . Then call user.greet() . Then assign const g =
 user.greet and call g() .
@@ -122,6 +130,7 @@ const team = {
 
 team.printArrow();
 </code></pre>
+                    </div>
                 </section>
             </article>
         </main>

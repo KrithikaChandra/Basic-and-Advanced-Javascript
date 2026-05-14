@@ -15,33 +15,50 @@
         <main class="site-content">
             <article>
                 <h2>Hands-on: DOM tasks</h2>
-                <p>Use the buttons below. Open <strong>DevTools (F12) → Console</strong> for Task&nbsp;1 selection logs.</p>
+                <div class="lab-intro">
+                    <p><strong>Tasks</strong> describe what to try on the page. <strong>Try it</strong> is the live area (buttons and sample markup). Use the <strong>console</strong> for Task&nbsp;1 logs.</p>
+                </div>
 
-                <section>
-                    <h3>Task 1: Select elements</h3>
-                    <p><button type="button" id="select-btn">Run selection demo</button></p>
-                    <p>This paragraph (and others on the page) can be targeted by <code>querySelector</code> / <code>querySelectorAll</code>.</p>
-                    <div class="box" style="padding:10px;background:#e3f2fd;border-radius:4px;border:1px solid #90caf9;">Sample <code>.box</code> element</div>
-                    <ul>
-                        <li>List item A</li>
-                        <li>List item B</li>
-                        <li>List item C</li>
-                    </ul>
-                </section>
-
-                <section>
-                    <h3>Task 2: Modify content</h3>
-                    <p><button type="button" id="modify-btn">Modify title and paragraphs</button></p>
-                    <div id="title" style="padding:12px;background:#fff3e0;border-radius:4px;border:1px solid #ffb74d;">
-                        <h4>Original title</h4>
+                <section class="task-section">
+                    <div class="task-instructions">
+                        <h3>Task 1: Select elements</h3>
+                        <p>Click the button and inspect how <code>querySelector</code> and <code>querySelectorAll</code> target the heading, <code>.box</code>, and list items.</p>
                     </div>
-                    <p>Another paragraph for styling.</p>
+                    <div class="task-interactive">
+                        <p><button type="button" id="select-btn">Run selection demo</button></p>
+                        <p>This paragraph (and others on the page) can be targeted by <code>querySelector</code> / <code>querySelectorAll</code>.</p>
+                        <div class="box" style="padding:10px;background:#e3f2fd;border-radius:4px;border:1px solid #90caf9;">Sample <code>.box</code> element</div>
+                        <ul>
+                            <li>List item A</li>
+                            <li>List item B</li>
+                            <li>List item C</li>
+                        </ul>
+                    </div>
                 </section>
 
-                <section>
-                    <h3>Task 3: Create elements</h3>
-                    <p><button type="button" id="create-btn">Add a new box</button></p>
-                    <div id="element-container"></div>
+                <section class="task-section">
+                    <div class="task-instructions">
+                        <h3>Task 2: Modify content</h3>
+                        <p>Change text and styles on existing nodes. The script updates the title region and paragraph styles.</p>
+                    </div>
+                    <div class="task-interactive">
+                        <p><button type="button" id="modify-btn">Modify title and paragraphs</button></p>
+                        <div id="title" style="padding:12px;background:#fff3e0;border-radius:4px;border:1px solid #ffb74d;">
+                            <h4>Original title</h4>
+                        </div>
+                        <p>Another paragraph for styling.</p>
+                    </div>
+                </section>
+
+                <section class="task-section">
+                    <div class="task-instructions">
+                        <h3>Task 3: Create elements</h3>
+                        <p>Append new elements to the container using <code>createElement</code> and <code>appendChild</code>.</p>
+                    </div>
+                    <div class="task-interactive">
+                        <p><button type="button" id="create-btn">Add a new box</button></p>
+                        <div id="element-container"></div>
+                    </div>
                 </section>
             </article>
         </main>

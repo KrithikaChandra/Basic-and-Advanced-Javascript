@@ -14,11 +14,18 @@
         </header>
         <main class="site-content">
             <article>
-                <h2>Hands-on script</h2>
-                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
-                <section>
-                    <h3>Source (hands-on.js)</h3>
-                    <pre><code>// Task 1 Predict the var hoist
+                <h2>Hands-on: Hoisting &amp; TDZ</h2>
+                <div class="lab-intro">
+                    <p><strong>Tasks</strong> are in line comments at the start of each block. <strong>Code</strong> is the full script — run it and use the <strong>console</strong> for output and errors.</p>
+                </div>
+                <section class="task-section">
+                    <div class="task-instructions">
+                        <h3>What this script covers</h3>
+                        <p><code>var</code> hoisting, <code>let</code> TDZ, function declaration vs expression, and an optional call-stack trace.</p>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Code — hands-on.js</span>
+                        <pre><code>// Task 1 Predict the var hoist
 // Type this exact snippet in a fresh JS file: console.log(name); var name = &quot;Priya&quot;; console.log(name);
 // BEFORE running it, predict what each console.log will print.
 // Now run it. Match your prediction against actual output.
@@ -74,6 +81,7 @@ function printSquare(n){
 }
 printSquare(5); //25
 //multiply(5,5) , square(5), printSquare(5), global()</code></pre>
+                    </div>
                 </section>
             </article>
         </main>
