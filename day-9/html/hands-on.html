@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 9 Modern Syntax | JavaScript Curriculum</title>
+    <link rel="stylesheet" href="../../shared/css/style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <h1>Day 9: Modern Syntax</h1>
+            <p class="subtitle">Hands-on: In-class Tasks</p>
+        </header>
+        <main class="site-content">
+            <article>
+                <h2>Hands-on script</h2>
+                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
+                <section>
+                    <h3>Source (hands-on.js)</h3>
+                    <pre><code>/*Task 1 Template Literal Sentence Builder
+Declare: const item = &quot;Laptop&quot;;, const price = 60000;, const tax = 0.18;.
+Use a template literal to build the sentence: &quot;The Laptop costs ₹60000 + ₹10800 GST = ₹70800.&quot;
+Compute the GST and total inside the template literal — don&#x27;t pre-compute.
+Bonus: include a multiline version that puts each part on its own line.*/
+const item = &quot;Laptop&quot;;
+const price = 60000;
+const tax = 0.18;
+const statement = `The ${item} costs ₹${price} + ₹${price * tax} GST = ₹${price + price*tax}` 
+console.log(statement);
+const multilineStatement = `The ${item} costs 
+₹${price} +
+₹${price * tax} GST 
+= ₹${price + price*tax}` ;
+console.log(multilineStatement);                            
+
+/*Task 2 Array + Object Destructuring
+Use this array: const scores = [88, 75, 92, 60, 45];
+Destructure the first two values into top and second. Collect the rest into others.
+Use this object: const user = { name: &quot;Anaya&quot;, age: 21, address: { city: &quot;Jaipur&quot;, pincode: &quot;302001&quot; } };
+Destructure name, rename age to userAge, and pull out city from the nested address.
+Log all extracted variables.*/
+const scores = [88, 75, 92, 60, 45];
+const [topElement , second , ...others] = scores;
+console.log(topElement);
+console.log(second);
+console.log(others);
+
+const user = { name: &quot;Anaya&quot;, age: 21, address: { city: &quot;Jaipur&quot;, pincode: &quot;302001&quot; } };
+const {name , age : userAge,address: {city}} = user;
+console.log(userAge);
+console.log(city);
+console.log(name);
+
+/*Task 3 Rest Parameters
+Write a function sumAll(...numbers) that returns the total of all numbers passed.
+Test with sumAll(1, 2, 3), sumAll(10, 20, 30, 40), sumAll().
+Write a function joinNames(separator, ...names) that joins all names using the separator.
+Test: joinNames(&quot;, &quot;, &quot;Priya&quot;, &quot;Aarav&quot;, &quot;Riya&quot;) should give &quot;Priya, Aarav, Riya&quot;.*/
+
+function sumAll(...numbers){
+    return numbers.reduce((acc,n)=&gt; acc+n ,0);
+}
+console.log(sumAll(1, 2, 3));
+console.log(sumAll(10, 20, 30, 40));
+console.log(sumAll());
+
+function joinNames(separator, ...names){
+    return names.join(separator);
+}
+console.log(joinNames(&quot;, &quot;, &quot;Priya&quot;, &quot;Aarav&quot;, &quot;Riya&quot;));
+
+/*Bonus Spread to Merge Settings
+Declare: const defaults = { theme: &quot;light&quot;, lang: &quot;en&quot;, notifications: true };
+Declare: const userPrefs = { theme: &quot;dark&quot;, fontSize: 16 };
+Use object spread to merge them so user preferences override defaults but unchanged defaults remain.
+Log the result.
+Bonus: write a function applyPrefs(defaults, prefs) that does this for any pair of objects using spread.*/
+const defaults = { theme: &quot;light&quot;, lang: &quot;en&quot;, notifications: true };
+const userPrefs = { theme: &quot;dark&quot;, fontSize: 16 };
+const newPrefs = {...defaults,...userPrefs};
+console.log(newPrefs);
+
+function applyPrefs(defaults, prefs){
+    return {...defaults,...prefs};
+}
+console.log(applyPrefs({theme: &quot;light&quot;, lang: &quot;en&quot;}, { theme: &quot;dark&quot;, fontSize: 16 }))</code></pre>
+                </section>
+            </article>
+        </main>
+
+
+                <aside class="site-outline">
+            <h2>Curriculum</h2>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Overview</a></li>
+                    <details>
+                        <summary>Day 1 — Basics</summary>
+                        <ul>
+                            <li><a href="../../day-1/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-1/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-1/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 2 — Variables</summary>
+                        <ul>
+                            <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-2/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-2/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 3 — Operators</summary>
+                        <ul>
+                            <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-3/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-3/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 4 — Control Flow</summary>
+                        <ul>
+                            <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-4/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-4/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 5 — Loops</summary>
+                        <ul>
+                            <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-5/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-5/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 6 — Functions</summary>
+                        <ul>
+                            <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-6/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-6/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 7 — Arrays</summary>
+                        <ul>
+                            <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-7/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-7/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 8 — Objects</summary>
+                        <ul>
+                            <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-8/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-8/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details open>
+                        <summary>Day 9 — Modern Syntax</summary>
+                        <ul>
+                            <li><a href="lesson.html">Lesson</a></li>
+                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
+                            <li><a href="homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 10 — DOM Basics</summary>
+                        <ul>
+                            <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-10/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-10/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 11 — Events</summary>
+                        <ul>
+                            <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-11/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-11/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 12 — Error Handling</summary>
+                        <ul>
+                            <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-12/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-12/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 13 — Hoisting &amp; TDZ</summary>
+                        <ul>
+                            <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-13/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 14 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-14/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-14/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-14/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 15 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-15/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-15/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-15/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </ul>
+            </nav>
+        </aside>
+    </div>
+    <script src="../js/hands-on.js"></script>
+</body>
+</html>

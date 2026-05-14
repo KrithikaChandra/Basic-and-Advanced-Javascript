@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 9 Modern Syntax | JavaScript Curriculum</title>
+    <link rel="stylesheet" href="../../shared/css/style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <h1>Day 9: Modern Syntax</h1>
+            <p class="subtitle">Lesson: Topics and Demo Code</p>
+        </header>
+        <main class="site-content">
+            <article>
+                <h2>Lesson script</h2>
+                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
+                <section>
+                    <h3>Source (lesson.js)</h3>
+                    <pre><code>// const name = &quot;Priya&quot;;
+// const age = 24;
+
+// // Old way — string concatenation
+// const msg1 = &quot;Hello, &quot; + name + &quot;. You are &quot; + age + &quot; years old.&quot;;
+// console.log(msg1);
+
+// // Template literal — clean
+// const msg2 = `Hello, ${name}. You are ${age} years old.`;
+// console.log(msg2);
+// // Multiline — no \n
+// const address = `MI Road
+// Jaipur 302001
+// Rajasthan`;
+// console.log(address);
+
+// // Expressions inside ${...}
+// const total = 1180;
+// const summary = `Total ${total &gt;= 1000 ? &quot;qualifies&quot; : &quot;doesn&#x27;t qualify&quot;} for free shipping.`;
+// console.log(summary);
+// // Math, function calls
+// const taxed = `Final price: ₹${(1000 * 1.18).toFixed(2)}`;
+// console.log(taxed);
+
+// //Topic 2 Array Destructuring
+
+// const colors = [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;];
+
+// // Basic
+// const [first, second, third] = colors;
+// console.log(first, second, third);   // red green blue
+
+// // Skip with comma
+// const [, , last] = colors;
+// console.log(last);                   // blue
+
+// // Default values
+// const [a, b, c, d = &quot;yellow&quot;] = colors;
+// console.log(d);                      // yellow (filled in)
+
+// // Swap variables — no temp needed
+// let x = 1, y = 2;
+// [x, y] = [y, x];
+// console.log(x, y);                   // 2 1
+
+// // Rest pattern — gather the rest
+// const nums = [1, 2, 3, 4, 5];
+// const [head, ...tail] = nums;
+// console.log(head);    // 1
+// console.log(tail);    // [2, 3, 4, 5]
+
+// const [a1, b1, ...rest] = [10, 20, 30, 40, 50];
+// console.log(a1, b1, rest);
+
+// //Topic 3 Object Destructuring
+// const user = {
+//   name: &quot;Aarav&quot;,
+//   age: 22,
+//   address: {
+//     city: &quot;Jaipur&quot;,
+//     pincode: &quot;302001&quot;
+//   }
+// };
+
+// // Nested
+// const { address: { city } } = user;
+// console.log(city);                      // Jaipur
+
+// // Rename + default
+// const { name: userName, phone = &quot;N/A&quot; } = user;
+// console.log(userName, phone);           // Aarav N/A
+
+// // Rest with objects — gather remaining keys
+// const { name1, ...rest1 } = user;
+// console.log(name);    // Aarav
+// console.log(rest);    // { age: 22, address: { ... } }
+
+// // In function parameters — super common in React
+// const greet = ({ name, age }) =&gt; `${name} is ${age}`;
+// console.log(greet(user));               // Aarav is 22
+
+// With defaults in params — robust
+const showInfo = ({ name = &quot;Guest&quot;, role = &quot;User&quot; } = {}) =&gt;
+  `${role}: ${name}`;
+console.log(showInfo());                // User: Guest
+console.log(showInfo({ name: &quot;Riya&quot; })); // User: Riya
+console.log(showInfo({ name: &quot;Riya&quot;, role: &quot;Admin&quot; })); 
+console.log(showInfo({ role: &quot;SuperAdmin&quot; })); 
+
+
+// const defaultInfo = { name: &quot;Guest&quot;, role: &quot;User&quot; }; 
+// const showInfo = (info = defaultInfo) =&gt;
+//   `${info.role}: ${info.name}`;
+ 
+// console.log(showInfo());                      // &quot;User: Guest&quot;
+// console.log(showInfo({ name: &quot;Riya&quot;, role: &quot;User&quot; })); // &quot;User: Riya&quot;
+// const u = { a: 1, b: 2, c: 3 };
+// const { a, ...rest } = u;
+// console.log(rest);
+
+//Topic 4 Rest Parameters
+function sum(...numbers) {
+  return numbers.reduce((acc, n) =&gt; acc + n, 0);
+}
+
+console.log(sum(1, 2, 3));         // 6
+console.log(sum(1, 2, 3, 4, 5));   // 15
+console.log(sum());                // 0
+
+// Combined with regular params
+function greet(greeting, ...names) {
+  return names.map(n =&gt; `${greeting}, ${n}`).join(&quot; | &quot;);
+}
+console.log(greet(&quot;Hi&quot;, &quot;Priya&quot;, &quot;Aarav&quot;, &quot;Riya&quot;));
+
+//Topic 5 Spread — Object Spread
+const a1 = [1, 2, 3];
+const b = [4, 5, 6];
+
+// Array spread — recap
+console.log([...a1, ...b]);          // [1, 2, 3, 4, 5, 6]
+console.log(Math.max(...a1));        // 3
+
+// Object spread — copy + override
+const user = { name: &quot;Priya&quot;, age: 24, city: &quot;Jaipur&quot; };
+const updated = { ...user, age: 25 };
+console.log(updated);
+// { name: &quot;Priya&quot;, age: 25, city: &quot;Jaipur&quot; }
+
+// Merge objects (later wins on conflict)
+const defaults = { theme: &quot;light&quot;, notifications: true };
+const userPrefs = { theme: &quot;dark&quot; };
+const final = { ...defaults, ...userPrefs };
+console.log(final);   // { theme: &quot;dark&quot;, notifications: true }
+
+// Topic 6 Defaults: || vs ??
+console.log(0 || &quot;default&quot;);        // &quot;default&quot;  (0 is falsy)
+console.log(&quot;&quot; || &quot;default&quot;);       // &quot;default&quot;
+console.log(null || &quot;default&quot;);     // &quot;default&quot;
+
+// ?? — only null/undefined triggers
+console.log(0 ?? &quot;default&quot;);        // 0          (0 is valid!)
+console.log(&quot;&quot; ?? &quot;default&quot;);       // &quot;&quot;
+console.log(null ?? &quot;default&quot;);     // &quot;default&quot;
+console.log(undefined ?? &quot;default&quot;); // &quot;default&quot;
+
+// Real example — count of items
+// const count = userInputCount ?? 1; 
+
+//Topic 7 Computed Property Names
+const fieldName = &quot;email&quot;;
+const value = &quot;priya@x.in&quot;;
+
+// Old way
+const user1 = {};
+user[fieldName] = value;
+
+// Modern — computed in the literal
+const user2 = {
+  name: &quot;Priya&quot;,
+  [fieldName]: value,
+  [`is_${fieldName}_verified`]: true
+};
+console.log(user2);
+// { name: &quot;Priya&quot;, email: &quot;priya@x.in&quot;, is_email_verified: true }</code></pre>
+                </section>
+            </article>
+        </main>
+
+
+                <aside class="site-outline">
+            <h2>Curriculum</h2>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Overview</a></li>
+                    <details>
+                        <summary>Day 1 — Basics</summary>
+                        <ul>
+                            <li><a href="../../day-1/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-1/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-1/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 2 — Variables</summary>
+                        <ul>
+                            <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-2/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-2/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 3 — Operators</summary>
+                        <ul>
+                            <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-3/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-3/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 4 — Control Flow</summary>
+                        <ul>
+                            <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-4/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-4/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 5 — Loops</summary>
+                        <ul>
+                            <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-5/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-5/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 6 — Functions</summary>
+                        <ul>
+                            <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-6/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-6/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 7 — Arrays</summary>
+                        <ul>
+                            <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-7/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-7/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 8 — Objects</summary>
+                        <ul>
+                            <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-8/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-8/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details open>
+                        <summary>Day 9 — Modern Syntax</summary>
+                        <ul>
+                            <li><a href="lesson.html" aria-current="page">Lesson</a></li>
+                            <li><a href="hands-on.html">Hands-on</a></li>
+                            <li><a href="homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 10 — DOM Basics</summary>
+                        <ul>
+                            <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-10/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-10/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 11 — Events</summary>
+                        <ul>
+                            <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-11/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-11/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 12 — Error Handling</summary>
+                        <ul>
+                            <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-12/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-12/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 13 — Hoisting &amp; TDZ</summary>
+                        <ul>
+                            <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-13/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 14 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-14/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-14/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-14/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 15 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-15/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-15/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-15/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </ul>
+            </nav>
+        </aside>
+    </div>
+    <script src="../js/lesson.js"></script>
+</body>
+</html>

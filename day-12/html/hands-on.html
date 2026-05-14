@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 12 Error Handling | JavaScript Curriculum</title>
+    <link rel="stylesheet" href="../../shared/css/style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <h1>Day 12: Error Handling</h1>
+            <p class="subtitle">Hands-on: In-class Tasks</p>
+        </header>
+        <main class="site-content">
+            <article>
+                <h2>Hands-on script</h2>
+                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
+                <section>
+                    <h3>Source (hands-on.js)</h3>
+                    <pre><code>// Task 1 Safe JSON Parse
+// Write a function safeParse(str) that uses try/catch around JSON.parse(str).
+// If parsing succeeds, return the parsed object.
+// If it fails, log &quot;Invalid JSON:&quot; plus the error message, and return null.
+// Test with &#x27;{&quot;name&quot;:&quot;Priya&quot;}&#x27; (valid) and &#x27;{&quot;name&quot;:&quot;Priya&quot;&#x27; (broken).
+function safeparse(str){
+    try{
+    return JSON.parse(str);   
+    }
+    catch(error){
+    console.log(&quot;Invalid JSON:&quot;,error.message);
+    }
+}
+console.log(safeparse(&#x27;{&quot;name&quot;:&quot;Priya&quot;}&#x27;));
+console.log(safeparse(&#x27;{&quot;name&quot;:&quot;Priya&quot;&#x27;));
+// Task 2 Throw on Bad Age
+// Write a function setAge(age) that:
+// Throws an Error with message &quot;Age must be a number&quot; if typeof age !== &quot;number&quot;.
+// Throws an Error with message &quot;Age must be 0–120&quot; if age is out of range.
+// Otherwise returns age.
+// Wrap calls in try/catch. Test: setAge(25), setAge(&quot;twenty&quot;), setAge(200).
+function setAge(age){
+    if(typeof(age) !== &quot;number&quot;){
+        throw new Error(&quot;Age must be a number&quot;);
+    }
+    if(age&gt;120 || age&lt;0)
+    {
+        throw new Error(&quot;Age must be 0-120&quot;);
+    }
+    return age;
+}
+try {
+    console.log(setAge(25));
+    console.log(setAge(&quot;twenty&quot;));
+    console.log(setAge(200));
+
+} catch (error) {
+    console.log(error.message);
+}
+
+// Task 3 Custom ValidationError on Email
+// Define a class ValidationError extends Error that sets this.name = &quot;ValidationError&quot;.
+// Write validateEmail(email) that throws a ValidationError if the email doesn&#x27;t include &quot;@&quot;.
+// Wrap a call in try/catch. Inside catch, branch on err instanceof ValidationError.
+// Test with &quot;priya@example.com&quot; and &quot;priya-no-at&quot;.
+
+class ValidationError extends Error{
+constructor(message) {
+        super(message);
+        this.name = &quot;ValidationError&quot;;
+    }
+}
+
+function validateEmail(email){
+    if(!email.includes(&#x27;@&#x27;)){
+        throw new ValidationError(&quot;Email must contain @&quot;);
+    }
+    return &quot;Valid Email&quot;;
+}
+
+try {
+    console.log(validateEmail(&quot;priya@example.com&quot;)); //Valid Email
+
+} catch (err) {
+
+    if (err instanceof ValidationError) {
+        console.log(&quot;Validation Error:&quot;, err.message);
+    } else {
+        console.log(&quot;Other Error:&quot;, err.message);
+    }
+}
+try {
+    console.log(validateEmail(&quot;priya-no-at&quot;)); //Validation Error: Email must contain @
+
+} catch (err) {
+
+    if (err instanceof ValidationError) {
+        console.log(&quot;Validation Error:&quot;, err.message);
+    } else {
+        console.log(&quot;Other Error:&quot;, err.message);
+    }
+}
+
+// Bonus Two-File Module Setup
+// Create mathUtils.js exporting (named): PI, add(a, b), multiply(a, b).
+// Create mathUtils.js exporting (default): a function formatPrice(n) that returns &quot;₹&lt;n&gt;&quot;.
+// Create app.js that imports all of them and uses each.
+// Don&#x27;t forget &lt;script type=&quot;module&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt; in HTML.
+//Done check app.js and mathUtils.js
+</code></pre>
+                </section>
+            </article>
+        </main>
+
+
+                <aside class="site-outline">
+            <h2>Curriculum</h2>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Overview</a></li>
+                    <details>
+                        <summary>Day 1 — Basics</summary>
+                        <ul>
+                            <li><a href="../../day-1/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-1/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-1/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 2 — Variables</summary>
+                        <ul>
+                            <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-2/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-2/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 3 — Operators</summary>
+                        <ul>
+                            <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-3/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-3/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 4 — Control Flow</summary>
+                        <ul>
+                            <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-4/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-4/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 5 — Loops</summary>
+                        <ul>
+                            <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-5/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-5/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 6 — Functions</summary>
+                        <ul>
+                            <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-6/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-6/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 7 — Arrays</summary>
+                        <ul>
+                            <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-7/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-7/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 8 — Objects</summary>
+                        <ul>
+                            <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-8/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-8/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 9 — Modern Syntax</summary>
+                        <ul>
+                            <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-9/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-9/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 10 — DOM Basics</summary>
+                        <ul>
+                            <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-10/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-10/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 11 — Events</summary>
+                        <ul>
+                            <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-11/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-11/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details open>
+                        <summary>Day 12 — Error Handling</summary>
+                        <ul>
+                            <li><a href="lesson.html">Lesson</a></li>
+                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
+                            <li><a href="homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 13 — Hoisting &amp; TDZ</summary>
+                        <ul>
+                            <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-13/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 14 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-14/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-14/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-14/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 15 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-15/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-15/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-15/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </ul>
+            </nav>
+        </aside>
+    </div>
+    <script src="../js/hands-on.js"></script>
+</body>
+</html>

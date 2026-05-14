@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 8 Objects | JavaScript Curriculum</title>
+    <link rel="stylesheet" href="../../shared/css/style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <h1>Day 8: Objects</h1>
+            <p class="subtitle">Lesson: Topics and Demo Code</p>
+        </header>
+        <main class="site-content">
+            <article>
+                <h2>Lesson script</h2>
+                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
+                <section>
+                    <h3>Source (lesson.js)</h3>
+                    <pre><code>//Topic Object Literals
+const user = {
+  name: &quot;Priya&quot;,
+  age: 24,
+  city: &quot;Jaipur&quot;,
+  isActive: true,
+  hobbies: [&quot;reading&quot;, &quot;trekking&quot;],
+  address: {
+    street: &quot;MI Road&quot;,
+    pincode: &quot;302001&quot;
+  }
+};
+
+console.log(user);
+
+//Topic 2 Dot vs Bracket
+const user2 = { name: &quot;Priya&quot;, age: 24, &quot;favourite color&quot;: &quot;blue&quot; };
+
+// Dot — clean
+console.log(user2.name);              // Priya
+console.log(user2.age);               // 24
+
+// Bracket — when key is dynamic
+const field = &quot;name&quot;;
+console.log(user2[field]);            // Priya  ← variable
+
+// Bracket — when key has spaces/special chars
+console.log(user2[&quot;favourite color&quot;]); // blue   (can&#x27;t do user.favourite color)
+
+// Property doesn&#x27;t exist? undefined — no error
+console.log(user2.email);             // undefined
+
+const u = { name: &quot;Priya&quot; };
+console.log(u.name);
+const f = &quot;name&quot;;
+console.log(u[f]);
+// console.log(u.email);
+
+// Toic 3 Add Update Delete
+const user3 = { name: &quot;Priya&quot;, age: 24 };
+
+// Add
+user3.email = &quot;priya@example.com&quot;;
+user3.city = &quot;Jaipur&quot;;
+
+// Update — same syntax
+user3.age = 25;
+
+// Delete
+delete user3.city;
+
+console.log(user3);
+// { name: &quot;Priya&quot;, age: 25, email: &quot;priya@example.com&quot; }
+
+//Topic 4 Method &amp; this
+const user4 = {
+  name: &quot;Aarav&quot;,
+  age: 22,
+
+  greet() {
+    return `Hello, I am ${this.name}`;
+  },
+
+  birthday() {
+    this.age += 1;
+    return `Happy birthday! ${this.name} is now ${this.age}`;
+  }
+};
+
+console.log(user4.greet());      // Hello, I am Aarav
+console.log(user4.birthday());   // Happy birthday! Aarav is now 23
+console.log(user4.age);          // 23 (changed)
+
+//Topic 5 Destructuring
+const user5 = { name: &quot;Riya&quot;, age: 23, city: &quot;Jaipur&quot;, email: &quot;r@x.in&quot; };
+
+// Without destructuring — verbose
+const name1 = user5.name;
+const age1 = user5.age;
+
+// WITH destructuring — clean
+const { name, age } = user5;
+console.log(name, age);   // Riya 23
+
+// Rename — pull `name` but call it `userName`
+const { name: userName, city } = user;
+console.log(userName, city);   // Riya Jaipur
+
+// Default values — when property is missing
+const { phone = &quot;N/A&quot; } = user5;
+console.log(phone);            // &quot;N/A&quot;
+
+// Use it in function parameters
+const greet = ({ name, age }) =&gt; `Hi ${name}, age ${age}`;
+console.log(greet(user5));      // Hi Riya, age 23
+
+
+// const u = { a: 1, b: 2 };
+// const { a, b } = u;
+// console.log(a, b);
+// const { phone = &quot;N/A&quot; } = u;
+// console.log(phone);
+
+//Topic 6 Object.keys · values · entries
+const user6 = { name: &quot;Anaya&quot;, age: 21, city: &quot;Jaipur&quot; };
+
+console.log(Object.keys(user6));     // [&quot;name&quot;, &quot;age&quot;, &quot;city&quot;]
+console.log(Object.values(user6));   // [&quot;Anaya&quot;, 21, &quot;Jaipur&quot;]
+console.log(Object.entries(user6));  // [[&quot;name&quot;,&quot;Anaya&quot;], [&quot;age&quot;,21], [&quot;city&quot;,&quot;Jaipur&quot;]]
+
+// Combine with array methods — clean!
+Object.entries(user6).forEach(([key, value]) =&gt; {
+  console.log(`${key}: ${value}`);
+});
+
+
+//Topic 7 Object.assign &amp; Spread
+const a = { name: &quot;Priya&quot; };
+const b = { age: 24 };
+
+// Object.assign — merge into first arg
+const merged = Object.assign({}, a, b);
+console.log(merged);    // { name: &quot;Priya&quot;, age: 24 }
+
+// Modern way — spread (same as arrays)
+const merged2 = { ...a, ...b };
+console.log(merged2);   // { name: &quot;Priya&quot;, age: 24 }
+
+// Spread to copy (shallow)
+const copy = { ...a };</code></pre>
+                </section>
+            </article>
+        </main>
+
+
+                <aside class="site-outline">
+            <h2>Curriculum</h2>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Overview</a></li>
+                    <details>
+                        <summary>Day 1 — Basics</summary>
+                        <ul>
+                            <li><a href="../../day-1/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-1/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-1/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 2 — Variables</summary>
+                        <ul>
+                            <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-2/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-2/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 3 — Operators</summary>
+                        <ul>
+                            <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-3/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-3/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 4 — Control Flow</summary>
+                        <ul>
+                            <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-4/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-4/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 5 — Loops</summary>
+                        <ul>
+                            <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-5/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-5/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 6 — Functions</summary>
+                        <ul>
+                            <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-6/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-6/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 7 — Arrays</summary>
+                        <ul>
+                            <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-7/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-7/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details open>
+                        <summary>Day 8 — Objects</summary>
+                        <ul>
+                            <li><a href="lesson.html" aria-current="page">Lesson</a></li>
+                            <li><a href="hands-on.html">Hands-on</a></li>
+                            <li><a href="homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 9 — Modern Syntax</summary>
+                        <ul>
+                            <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-9/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-9/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 10 — DOM Basics</summary>
+                        <ul>
+                            <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-10/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-10/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 11 — Events</summary>
+                        <ul>
+                            <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-11/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-11/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 12 — Error Handling</summary>
+                        <ul>
+                            <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-12/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-12/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 13 — Hoisting &amp; TDZ</summary>
+                        <ul>
+                            <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-13/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 14 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-14/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-14/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-14/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 15 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-15/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-15/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-15/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </ul>
+            </nav>
+        </aside>
+    </div>
+    <script src="../js/lesson.js"></script>
+</body>
+</html>
