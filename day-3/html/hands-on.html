@@ -3,32 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 3 Operators | JavaScript Curriculum</title>
+    <title>Day 2 Variables | JavaScript Curriculum</title>
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
 <body>
     <div class="page-shell">
         <header class="site-header">
-            <h1>Day 3: Operators</h1>
+            <h1>Day 2: Variables</h1>
             <p class="subtitle">Hands-on: In-class Tasks</p>
         </header>
+
         <main class="site-content">
             <article>
-                <h2>Hands-on script</h2>
+                <h2>Hands-on Tasks</h2>
+                
                 <section>
-                    <h3>Source (hands-on.js)</h3>
-                    <p><em>No <code>day-3/js/hands-on.js</code> yet. Add <code>exercise.js</code> / <code>hands-on.js</code> / <code>hw.js</code> under <code>js/day 3/</code> and re-run <code>python tools/generate_day_html.py</code>.</em></p>
+                    <h3>Task 1: typeof Exploration</h3>
+                    <p><strong>What to do:</strong></p>
+                    <ul>
+                        <li>In the console, log <code>typeof</code> for each: <code>42</code>, <code>"hello"</code>, <code>true</code>, <code>undefined</code>, <code>null</code>, <code>100n</code>, <code>Symbol("x")</code></li>
+                        <li>Note which one returns a SURPRISING type</li>
+                        <li>In a comment, write down which one and why</li>
+                    </ul>
+                    <pre><code>console.log(typeof 42);                 // "number"
+console.log(typeof "hello");            // "string"
+console.log(typeof true);               // "boolean"
+console.log(typeof undefined);          // "undefined"
+console.log(typeof null);               // "object" -- SURPRISE! Null is NOT an object!
+console.log(typeof 100n);               // "bigint"
+console.log(typeof Symbol("x"));        // "symbol"
+
+// Interesting fact: null returns "object" due to a quirk in JavaScript!
+// This is a historical bug that couldn't be fixed without breaking code.</code></pre>
                 </section>
+
+                <section>
+                    <h3>Task 2: Template Literals</h3>
+                    <p><strong>What to do:</strong></p>
+                    <ul>
+                        <li>Create variables: <code>const name = "Aarav"</code>, <code>const age = 22</code>, <code>const city = "Jaipur"</code></li>
+                        <li>Build the string "Aarav, 22, from Jaipur" using OLD-style concatenation with <code>+</code></li>
+                        <li>Build the same string using a TEMPLATE LITERAL</li>
+                        <li>Then build a 3-line "card" using a multi-line template literal</li>
+                    </ul>
+                    <pre><code>const name = "Aarav";
+const age = 22;
+const city = "Jaipur";
+
+// OLD-style concatenation with +
+let oldStyle = name + ", " + age + ", from " + city;
+console.log(oldStyle);                  // Aarav, 22, from Jaipur
+
+// NEW-style with template literal
+let newStyle = `${name}, ${age}, from ${city}`;
+console.log(newStyle);                  // Aarav, 22, from Jaipur
+
+// Multi-line template literal (3-line card)
+let card = `Name: ${name}
+Age: ${age}
+City: ${city}`;
+console.log(card);</code></pre>
+                </section>
+
+                <section>
+                    <h3>Task 3: null vs undefined</h3>
+                    <p><strong>What to do:</strong></p>
+                    <ul>
+                        <li>Declare <code>let user;</code> (no value). Log it. Log its <code>typeof</code></li>
+                        <li>Now set <code>user = null</code>. Log it. Log its <code>typeof</code></li>
+                        <li>Compare: <code>null == undefined</code> and <code>null === undefined</code>. Note the difference.</li>
+                    </ul>
+                    <pre><code>let user;
+console.log(user);                      // undefined
+console.log(typeof user);               // "undefined"
+
+user = null;
+console.log(user);                      // null
+console.log(typeof user);               // "object" (quirk!)
+
+// Loose equality (==) treats them as equal
+console.log(null == undefined);         // true
+
+// Strict equality (===) treats them as different
+console.log(null === undefined);        // false
+
+// Key difference:
+// undefined = "no value was set"
+// null = "I intentionally set this to no value"</code></pre>
+                </section>
+
             </article>
         </main>
-
 
                 <aside class="site-outline">
             <h2>Curriculum</h2>
             <nav>
                 <ul>
                     <li><a href="../../index.html">Overview</a></li>
-                    <details>
+                    
+                    <details >
                         <summary>Day 1 — Basics</summary>
                         <ul>
                             <li><a href="../../day-1/html/lesson.html">Lesson</a></li>
@@ -36,23 +109,26 @@
                             <li><a href="../../day-1/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    <details>
-                        <summary>Day 2 — Variables</summary>
-                        <ul>
-                            <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
-                            <li><a href="../../day-2/html/hands-on.html">Hands-on</a></li>
-                            <li><a href="../../day-2/html/homework.html">Homework</a></li>
-                        </ul>
-                    </details>
+                    
                     <details open>
-                        <summary>Day 3 — Operators</summary>
+                        <summary>Day 2 — Variables</summary>
                         <ul>
                             <li><a href="lesson.html">Lesson</a></li>
                             <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
                             <li><a href="homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    <details>
+                    
+                    <details >
+                        <summary>Day 3 — Operators</summary>
+                        <ul>
+                            <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-3/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-3/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    
+                    <details >
                         <summary>Day 4 — Control Flow</summary>
                         <ul>
                             <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
@@ -60,7 +136,8 @@
                             <li><a href="../../day-4/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    <details>
+                    
+                    <details >
                         <summary>Day 5 — Loops</summary>
                         <ul>
                             <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
@@ -68,7 +145,8 @@
                             <li><a href="../../day-5/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    <details>
+                    
+                    <details >
                         <summary>Day 6 — Functions</summary>
                         <ul>
                             <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
@@ -76,7 +154,8 @@
                             <li><a href="../../day-6/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    <details>
+                    
+                    <details >
                         <summary>Day 7 — Arrays</summary>
                         <ul>
                             <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
@@ -84,7 +163,8 @@
                             <li><a href="../../day-7/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    <details>
+                    
+                    <details >
                         <summary>Day 8 — Objects</summary>
                         <ul>
                             <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
@@ -92,7 +172,8 @@
                             <li><a href="../../day-8/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    <details>
+                    
+                    <details >
                         <summary>Day 9 — Modern Syntax</summary>
                         <ul>
                             <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
@@ -100,7 +181,8 @@
                             <li><a href="../../day-9/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    <details>
+                    
+                    <details >
                         <summary>Day 10 — DOM Basics</summary>
                         <ul>
                             <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
@@ -108,7 +190,8 @@
                             <li><a href="../../day-10/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    <details>
+                    
+                    <details >
                         <summary>Day 11 — Events</summary>
                         <ul>
                             <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
@@ -116,7 +199,8 @@
                             <li><a href="../../day-11/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    <details>
+                    
+                    <details >
                         <summary>Day 12 — Error Handling</summary>
                         <ul>
                             <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
@@ -124,28 +208,13 @@
                             <li><a href="../../day-12/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    <details>
-                        <summary>Day 13 — Hoisting &amp; TDZ</summary>
+                    
+                    <details >
+                        <summary>Day 13 — Hoisting and TDZ</summary>
                         <ul>
                             <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
                             <li><a href="../../day-13/html/homework.html">Homework</a></li>
-                        </ul>
-                    </details>
-                    <details>
-                        <summary>Day 14 — Practice</summary>
-                        <ul>
-                            <li><a href="../../day-14/html/lesson.html">Lesson</a></li>
-                            <li><a href="../../day-14/html/hands-on.html">Hands-on</a></li>
-                            <li><a href="../../day-14/html/homework.html">Homework</a></li>
-                        </ul>
-                    </details>
-                    <details>
-                        <summary>Day 15 — Practice</summary>
-                        <ul>
-                            <li><a href="../../day-15/html/lesson.html">Lesson</a></li>
-                            <li><a href="../../day-15/html/hands-on.html">Hands-on</a></li>
-                            <li><a href="../../day-15/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
                 </ul>
@@ -153,5 +222,6 @@
         </aside>
     </div>
 
+    <script src="../js/hands-on.js"></script>
 </body>
 </html>
