@@ -9,7 +9,9 @@ https://krithikachandra.github.io/Basic-and-Advanced-Javascript/
 Each learning day contains:
 
 lesson.html — Concepts and examples
+
 hands-on.html — Practice exercises
+
 homework.html — Additional tasks
 
 License
