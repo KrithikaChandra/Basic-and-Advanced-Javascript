@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 5 Loops | JavaScript Curriculum</title>
+    <link rel="stylesheet" href="../../shared/css/style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <h1>Day 5: Loops</h1>
+            <p class="subtitle">Hands-on: In-class Tasks</p>
+        </header>
+        <main class="site-content">
+            <article>
+                <h2>Hands-on script</h2>
+                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
+                <section>
+                    <h3>Source (hands-on.js)</h3>
+                    <pre><code>/*Task 1 Multiplication Table
+Use a for loop to print the multiplication table of 7 from 1 to 10.
+Format: 7 x 1 = 7, 7 x 2 = 14, ..., 7 x 10 = 70.
+Use template literals (backticks) for cleaner string formatting.
+Bonus: print only the EVEN multiples of 7 (use continue or modify the step).*/
+for (let i = 1; i &lt;= 10; i++) {
+    console.log(`7 x ${i} = ${7 * i}`)};
+// Bonus
+for (let i = 1; i &lt;= 10; i++) {
+
+    if (i % 2 !== 0) {
+        continue;
+    }
+    console.log(`7 x ${i} = ${7 * i}`);
+}
+/*Task 2 Sum with while
+Use a while loop to calculate the sum of all numbers from 1 to 100.
+Start with let sum = 0; and let i = 1;.
+After the loop, log the final sum.
+Bonus: change the loop to sum only ODD numbers from 1 to 100.*/
+let sum = 0;
+let i = 1;
+while (i &lt;= 100) {
+    sum = sum + i;
+    i++;
+}
+console.log(&quot;Total Sum =&quot;, sum);
+
+// Bonus
+let oddSum = 0;
+let j = 1;
+
+while (j &lt;= 100) {
+    if (j % 2 !== 0) {
+        oddSum += j;
+    }
+    j++;
+}
+
+console.log(&quot;Odd Sum =&quot;, oddSum);
+
+/*Task 3 for...of with Names
+Declare an array: const names = [&quot;Priya&quot;, &quot;Aarav&quot;, &quot;Riya&quot;, &quot;Kabir&quot;, &quot;Anaya&quot;];
+Use for...of to log each name.
+Then, in a SECOND loop, count how many names are longer than 4 characters and log the count.
+Bonus: use for...of on the string &quot;Jaipur&quot; to log each character.*/
+const names = [&quot;Priya&quot;, &quot;Aarav&quot;, &quot;Riya&quot;, &quot;Kabir&quot;, &quot;Anaya&quot;];
+
+for (const name of names) {
+    console.log(name);
+}
+let count = 0;
+
+for (const name of names) {
+    if (name.length &gt; 4) {
+        count++;
+    }
+}
+console.log(&quot;Names longer than 4 letters:&quot;, count);
+
+// Bonus 
+for (const letter of &quot;Jaipur&quot;) {
+    console.log(letter);
+}
+
+/*Bonus Object Inspector with for...in
+Declare an object: const student = { name: &quot;Anaya&quot;, age: 21, city: &quot;Jaipur&quot;, course: &quot;B.Tech&quot; };
+Use for...in to log every key and its value in the format key: value.
+Bonus: count how many properties the object has and log the count.*/
+const student = {
+    name: &quot;Anaya&quot;,
+    age: 21,
+    city: &quot;Jaipur&quot;,
+    course: &quot;B.Tech&quot;
+};
+
+// Print keys and values
+for (const key in student) {
+    console.log(`${key}: ${student[key]}`);
+}
+
+let propertyCount = 0;
+for (const key in student) {
+    propertyCount++;
+}
+
+console.log(&quot;Total properties:&quot;, propertyCount);
+</code></pre>
+                </section>
+            </article>
+        </main>
+
+
+                <aside class="site-outline">
+            <h2>Curriculum</h2>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Overview</a></li>
+                    <details>
+                        <summary>Day 1 — Basics</summary>
+                        <ul>
+                            <li><a href="../../day-1/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-1/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-1/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 2 — Variables</summary>
+                        <ul>
+                            <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-2/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-2/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 3 — Operators</summary>
+                        <ul>
+                            <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-3/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-3/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 4 — Control Flow</summary>
+                        <ul>
+                            <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-4/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-4/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details open>
+                        <summary>Day 5 — Loops</summary>
+                        <ul>
+                            <li><a href="lesson.html">Lesson</a></li>
+                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
+                            <li><a href="homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 6 — Functions</summary>
+                        <ul>
+                            <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-6/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-6/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 7 — Arrays</summary>
+                        <ul>
+                            <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-7/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-7/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 8 — Objects</summary>
+                        <ul>
+                            <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-8/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-8/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 9 — Modern Syntax</summary>
+                        <ul>
+                            <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-9/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-9/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 10 — DOM Basics</summary>
+                        <ul>
+                            <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-10/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-10/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 11 — Events</summary>
+                        <ul>
+                            <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-11/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-11/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 12 — Error Handling</summary>
+                        <ul>
+                            <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-12/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-12/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 13 — Hoisting &amp; TDZ</summary>
+                        <ul>
+                            <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-13/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 14 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-14/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-14/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-14/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 15 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-15/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-15/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-15/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </ul>
+            </nav>
+        </aside>
+    </div>
+    <script src="../js/hands-on.js"></script>
+</body>
+</html>

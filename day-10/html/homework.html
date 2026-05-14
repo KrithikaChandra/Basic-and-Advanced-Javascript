@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 10 DOM Basics | JavaScript Curriculum</title>
+    <link rel="stylesheet" href="../../shared/css/style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <h1>Day 10: DOM Basics</h1>
+            <p class="subtitle">Homework: Take-home Practice</p>
+        </header>
+        <main class="site-content">
+            <article>
+                <h2>Homework script</h2>
+                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
+                <section>
+                    <h3>Source (homework.js)</h3>
+                    <pre><code>// Add a &lt;p&gt; to a page and change its text three times — once with textContent, once with innerHTML adding a &lt;strong&gt; tag, then back to plain text.
+const list = document.createElement(&#x27;p&#x27;);
+
+list.textContent = &quot;Hello&quot;;
+
+list.innerHTML = &quot;Hi&quot;;
+
+list.textContent = &quot;How are u&quot;;
+
+console.log(list);
+
+// Build a list of 5 items in HTML. Use a JS loop to add the class even to even-indexed items.
+const list2 = document.querySelector(&quot;item-list&quot;);
+
+for(let i = 0;i&lt;5;i++){
+    const li = document.createElement(&#x27;li&#x27;);
+    li.textContent = `Item {i+1}`;
+
+    if(i%2==0){
+        li.classList.add(&#x27;even&#x27;);
+    }
+    
+    list.appendChild(&#x27;li&#x27;);
+}
+
+// Create a button programmatically with createElement, set its text to &quot;Click me&quot;, give it an ID and a class, append it to body.
+const button = document.createElement(&#x27;button&#x27;);
+
+button.textContent = &quot;Click me&quot;;
+
+button.id = &quot;click-btn&quot;;
+
+button.classList.add(&quot;click&quot;);
+
+document.body.appendChild(button);
+
+console.log(button);
+
+// Take an array of 3 product objects (name, price). Build 3 cards from them dynamically.
+const products = [
+    { name: &quot;Laptop&quot;, price: 60000 },
+    { name: &quot;Phone&quot;, price: 30000 },
+    { name: &quot;Headphones&quot;, price: 5000 }
+];
+const cardContainer = document.querySelector(&#x27;#cards&#x27;);
+products.forEach((product) =&gt; {
+
+    const card = document.createElement(&quot;div&quot;);
+    card.classList.add(&quot;card&quot;);
+
+    const title = document.createElement(&quot;h3&quot;);
+    title.textContent = product.name;
+
+    const price = document.createElement(&quot;p&quot;);
+    price.textContent = `₹${product.price}`;
+
+    card.appendChild(title);
+    card.appendChild(price);
+
+    cardsContainer.appendChild(card);
+});</code></pre>
+                </section>
+            </article>
+        </main>
+
+
+                <aside class="site-outline">
+            <h2>Curriculum</h2>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Overview</a></li>
+                    <details>
+                        <summary>Day 1 — Basics</summary>
+                        <ul>
+                            <li><a href="../../day-1/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-1/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-1/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 2 — Variables</summary>
+                        <ul>
+                            <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-2/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-2/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 3 — Operators</summary>
+                        <ul>
+                            <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-3/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-3/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 4 — Control Flow</summary>
+                        <ul>
+                            <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-4/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-4/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 5 — Loops</summary>
+                        <ul>
+                            <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-5/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-5/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 6 — Functions</summary>
+                        <ul>
+                            <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-6/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-6/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 7 — Arrays</summary>
+                        <ul>
+                            <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-7/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-7/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 8 — Objects</summary>
+                        <ul>
+                            <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-8/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-8/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 9 — Modern Syntax</summary>
+                        <ul>
+                            <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-9/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-9/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details open>
+                        <summary>Day 10 — DOM Basics</summary>
+                        <ul>
+                            <li><a href="lesson.html">Lesson</a></li>
+                            <li><a href="hands-on.html">Hands-on</a></li>
+                            <li><a href="homework.html" aria-current="page">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 11 — Events</summary>
+                        <ul>
+                            <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-11/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-11/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 12 — Error Handling</summary>
+                        <ul>
+                            <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-12/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-12/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 13 — Hoisting &amp; TDZ</summary>
+                        <ul>
+                            <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-13/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 14 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-14/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-14/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-14/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 15 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-15/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-15/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-15/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </ul>
+            </nav>
+        </aside>
+    </div>
+    <script src="../js/homework.js"></script>
+</body>
+</html>

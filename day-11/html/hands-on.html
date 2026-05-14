@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 11 Events | JavaScript Curriculum</title>
+    <link rel="stylesheet" href="../../shared/css/style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <h1>Day 11: Events</h1>
+            <p class="subtitle">Hands-on: In-class Tasks</p>
+        </header>
+        <main class="site-content">
+            <article>
+                <h2>Hands-on script</h2>
+                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
+                <section>
+                    <h3>Source (hands-on.js)</h3>
+                    <pre><code>/*Task 1 Click Counter
+Grab the #counter-btn button and the #count span.
+On every click, increment a counter variable and update the span&#x27;s textContent.
+Bonus: after 10 clicks, change the button&#x27;s text to &quot;Stop clicking!&quot;.*/
+const counterBtn = document.querySelector(&quot;#counter-btn&quot;);
+const countSpan = document.querySelector(&quot;#count&quot;);
+let counter = 0;
+counterBtn.addEventListener(&quot;click&quot;,() =&gt; {
+    counter ++;
+    countSpan.textContent = `Clicked ${counter} times`;
+    if(counter&gt;10){
+        counterBtn.textContent = `Stop clicking!`;
+    }
+})
+console.log(counterBtn);
+console.log(countSpan);
+
+/*Task 2 Live Input Preview
+Grab the #live-input and #preview.
+On every keystroke, copy the current value into the preview (use the input event).
+Bonus: if the input is empty, show &quot;Start typing...&quot; in the preview.*/
+const liveInput = document.querySelector(&quot;#live-input&quot;)
+const preview = document.querySelector(&quot;#preview&quot;);
+liveInput.addEventListener(&quot;input&quot;,(e) =&gt; {
+const text = liveInput.value;
+
+    if (text === &quot;&quot;) {
+        preview.textContent = &quot;Start typing...&quot;;
+    } else {
+        preview.textContent = text;
+    }
+})
+
+/*Task 3 Form preventDefault
+Grab the #reg-form form and #name-field input and #welcome paragraph.
+On submit, prevent the default page reload.
+Read the input value, and set the welcome paragraph to &quot;Welcome, &lt;name&gt;!&quot; using template literals.
+Bonus: if the name field is empty, show &quot;Please enter your name&quot; instead.*/
+
+const regForm = document.querySelector(&quot;#reg-form&quot;);
+const nameField = document.querySelector(&quot;#name-field&quot;);
+const welcomeField = document.querySelector(&quot;#welcome&quot;);
+// const submit = document.querySelector(&quot;#submit&quot;);
+regForm.addEventListener(&quot;submit&quot;,(e) =&gt; {
+    e.preventDefault();
+    const name = nameField.value;
+    if (name === &quot;&quot;) {
+        welcomeField.textContent = &quot;Please enter your name&quot;;
+    } else {
+        welcomeField.textContent = `Welcome, ${name}!`;
+    }
+});
+console.log(welcomeField);
+console.log(nameField);
+console.log(regForm);
+
+/*Bonus Event Delegation on List
+Grab the #todo-list parent.
+Attach ONE click listener that toggles the done class on whichever &lt;li&gt; was clicked.
+Use e.target.tagName === &quot;LI&quot; to filter.
+Bonus: programmatically add a new &lt;li&gt; to the list with createElement. Confirm clicking it also toggles correctly — without any extra wiring.*/
+const toDoList = document.querySelector(&#x27;#todo-list&#x27;);
+toDoList.addEventListener(&quot;click&quot;, (e) =&gt;{
+    if(e.target.tagName === &quot;LI&quot;){
+        e.target.classList.toggle(&quot;done&quot;);
+    }
+});
+const newLi = document.createElement(&quot;li&quot;);
+toDoList.appendChild(newLi);
+console.log(toDoList);
+console.log(newLi);
+</code></pre>
+                </section>
+            </article>
+        </main>
+
+
+                <aside class="site-outline">
+            <h2>Curriculum</h2>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Overview</a></li>
+                    <details>
+                        <summary>Day 1 — Basics</summary>
+                        <ul>
+                            <li><a href="../../day-1/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-1/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-1/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 2 — Variables</summary>
+                        <ul>
+                            <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-2/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-2/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 3 — Operators</summary>
+                        <ul>
+                            <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-3/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-3/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 4 — Control Flow</summary>
+                        <ul>
+                            <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-4/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-4/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 5 — Loops</summary>
+                        <ul>
+                            <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-5/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-5/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 6 — Functions</summary>
+                        <ul>
+                            <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-6/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-6/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 7 — Arrays</summary>
+                        <ul>
+                            <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-7/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-7/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 8 — Objects</summary>
+                        <ul>
+                            <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-8/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-8/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 9 — Modern Syntax</summary>
+                        <ul>
+                            <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-9/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-9/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 10 — DOM Basics</summary>
+                        <ul>
+                            <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-10/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-10/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details open>
+                        <summary>Day 11 — Events</summary>
+                        <ul>
+                            <li><a href="lesson.html">Lesson</a></li>
+                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
+                            <li><a href="homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 12 — Error Handling</summary>
+                        <ul>
+                            <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-12/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-12/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 13 — Hoisting &amp; TDZ</summary>
+                        <ul>
+                            <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-13/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 14 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-14/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-14/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-14/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 15 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-15/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-15/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-15/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </ul>
+            </nav>
+        </aside>
+    </div>
+    <script src="../js/hands-on.js"></script>
+</body>
+</html>

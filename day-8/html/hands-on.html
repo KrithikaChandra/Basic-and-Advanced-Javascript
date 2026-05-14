@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 8 Objects | JavaScript Curriculum</title>
+    <link rel="stylesheet" href="../../shared/css/style.css">
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <h1>Day 8: Objects</h1>
+            <p class="subtitle">Hands-on: In-class Tasks</p>
+        </header>
+        <main class="site-content">
+            <article>
+                <h2>Hands-on script</h2>
+                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
+                <section>
+                    <h3>Source (hands-on.js)</h3>
+                    <pre><code>/*Task 1 Build a Student Object
+Create an object student with these properties: name = &quot;Anaya&quot;, age = 21, city = &quot;Jaipur&quot;, course = &quot;B.Tech&quot;, marks (an array of 3 numbers).
+Log the student. Then log just the name, age, and the FIRST mark using dot notation.
+Add a new property email = &quot;anaya@example.com&quot;. Update age to 22. Delete city.
+Log the student again to confirm changes.*/
+const student = {
+    name : &quot;Anaya&quot;,
+    age : 21, 
+    city : &quot;Jaipur&quot;,
+    course : &quot;B.Tech&quot;,
+    marks : [56 , 78 , 65]
+}
+console.log(student);
+console.log(student.name);
+console.log(student.age);
+console.log(student.marks[0]);
+student.email = &quot;anaya@example.com&quot;;
+student.age = 22;
+delete student.city;
+console.log(student);
+
+/*Task 2 Method with this
+Create an object bankAccount with: holder = &quot;Aarav&quot;, balance = 5000.
+Add a method deposit(amount) that adds to the balance and returns the new balance.
+Add a method withdraw(amount) that subtracts (only if balance is enough) and returns the new balance, or returns the string &quot;Insufficient funds&quot;.
+Test: deposit 1000, withdraw 2000, withdraw 10000.*/
+const bankAccount = {
+    holder : &quot;Aarav&quot;,
+    balance : 5000
+}
+function deposit(amount){
+    bankAccount.balance += amount;
+    return bankAccount.balance
+}
+function withdraw(amount){
+    if(bankAccount.balance - amount &gt; 0 ){
+        bankAccount.balance -= amount
+        return bankAccount.balance;
+    }
+    else
+    {console.log(&quot;Insufficient funds&quot;);
+    }
+}
+console.log(deposit(1000));
+console.log(withdraw(2000));
+console.log(withdraw(10000));
+
+/*Task 3 Destructuring
+Use this object: const product = { id: 101, name: &quot;Laptop&quot;, price: 60000, brand: &quot;Dell&quot;, stock: 5 };
+Destructure name and price into variables and log them.
+Destructure brand but rename it to make. Log it.
+Destructure warranty with a default value of &quot;1 year&quot; (since the property doesn&#x27;t exist). Log it.*/
+const product = { id: 101, name: &quot;Laptop&quot;, price: 60000, brand: &quot;Dell&quot;, stock: 5 };
+const {name , price} = product;
+console.log(name);
+console.log(price);
+const {brand :make} = product;
+console.log(make);
+const {warranty = &quot;1 year&quot;} = product;
+console.log(warranty);
+
+/*Bonus Object as Iterable
+Use the student object from Task 1 (after modifications).
+Use Object.keys to log all keys.
+Use Object.values to log all values.
+Use Object.entries with forEach to log each property as &quot;key: value&quot;.
+Bonus: count how many properties the object has.*/
+const student1 = {
+    name: &#x27;Anaya&#x27;,
+    age: 22,
+    course: &#x27;B.Tech&#x27;,
+    marks: [ 56, 78, 65 ],
+    email: &#x27;anaya@example.com&#x27;
+}
+console.log(Object.keys(student1))
+console.log(Object.values(student1))
+console.log(Object.entries(student1))
+console.log(&quot;Total properties:&quot;, Object.keys(student1).length);
+</code></pre>
+                </section>
+            </article>
+        </main>
+
+
+                <aside class="site-outline">
+            <h2>Curriculum</h2>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Overview</a></li>
+                    <details>
+                        <summary>Day 1 — Basics</summary>
+                        <ul>
+                            <li><a href="../../day-1/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-1/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-1/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 2 — Variables</summary>
+                        <ul>
+                            <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-2/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-2/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 3 — Operators</summary>
+                        <ul>
+                            <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-3/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-3/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 4 — Control Flow</summary>
+                        <ul>
+                            <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-4/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-4/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 5 — Loops</summary>
+                        <ul>
+                            <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-5/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-5/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 6 — Functions</summary>
+                        <ul>
+                            <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-6/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-6/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 7 — Arrays</summary>
+                        <ul>
+                            <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-7/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-7/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details open>
+                        <summary>Day 8 — Objects</summary>
+                        <ul>
+                            <li><a href="lesson.html">Lesson</a></li>
+                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
+                            <li><a href="homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 9 — Modern Syntax</summary>
+                        <ul>
+                            <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-9/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-9/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 10 — DOM Basics</summary>
+                        <ul>
+                            <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-10/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-10/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 11 — Events</summary>
+                        <ul>
+                            <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-11/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-11/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 12 — Error Handling</summary>
+                        <ul>
+                            <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-12/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-12/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 13 — Hoisting &amp; TDZ</summary>
+                        <ul>
+                            <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-13/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 14 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-14/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-14/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-14/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 15 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-15/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-15/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-15/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                </ul>
+            </nav>
+        </aside>
+    </div>
+    <script src="../js/hands-on.js"></script>
+</body>
+</html>
