@@ -14,11 +14,18 @@
         </header>
         <main class="site-content">
             <article>
-                <h2>Homework script</h2>
-                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
-                <section>
-                    <h3>Source (homework.js)</h3>
-                    <pre><code>// Build safeDivide(a, b) that throws on division by zero. Wrap a few calls in try/catch and log the messages.
+                <h2>Homework: Error handling</h2>
+                <div class="lab-intro">
+                    <p><strong>Tasks</strong> at the top of the file are written as comments (reading + multi-file exercises). <strong>Code</strong> below matches the live <code>homework.js</code> script. Run the page and use the <strong>console</strong> where needed.</p>
+                </div>
+                <section class="task-section">
+                    <div class="task-instructions">
+                        <h3>Written exercises + starter code</h3>
+                        <p>Implement <code>safeDivide</code>, <code>NotFoundError</code>, and <code>getUserById</code> as described in the comments. Extend with try/catch demos in your own file if you like.</p>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Code — homework.js</span>
+                        <pre><code>// Build safeDivide(a, b) that throws on division by zero. Wrap a few calls in try/catch and log the messages.
 // Define a NotFoundError extends Error. Write a getUserById(id) that throws it when id isn't 1, 2, or 3. Branch on it in catch.
 // Split a small calculator into two files: calc.js with named exports (add, subtract, multiply, divide) and app.js that imports and uses them.
 // Add a default export to calc.js — a calculate(op, a, b) function. Import it as default in app.js.
@@ -54,6 +61,7 @@ function getUserById(id) {
 // Demos — use try/catch; branch with err instanceof NotFoundError:
 // getUserById(1)   → { id: 1, name: "User 1" }
 // getUserById(99)  → catch: NotFoundError, err.message === "No user for id 99"</code></pre>
+                    </div>
                 </section>
             </article>
         </main>

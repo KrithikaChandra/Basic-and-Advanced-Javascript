@@ -14,11 +14,18 @@
         </header>
         <main class="site-content">
             <article>
-                <h2>Hands-on script</h2>
-                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
-                <section>
-                    <h3>Source (hands-on.js)</h3>
-                    <pre><code>/*Task 1 Click Counter
+                <h2>Hands-on: Events</h2>
+                <div class="lab-intro">
+                    <p><strong>Tasks</strong> are described in <code>/* … */</code> comments inside the script. <strong>Code</strong> is the full runnable file below — open <strong>DevTools (F12) → Console</strong> to see logs (this page has no extra widgets).</p>
+                </div>
+                <section class="task-section">
+                    <div class="task-instructions">
+                        <h3>What this script covers</h3>
+                        <p>Click counter, live input preview, form <code>submit</code> with <code>preventDefault</code>, and bonus event delegation on a list.</p>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Code — hands-on.js</span>
+                        <pre><code>/*Task 1 Click Counter
 Grab the #counter-btn button and the #count span.
 On every click, increment a counter variable and update the span&#x27;s textContent.
 Bonus: after 10 clicks, change the button&#x27;s text to &quot;Stop clicking!&quot;.*/
@@ -90,6 +97,7 @@ toDoList.appendChild(newLi);
 console.log(toDoList);
 console.log(newLi);
 </code></pre>
+                    </div>
                 </section>
             </article>
         </main>

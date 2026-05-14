@@ -74,6 +74,119 @@ body {
     border-left: 3px solid #3b82f6;
 }
 
+/* --- Structured lab: instructions vs code / playground --- */
+.site-content article .lab-intro {
+    font-size: 1.02rem;
+    color: #475569;
+    padding: 1rem 1.25rem;
+    background: #f1f5f9;
+    border-radius: 8px;
+    border-left: 4px solid #3b82f6;
+    margin-bottom: 2rem;
+}
+
+.site-content article .lab-intro p {
+    margin-bottom: 0.65rem;
+}
+
+.site-content article .lab-intro p:last-child {
+    margin-bottom: 0;
+}
+
+.site-content article .task-section {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+    overflow: hidden;
+}
+
+.site-content article .task-section:last-child {
+    margin-bottom: 0;
+}
+
+.site-content article .task-instructions {
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.site-content article .task-instructions h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.12rem;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.site-content article .task-instructions h3::before {
+    content: "";
+    display: inline-block;
+    width: 5px;
+    height: 1.05em;
+    background: #2563eb;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.site-content article .task-instructions li {
+    margin-bottom: 0.35rem;
+}
+
+.site-content article .task-instructions ul {
+    margin: 0 0 0.5rem 1.25rem;
+    padding: 0;
+    color: #4b5563;
+}
+
+.site-content article .task-interactive {
+    padding: 1.25rem 1.5rem;
+    background: #fff;
+    border-top: 1px solid #f1f5f9;
+}
+
+.site-content article .task-interactive > p:first-child {
+    margin-top: 0;
+}
+
+.site-content article .code-panel {
+    background: #0f172a;
+    border-top: 1px solid #334155;
+}
+
+.site-content article .code-panel__label {
+    display: block;
+    padding: 0.5rem 1rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #94a3b8;
+    background: #020617;
+    border-bottom: 1px solid #334155;
+    font-family: inherit;
+}
+
+.site-content article .code-panel pre {
+    margin: 0;
+    padding: 1.25rem 1.5rem;
+    background: transparent;
+    border-left: none;
+    color: #e2e8f0;
+    border-radius: 0;
+}
+
+.site-content article .code-panel code {
+    color: inherit;
+}
+
+.site-content article .code-panel .snippet-well pre {
+    margin: 0;
+}
+
 .site-content code {
     font-family: 'Monaco', 'Menlo', monospace;
     font-size: 0.9rem;
