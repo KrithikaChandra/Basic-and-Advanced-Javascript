@@ -16,14 +16,21 @@
         <main class="site-content">
             <article>
                 <h2>Homework Exercises</h2>
-                
-                <section>
+                <div class="lab-intro">
+                    <p>Each block splits <strong>what to do</strong> from <strong>example or starter code</strong> below.</p>
+                </div>
+
+                <section class="task-section">
+                    <div class="task-instructions">
                     <h3>Exercise 1: Declare All Primitive Types</h3>
                     <p><strong>What to do:</strong></p>
                     <ul>
                         <li>In a <code>day2.js</code> file, declare one variable of EACH primitive type</li>
                         <li>Log each value AND its <code>typeof</code></li>
                     </ul>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Example code</span>
                     <pre><code>const str = "Hello";
 const num = 42;
 const bigNum = 1000n;
@@ -39,15 +46,20 @@ console.log(bool, typeof bool);             // true boolean
 console.log(sym, typeof sym);               // Symbol(unique) symbol
 console.log(undefinedVal, typeof undefinedVal);   // undefined undefined
 console.log(nullVal, typeof nullVal);       // null object</code></pre>
+                    </div>
                 </section>
 
-                <section>
+                <section class="task-section">
+                    <div class="task-instructions">
                     <h3>Exercise 2: Five Sentences with Template Literals</h3>
                     <p><strong>What to do:</strong></p>
                     <ul>
                         <li>Take three variables (name, age, city)</li>
                         <li>Write FIVE different sentences about them using template literals</li>
                     </ul>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Example code</span>
                     <pre><code>const name = "Priya";
 const age = 23;
 const city = "Bangalore";
@@ -57,15 +69,20 @@ console.log(`I am ${age} years old.`);
 console.log(`I live in ${city}.`);
 console.log(`${name} is from ${city} and is ${age} years young.`);
 console.log(`Next year, ${name} will be ${age + 1} years old!`);</code></pre>
+                    </div>
                 </section>
 
-                <section>
+                <section class="task-section">
+                    <div class="task-instructions">
                     <h3>Exercise 3: The 0.1 + 0.2 Problem</h3>
                     <p><strong>What to do:</strong></p>
                     <ul>
                         <li>Compute <code>0.1 + 0.2</code>. Log the result</li>
                         <li>Use the multiply-to-paise trick: compute <code>(10 + 20) / 100</code> and confirm you get exactly 0.3</li>
                     </ul>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Example code</span>
                     <pre><code>// The JavaScript surprise!
 let result = 0.1 + 0.2;
 console.log(result);                        // 0.30000000000000004 (surprise!)
@@ -79,9 +96,11 @@ console.log(total);                         // 0.3 (exactly!)
 console.log(total === 0.3);                 // true
 
 // Why? Floating-point numbers in binary can't represent 0.1 and 0.2 exactly.</code></pre>
+                    </div>
                 </section>
 
-                <section>
+                <section class="task-section">
+                    <div class="task-instructions">
                     <h3>Exercise 4: User Card with Multi-line Template Literal</h3>
                     <p><strong>What to do:</strong></p>
                     <ul>
@@ -89,6 +108,9 @@ console.log(total === 0.3);                 // true
                         <li>Include name, age, city, and one fact about you</li>
                         <li>In a comment, explain when YOU should use null vs let it be undefined</li>
                     </ul>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Example code</span>
                     <pre><code>const name = "Rahul";
 const age = 24;
 const city = "Delhi";
@@ -110,9 +132,11 @@ console.log(userCard);
 // null: "I explicitly set this to empty" (intentional choice by programmer)
 // Use null when you want to say "this value is intentionally empty"
 // Let it be undefined when a value hasn't been assigned yet.</code></pre>
+                    </div>
                 </section>
 
-                <section>
+                <section class="task-section">
+                    <div class="task-instructions">
                     <h3>Bonus: Number Quirks</h3>
                     <p><strong>What to observe:</strong></p>
                     <ul>
@@ -120,6 +144,9 @@ console.log(userCard);
                         <li>Try <code>Number.isInteger(5)</code>, <code>Number.isInteger(5.0)</code>, <code>Number.isInteger(5.5)</code></li>
                         <li>Try <code>1 / 0</code> and <code>"abc" * 2</code>. Note the special values</li>
                     </ul>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Example code</span>
                     <pre><code>// 0.1 + 0.2 surprise
 console.log(0.1 + 0.2);                     // 0.30000000000000004
 console.log(0.1 + 0.2 === 0.3);             // false!
@@ -138,6 +165,7 @@ console.log(typeof NaN);                    // "number"
 // Cool fact: NaN is never equal to itself!
 console.log(NaN === NaN);                   // false
 console.log(Number.isNaN(NaN));             // true (correct way to check)</code></pre>
+                    </div>
                 </section>
 
             </article>

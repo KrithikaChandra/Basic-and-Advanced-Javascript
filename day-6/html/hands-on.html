@@ -14,11 +14,18 @@
         </header>
         <main class="site-content">
             <article>
-                <h2>Hands-on script</h2>
-                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
-                <section>
-                    <h3>Source (hands-on.js)</h3>
-                    <pre><code>/*Task 1 Rectangle Area
+                <h2>Hands-on</h2>
+                <div class="lab-intro">
+                    <p>Same source as <code>hands-on.js</code>. <strong>Tasks</strong> are in comments; <strong>code</strong> is below. Use <strong>DevTools (F12) → Console</strong> where needed.</p>
+                </div>
+                <section class="task-section">
+                    <div class="task-instructions">
+                        <h3>Hands-on overview</h3>
+                        <p>Read the <strong>task</strong> notes in comments, then study the <strong>code</strong> in the panel below.</p>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Code — hands-on.js</span>
+                        <pre><code>/*Task 1 Rectangle Area
 Write a function area(length, width) that returns the area of a rectangle.
 Call it three times with different values and log each result.
 Bonus: rewrite the same function as an arrow function with implicit return.*/
@@ -78,6 +85,7 @@ console.log(addToTotal(2));
 console.log(addToTotal(4));
 console.log(addToTotal(6));
 //Pure function is easier to reason as its output doesnt depend on outer state, same input gives same outputs</code></pre>
+                    </div>
                 </section>
             </article>
         </main>

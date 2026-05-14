@@ -14,11 +14,18 @@
         </header>
         <main class="site-content">
             <article>
-                <h2>Homework script</h2>
-                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
-                <section>
-                    <h3>Source (homework.js)</h3>
-                    <pre><code>//1. Predict the output of console.log(typeof age); var age = 25; BEFORE running it. Run it. Compare. (Hint: typeof on an undefined variable is unusual.)
+                <h2>Homework</h2>
+                <div class="lab-intro">
+                    <p>Same source as <code>homework.js</code>. <strong>Tasks</strong> are in comments; <strong>code</strong> is below. Use <strong>DevTools (F12) → Console</strong> for output.</p>
+                </div>
+                <section class="task-section">
+                    <div class="task-instructions">
+                        <h3>Homework overview</h3>
+                        <p>Read the <strong>task</strong> notes in comments, then study the <strong>code</strong> in the panel below.</p>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Code — homework.js</span>
+                        <pre><code>//1. Predict the output of console.log(typeof age); var age = 25; BEFORE running it. Run it. Compare. (Hint: typeof on an undefined variable is unusual.)
 
 var age = 25;
 console.log(typeof age); //undefined and number when after intialized
@@ -55,6 +62,7 @@ const displayArrow = () =&gt; {
 // overrideMethod	@	installHook.js:1 //Function Execution Context 
 // display	@	hw.js:13 //Function Execution Context
 // (anonymous)	@	hw.js:11 //Global Execution Context</code></pre>
+                    </div>
                 </section>
             </article>
         </main>

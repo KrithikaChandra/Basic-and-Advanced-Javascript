@@ -14,11 +14,18 @@
         </header>
         <main class="site-content">
             <article>
-                <h2>Homework script</h2>
-                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
-                <section>
-                    <h3>Source (homework.js)</h3>
-                    <pre><code>// Add a &lt;p&gt; to a page and change its text three times — once with textContent, once with innerHTML adding a &lt;strong&gt; tag, then back to plain text.
+                <h2>Homework</h2>
+                <div class="lab-intro">
+                    <p>Same source as <code>homework.js</code>. <strong>Tasks</strong> are in comments; <strong>code</strong> is below. Use <strong>DevTools (F12) → Console</strong> for output.</p>
+                </div>
+                <section class="task-section">
+                    <div class="task-instructions">
+                        <h3>Homework overview</h3>
+                        <p>Read the <strong>task</strong> notes in comments, then study the <strong>code</strong> in the panel below.</p>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Code — homework.js</span>
+                        <pre><code>// Add a &lt;p&gt; to a page and change its text three times — once with textContent, once with innerHTML adding a &lt;strong&gt; tag, then back to plain text.
 const list = document.createElement(&#x27;p&#x27;);
 
 list.textContent = &quot;Hello&quot;;
@@ -79,6 +86,7 @@ products.forEach((product) =&gt; {
 
     cardsContainer.appendChild(card);
 });</code></pre>
+                    </div>
                 </section>
             </article>
         </main>

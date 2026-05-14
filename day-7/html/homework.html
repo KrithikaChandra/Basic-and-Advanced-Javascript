@@ -14,11 +14,18 @@
         </header>
         <main class="site-content">
             <article>
-                <h2>Homework script</h2>
-                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
-                <section>
-                    <h3>Source (homework.js)</h3>
-                    <pre><code>// Given an array of names [&quot;Priya&quot;, &quot;Aarav&quot;, &quot;Riya&quot;], use map to make a new array of greetings: &quot;Hello, Priya&quot;, etc.
+                <h2>Homework</h2>
+                <div class="lab-intro">
+                    <p>Same source as <code>homework.js</code>. <strong>Tasks</strong> are in comments; <strong>code</strong> is below. Use <strong>DevTools (F12) → Console</strong> for output.</p>
+                </div>
+                <section class="task-section">
+                    <div class="task-instructions">
+                        <h3>Homework overview</h3>
+                        <p>Read the <strong>task</strong> notes in comments, then study the <strong>code</strong> in the panel below.</p>
+                    </div>
+                    <div class="code-panel">
+                        <span class="code-panel__label">Code — homework.js</span>
+                        <pre><code>// Given an array of names [&quot;Priya&quot;, &quot;Aarav&quot;, &quot;Riya&quot;], use map to make a new array of greetings: &quot;Hello, Priya&quot;, etc.
 const names = [&quot;Priya&quot;, &quot;Aarav&quot;, &quot;Riya&quot;]
 const newNames = names.map(n =&gt; &quot; Hello &quot; +n)
 console.log(newNames);
@@ -46,6 +53,7 @@ function sum(numbers){
 }
 sum(numbers3);
 </code></pre>
+                    </div>
                 </section>
             </article>
         </main>
