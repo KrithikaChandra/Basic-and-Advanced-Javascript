@@ -1,5 +1,6 @@
 """
-Generate day-4..day-15 html/*.html from shared layout + js/day N sources.
+Generate day-1 and day-4..day-15 html/*.html from shared layout + js/day N sources.
+(Days 2–3 use hand-authored day-N/html; this script still syncs js/day N → day-N/js.)
 Copies scripts into day-N/js (lesson.js from exercise.js or lesson.js).
 Run: python tools/generate_day_html.py
 """
@@ -32,6 +33,9 @@ CURRICULUM: list[tuple[int, str]] = [
 ]
 
 SUMMARY_BY_DAY = {n: s for n, s in CURRICULUM}
+
+# Days with hand-authored day-N/html/*.html — still sync js/day N → day-N/js, but do not overwrite HTML.
+SKIP_GENERATED_HTML_DAYS = frozenset({2, 3})
 
 
 def topic_short(summary: str) -> str:
@@ -187,6 +191,8 @@ def main() -> None:
         if n < 1 or n > 15:
             continue
         sync_js(n)
+        if n in SKIP_GENERATED_HTML_DAYS:
+            continue
         html_dir = ROOT / f"day-{n}" / "html"
         html_dir.mkdir(parents=True, exist_ok=True)
 
@@ -223,7 +229,12 @@ def main() -> None:
             )
             (html_dir / fname).write_text(content, encoding="utf-8")
 
-    print("Generated day-1..day-15 html; synced day-N/js from js/day N/.")
+    print(
+        "Synced day-N/js from js/day N/ for all curriculum days; "
+        "generated html for days except "
+        + ", ".join(f"day-{d}" for d in sorted(SKIP_GENERATED_HTML_DAYS))
+        + " (hand-authored)."
+    )
 
 
 if __name__ == "__main__":

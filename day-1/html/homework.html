@@ -12,77 +12,34 @@
             <h1>Day 1: Basics</h1>
             <p class="subtitle">Homework: Take-home Practice</p>
         </header>
-
         <main class="site-content">
             <article>
-                <h2>Homework Exercises</h2>
-                <p>Complete these exercises at home. Open the browser console and test your code.</p>
-                
+                <h2>Homework script</h2>
+                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
                 <section>
-                    <h3>Exercise 1: Create and Run a File</h3>
-                    <p><strong>What to do:</strong></p>
-                    <ul>
-                        <li>Create a file <code>day1.js</code></li>
-                        <li>Write 5 different console.log statements in it</li>
-                        <li>Run it with <code>node day1.js</code> in your terminal</li>
-                    </ul>
-                    <pre><code>console.log("Welcome to Day 1");
-console.log(42);
-console.log("Learning JavaScript is fun!");
-console.log(10 + 20);
-console.log("The answer is " + 42);</code></pre>
+                    <h3>Source (homework.js)</h3>
+                    <pre><code>// Day 1 - Basics
+// Homework
+
+let myName = &quot;Priya&quot;;
+let age = 20;
+let city = &quot;Kerala&quot;;
+
+console.log(&quot;My name is &quot; + myName);
+console.log(&quot;My age is &quot; + age);
+console.log(&quot;I live in &quot; + city);
+console.log(&quot;This year I&#x27;ll be &quot; + (age + 1) + &quot; years old&quot;);
+</code></pre>
                 </section>
-
-                <section>
-                    <h3>Exercise 2: Declare Variables</h3>
-                    <p><strong>What to do:</strong></p>
-                    <ul>
-                        <li>Declare 3 variables — one const for your name, one let for your age, one const for your city</li>
-                        <li>Log all three</li>
-                    </ul>
-                    <pre><code>const myName = "Gokul";
-let myAge = 22;
-const myCity = "Jaipur";
-
-console.log(myName);
-console.log(myAge);
-console.log(myCity);</code></pre>
-                </section>
-
-                <section>
-                    <h3>Exercise 3: Try Reassigning Variables</h3>
-                    <p><strong>What to do:</strong></p>
-                    <ul>
-                        <li>Try reassigning each of the 3 variables from Exercise 2</li>
-                        <li>Note which throws an error and why</li>
-                    </ul>
-                    <pre><code>const myName = "Gokul";
-let myAge = 22;
-const myCity = "Jaipur";
-
-// This works - let can be reassigned
-myAge = 23;
-console.log(myAge);           // 23
-
-// This fails - const cannot be reassigned
-// myName = "Rahul";          // Error: Assignment to constant variable
-
-// This fails - const cannot be reassigned
-// myCity = "Delhi";          // Error: Assignment to constant variable
-
-console.log("const cannot be reassigned - that's why it's safe for fixed values!");
-console.log("let can be reassigned - use it for values that change!");</code></pre>
-                </section>
-
             </article>
         </main>
+
 
                 <aside class="site-outline">
             <h2>Curriculum</h2>
             <nav>
                 <ul>
                     <li><a href="../../index.html">Overview</a></li>
-                    
                     <details open>
                         <summary>Day 1 — Basics</summary>
                         <ul>
@@ -91,8 +48,7 @@ console.log("let can be reassigned - use it for values that change!");</code></p
                             <li><a href="homework.html" aria-current="page">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 2 — Variables</summary>
                         <ul>
                             <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
@@ -100,8 +56,7 @@ console.log("let can be reassigned - use it for values that change!");</code></p
                             <li><a href="../../day-2/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 3 — Operators</summary>
                         <ul>
                             <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
@@ -109,8 +64,7 @@ console.log("let can be reassigned - use it for values that change!");</code></p
                             <li><a href="../../day-3/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 4 — Control Flow</summary>
                         <ul>
                             <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
@@ -118,8 +72,7 @@ console.log("let can be reassigned - use it for values that change!");</code></p
                             <li><a href="../../day-4/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 5 — Loops</summary>
                         <ul>
                             <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
@@ -127,8 +80,7 @@ console.log("let can be reassigned - use it for values that change!");</code></p
                             <li><a href="../../day-5/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 6 — Functions</summary>
                         <ul>
                             <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
@@ -136,8 +88,7 @@ console.log("let can be reassigned - use it for values that change!");</code></p
                             <li><a href="../../day-6/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 7 — Arrays</summary>
                         <ul>
                             <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
@@ -145,8 +96,7 @@ console.log("let can be reassigned - use it for values that change!");</code></p
                             <li><a href="../../day-7/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 8 — Objects</summary>
                         <ul>
                             <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
@@ -154,8 +104,7 @@ console.log("let can be reassigned - use it for values that change!");</code></p
                             <li><a href="../../day-8/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 9 — Modern Syntax</summary>
                         <ul>
                             <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
@@ -163,8 +112,7 @@ console.log("let can be reassigned - use it for values that change!");</code></p
                             <li><a href="../../day-9/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 10 — DOM Basics</summary>
                         <ul>
                             <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
@@ -172,8 +120,7 @@ console.log("let can be reassigned - use it for values that change!");</code></p
                             <li><a href="../../day-10/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 11 — Events</summary>
                         <ul>
                             <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
@@ -181,8 +128,7 @@ console.log("let can be reassigned - use it for values that change!");</code></p
                             <li><a href="../../day-11/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 12 — Error Handling</summary>
                         <ul>
                             <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
@@ -190,20 +136,34 @@ console.log("let can be reassigned - use it for values that change!");</code></p
                             <li><a href="../../day-12/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
-                        <summary>Day 13 — Hoisting and TDZ</summary>
+                    <details>
+                        <summary>Day 13 — Hoisting &amp; TDZ</summary>
                         <ul>
                             <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
                             <li><a href="../../day-13/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
+                    <details>
+                        <summary>Day 14 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-14/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-14/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-14/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 15 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-15/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-15/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-15/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
                 </ul>
             </nav>
         </aside>
     </div>
-
     <script src="../js/homework.js"></script>
 </body>
 </html>
