@@ -12,45 +12,49 @@
             <h1>Day 1: Basics</h1>
             <p class="subtitle">Lesson: Topics and Demo Code</p>
         </header>
-
         <main class="site-content">
             <article>
-                <h2>JavaScript Basics</h2>
-                <p>Welcome to your JavaScript learning journey! This lesson covers the fundamental concepts you need to get started.</p>
-                
+                <h2>Lesson script</h2>
+                <p>Open <strong>DevTools (F12) → Console</strong> to see output from this script.</p>
                 <section>
-                    <h3>What is JavaScript?</h3>
-                    <p>JavaScript is a programming language that runs in web browsers. It allows you to add interactivity to web pages.</p>
-                    <div id="topic1Code">
-                        <pre><code></code></pre>
-                    </div>
-                </section>
+                    <h3>Source (lesson.js)</h3>
+                    <pre><code>// Day 1 - Basics: Code Snippets
 
-                <section>
-                    <h3>Your First Program</h3>
-                    <p>Open the browser console (F12 or right-click â†’ Inspect â†’ Console tab) and try typing code.</p>
-                    <div id="topic2Code">
-                        <pre><code></code></pre>
-                    </div>
-                </section>
+const topic1Snippet = `console.log(&quot;Hello, World!&quot;);`;
 
-                <section>
-                    <h3>Comments</h3>
-                    <p>Comments explain your code. They start with // for single-line comments.</p>
-                    <div id="topic3Code">
-                        <pre><code></code></pre>
-                    </div>
-                </section>
+const topic2Snippet = `console.log(2 + 3);
+console.log(&quot;Name: &quot; + &quot;Gokul&quot;);
+console.log(10 &gt; 5);`;
 
+const topic3Snippet = `// This is a comment
+console.log(&quot;This runs&quot;); // This comment explains the line above
+
+/* This is a multi-line comment
+   It can span multiple lines
+   Useful for longer explanations */`;
+
+// Inject snippets into HTML
+document.querySelector(&quot;#topic1Code code&quot;).textContent = topic1Snippet;
+document.querySelector(&quot;#topic2Code code&quot;).textContent = topic2Snippet;
+document.querySelector(&quot;#topic3Code code&quot;).textContent = topic3Snippet;
+
+// Run demonstrations
+console.log(&quot;=== Day 1: Basics ===&quot;);
+console.log(&quot;Hello, World!&quot;);
+console.log(2 + 3);
+console.log(&quot;Name: &quot; + &quot;Gokul&quot;);
+console.log(10 &gt; 5);
+</code></pre>
+                </section>
             </article>
         </main>
+
 
                 <aside class="site-outline">
             <h2>Curriculum</h2>
             <nav>
                 <ul>
                     <li><a href="../../index.html">Overview</a></li>
-                    
                     <details open>
                         <summary>Day 1 — Basics</summary>
                         <ul>
@@ -59,8 +63,7 @@
                             <li><a href="homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 2 — Variables</summary>
                         <ul>
                             <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
@@ -68,8 +71,7 @@
                             <li><a href="../../day-2/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 3 — Operators</summary>
                         <ul>
                             <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
@@ -77,8 +79,7 @@
                             <li><a href="../../day-3/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 4 — Control Flow</summary>
                         <ul>
                             <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
@@ -86,8 +87,7 @@
                             <li><a href="../../day-4/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 5 — Loops</summary>
                         <ul>
                             <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
@@ -95,8 +95,7 @@
                             <li><a href="../../day-5/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 6 — Functions</summary>
                         <ul>
                             <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
@@ -104,8 +103,7 @@
                             <li><a href="../../day-6/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 7 — Arrays</summary>
                         <ul>
                             <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
@@ -113,8 +111,7 @@
                             <li><a href="../../day-7/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 8 — Objects</summary>
                         <ul>
                             <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
@@ -122,8 +119,7 @@
                             <li><a href="../../day-8/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 9 — Modern Syntax</summary>
                         <ul>
                             <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
@@ -131,8 +127,7 @@
                             <li><a href="../../day-9/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 10 — DOM Basics</summary>
                         <ul>
                             <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
@@ -140,8 +135,7 @@
                             <li><a href="../../day-10/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 11 — Events</summary>
                         <ul>
                             <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
@@ -149,8 +143,7 @@
                             <li><a href="../../day-11/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
+                    <details>
                         <summary>Day 12 — Error Handling</summary>
                         <ul>
                             <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
@@ -158,20 +151,34 @@
                             <li><a href="../../day-12/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    
-                    <details >
-                        <summary>Day 13 — Hoisting and TDZ</summary>
+                    <details>
+                        <summary>Day 13 — Hoisting &amp; TDZ</summary>
                         <ul>
                             <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
                             <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
                             <li><a href="../../day-13/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
+                    <details>
+                        <summary>Day 14 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-14/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-14/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-14/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 15 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-15/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-15/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-15/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
                 </ul>
             </nav>
         </aside>
     </div>
-
     <script src="../js/lesson.js"></script>
 </body>
 </html>
