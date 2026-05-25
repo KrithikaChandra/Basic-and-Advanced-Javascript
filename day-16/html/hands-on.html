@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Day 16 Practice | JavaScript Curriculum</title>
 
     <link rel="stylesheet" href="../../shared/css/style.css" />
 
-    <!-- Prism.js -->
+    <!-- Prism.js Syntax Highlighting -->
     <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css"
@@ -21,15 +20,9 @@
 
         <!-- HEADER -->
         <header class="site-header">
-
             <h1>Day 16: Practice</h1>
-
-            <p class="subtitle">
-                Hands-on: In-class Tasks
-            </p>
-
+            <p class="subtitle">Hands-on: In-class Tasks</p>
         </header>
-
 
 
         <!-- MAIN CONTENT -->
@@ -37,55 +30,52 @@
 
             <article>
 
-                <h2>
-                    Hands-on:
-                    <code>Prototype & Inheritance</code>
-                </h2>
-
+                <h2>Hands-on: <code>Prototype & Inheritance</code></h2>
 
                 <div class="lab-intro">
-
                     <p>
-                        Read the task first, then check the solution.
+                        Read each task carefully.
+                        Open the solution to compare your answer.
                     </p>
 
                     <p>
-                        Open
-                        <strong>DevTools → Console</strong>
-                        to view output.
+                        Open <strong>DevTools → Console</strong>
+                        to see outputs.
                     </p>
-
                 </div>
 
 
+                <!-- TASK 1 -->
+                <section class="task-card">
 
-<!-- TASK 1 -->
-<section class="task-card">
+                    <h3>Task 1 — Inspect a Prototype</h3>
 
-    <h3>Task 1 — Inspect a Prototype</h3>
+                    <div class="task-description">
 
-    <div class="task-description">
-<pre><code class="language-js">/* Task 1 — Inspect a Prototype
+                        <p>
+                            Create:
+                            <code>const arr = [1, 2, 3]</code>
+                        </p>
 
-Create:
+                        <p>
+                            Use:
+                            <code>Object.getPrototypeOf()</code>
+                            to inspect the prototype chain.
+                        </p>
+
+                        <p>
+                            Find what value ends the chain.
+                        </p>
+
+                    </div>
+
+
+                    <details class="solution-box">
+
+                        <summary>View Solution</summary>
+
+<pre><code class="language-js">
 const arr = [1, 2, 3];
-
-Log:
-Object.getPrototypeOf(arr)
-
-Then log the next prototype step.
-
-What value ends the chain?
-
-Draw the prototype chain
-in a comment.
-*/</code></pre>
-    </div>
-
-    <div class="code-panel">
-        <span class="code-panel__label">Solution</span>
-
-<pre><code class="language-js">const arr = [1, 2, 3];
 
 console.log(Object.getPrototypeOf(arr));
 
@@ -99,116 +89,150 @@ console.log(
   Object.getPrototypeOf(Object.prototype)
 );
 
+// Prototype chain:
 // arr
 // ↓
 // Array.prototype
 // ↓
 // Object.prototype
 // ↓
-// null</code></pre>
+// null
+</code></pre>
 
-    </div>
+                    </details>
 
-</section>
+                </section>
 
 
-<!-- TASK 2 -->
-<section class="task-card">
 
-    <h3>Task 2 — Build with Object.create()</h3>
+                <!-- TASK 2 -->
+                <section class="task-card">
 
-    <div class="task-description">
-<pre><code class="language-js">/* Task 2 — Build with Object.create()
+                    <h3>Task 2 — Build with Object.create()</h3>
 
-Create a vehicle object with:
+                    <div class="task-description">
 
-start() {
-  console.log(`${this.name} starting`);
-}
+                        <p>
+                            Create a <code>vehicle</code> object
+                            with a <code>start()</code> method.
+                        </p>
 
-Create:
-car.name = "Tata Nexon"
-bike.name = "Royal Enfield"
+                        <p>
+                            Use <code>Object.create()</code>
+                            to create:
+                        </p>
 
-Call start() on both.
+                        <ul>
+                            <li>car → Tata Nexon</li>
+                            <li>bike → Royal Enfield</li>
+                        </ul>
 
-Check:
-- own properties
-- inherited properties
-*/</code></pre>
-    </div>
+                        <p>
+                            Verify:
+                            <code>name</code> is own property
+                            and
+                            <code>start</code> is inherited.
+                        </p>
 
-    <div class="code-panel">
-        <span class="code-panel__label">Solution</span>
+                    </div>
 
-<pre><code class="language-js">const vehicle = {
 
-  start() {
+                    <details class="solution-box">
+
+                        <summary>View Solution</summary>
+
+<pre><code class="language-js">
+const vehicle = {
+
+  start: function () {
+
     console.log(`${this.name} starting`);
   }
-
 };
 
+
 const car = Object.create(vehicle);
+
 car.name = "Tata Nexon";
 
+
 const bike = Object.create(vehicle);
+
 bike.name = "Royal Enfield";
 
+
 car.start();
+
 bike.start();
 
-console.log(car.hasOwnProperty("name"));
-console.log(car.hasOwnProperty("start"));
 
-console.log("start" in car);</code></pre>
+// Own property checks
+console.log(
+  car.hasOwnProperty("name")
+);
 
-    </div>
+console.log(
+  car.hasOwnProperty("start")
+);
 
-</section>
+
+// Inherited property checks
+console.log("start" in car);
+</code></pre>
+
+                    </details>
+
+                </section>
 
 
-<!-- TASK 3 -->
-<section class="task-card">
 
-    <h3>Task 3 — Constructor Function Inheritance</h3>
+                <!-- TASK 3 -->
+                <section class="task-card">
 
-    <div class="task-description">
-<pre><code class="language-js">/* Task 3 — Constructor Function Inheritance
+                    <h3>Task 3 — Constructor Function Inheritance</h3>
 
-Create:
-Person(name)
+                    <div class="task-description">
 
-and:
-Student(name, school)
+                        <p>
+                            Build:
+                        </p>
 
-Use:
-Person.call(this, name)
+                        <ul>
+                            <li><code>Person(name)</code></li>
+                            <li><code>Student(name, school)</code></li>
+                        </ul>
 
-Inherit using:
-Object.create(Person.prototype)
+                        <p>
+                            Use:
+                        </p>
 
-Add:
-greet()
-study()
+                        <ul>
+                            <li><code>Person.call()</code></li>
+                            <li><code>Object.create()</code></li>
+                            <li>prototype inheritance</li>
+                        </ul>
 
-Create:
-new Student("Riya", "IIT Delhi")
+                    </div>
 
-Call both methods.
-*/</code></pre>
-    </div>
 
-    <div class="code-panel">
-        <span class="code-panel__label">Solution</span>
+                    <details class="solution-box">
 
-<pre><code class="language-js">function Person(name) {
+                        <summary>View Solution</summary>
+
+<pre><code class="language-js">
+function Person(name) {
+
   this.name = name;
 }
 
+
 Person.prototype.greet = function () {
-  console.log("Hi, I'm " + this.name);
+
+  console.log(
+    "Hi, I'm " + this.name
+  );
 };
+
 
 function Student(name, school) {
 
@@ -217,96 +241,197 @@ function Student(name, school) {
   this.school = school;
 }
 
+
 Student.prototype =
   Object.create(Person.prototype);
 
-Student.prototype.constructor = Student;
 
-Student.prototype.study = function () {
+Student.prototype.constructor =
+  Student;
 
-  console.log(
-    this.name +
-    " studies at " +
-    this.school
-  );
 
-};
+Student.prototype.study =
+  function () {
+
+    console.log(
+      this.name +
+      " studies at " +
+      this.school
+    );
+  };
+
 
 const student1 =
-  new Student("Riya", "IIT Delhi");
+  new Student(
+    "Riya",
+    "IIT Delhi"
+  );
+
 
 student1.greet();
-student1.study();</code></pre>
 
-    </div>
+student1.study();
+</code></pre>
 
-</section>
+                    </details>
+
+                </section>
 
 
-<!-- BONUS -->
-<section class="task-card">
 
-    <h3>Bonus — hasOwnProperty vs in</h3>
+                <!-- BONUS -->
+                <section class="task-card">
 
-    <div class="task-description">
-<pre><code class="language-js">/* Bonus
+                    <h3>Bonus — hasOwnProperty vs in</h3>
 
-Create:
+                    <div class="task-description">
 
-const dog = Object.create({
-  species: "Canis"
-});
+                        <p>
+                            Create:
+                        </p>
+
+                        <code>
+                            const dog =
+                            Object.create({ species: "Canis" })
+                        </code>
+
+                        <p>
+                            Add:
+                            <code>dog.name = "Bruno"</code>
+                        </p>
+
+                        <p>
+                            Test:
+                        </p>
+
+                        <ul>
+                            <li>hasOwnProperty()</li>
+                            <li>in operator</li>
+                        </ul>
+
+                    </div>
+
+
+                    <details class="solution-box">
+
+                        <summary>View Solution</summary>
+
+<pre><code class="language-js">
+const dog =
+  Object.create({
+    species: "Canis"
+  });
 
 dog.name = "Bruno";
 
-Predict the result of:
-
-dog.hasOwnProperty("name")
-dog.hasOwnProperty("species")
-
-"name" in dog
-"species" in dog
-"toString" in dog
-
-Write the difference between:
-hasOwnProperty() and in
-*/</code></pre>
-    </div>
-
-    <div class="code-panel">
-        <span class="code-panel__label">Solution</span>
-
-<pre><code class="language-js">const dog = Object.create({
-  species: "Canis"
-});
-
-dog.name = "Bruno";
 
 console.log(
   dog.hasOwnProperty("name")
-); // true
+);
+// true
+
 
 console.log(
   dog.hasOwnProperty("species")
-); // false
+);
+// false
 
-console.log("name" in dog); // true
-console.log("species" in dog); // true
-console.log("toString" in dog); // true
 
+console.log("name" in dog);
+// true
+
+
+console.log("species" in dog);
+// true
+
+
+console.log("toString" in dog);
+// true
+
+
+// Rule:
 // hasOwnProperty()
-// → checks only own properties
-
+// checks ONLY own properties.
+//
 // in
-// → checks own + inherited properties</code></pre>
+// checks own + inherited properties.
+</code></pre>
 
-    </div>
+                    </details>
 
-</section>
+                </section>
 
             </article>
 
         </main>
+
+
+
+        <!-- SIDEBAR -->
+        <aside class="site-outline">
+
+            <h2>Curriculum</h2>
+
+            <nav>
+
+                <ul>
+
+                    <li>
+                        <a href="../../index.html">
+                            Overview
+                        </a>
+                    </li>
+
+                    <details open>
+
+                        <summary>
+                            Day 16 — Practice
+                        </summary>
+
+                        <ul>
+
+                            <li>
+                                <a href="lesson.html">
+                                    Lesson
+                                </a>
+                            </li>
+
+                            <li>
+                                <a
+                                    href="hands-on.html"
+                                    aria-current="page"
+                                >
+                                    Hands-on
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="homework.html">
+                                    Homework
+                                </a>
+                            </li>
+
+                        </ul>
+
+                    </details>
+
+                </ul>
+
+            </nav>
+
+        </aside>
+
+    </div>
+
+<!-- 
+    <!-- Prism.js -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs/prism.js"></script>
+
+    <!-- Actual JS File -->
+    <script src="../js/hands-on.js"></script> -->
+
+</body>
+</html>
 
                 <aside class="site-outline">
             <h2>Curriculum</h2>
