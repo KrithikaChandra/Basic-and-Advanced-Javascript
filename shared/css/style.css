@@ -8,207 +8,162 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background-color: #f5f7fa;
     color: #333;
+    line-height: 1.5;
 }
 
+/* PAGE LAYOUT */
 .page-shell {
     display: grid;
-    grid-template-columns: 1fr 320px;
-    grid-template-rows: auto 1fr;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 1.5rem;
     min-height: 100vh;
-    gap: 2rem;
-    padding: 2rem;
+    padding: 1.25rem;
+    align-items: start;
 }
 
+/* HEADER */
 .site-header {
     grid-column: 1 / -1;
-    border-bottom: 2px solid #e0e7ff;
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
+    border-bottom: 1px solid #dbe3f0;
+    padding-bottom: 0.8rem;
+    margin-bottom: 0.3rem;
 }
 
 .site-header h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: #1f2937;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
 }
 
 .subtitle {
     color: #6b7280;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
 }
 
+/* MAIN CONTENT */
 .site-content {
     background: white;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    padding: 1.4rem;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
 
 .site-content h2 {
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     color: #1f2937;
+    font-size: 1.35rem;
 }
 
-.site-content h3 {
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: #374151;
-}
-
-.site-content section {
-    margin-bottom: 2rem;
-}
-
-.site-content p {
-    line-height: 1.6;
-    margin-bottom: 1rem;
-    color: #4b5563;
-}
-
-.site-content pre {
-    background: #f3f4f6;
-    padding: 1rem;
-    border-radius: 6px;
-    overflow-x: auto;
-    margin: 1rem 0;
-    border-left: 3px solid #3b82f6;
-}
-
-/* --- Structured lab: instructions vs code / playground --- */
-.site-content article .lab-intro {
-    font-size: 1.02rem;
-    color: #475569;
-    padding: 1rem 1.25rem;
-    background: #f1f5f9;
-    border-radius: 8px;
+/* INTRO */
+.lab-intro {
+    background: #f8fafc;
     border-left: 4px solid #3b82f6;
-    margin-bottom: 2rem;
+    padding: 0.9rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.2rem;
 }
 
-.site-content article .lab-intro p {
-    margin-bottom: 0.65rem;
-}
-
-.site-content article .lab-intro p:last-child {
-    margin-bottom: 0;
-}
-
-.site-content article .task-section {
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    margin-bottom: 2rem;
-    background: #fff;
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
-    overflow: hidden;
-}
-
-.site-content article .task-section:last-child {
-    margin-bottom: 0;
-}
-
-.site-content article .task-instructions {
-    padding: 1.25rem 1.5rem;
-    background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
-    border-bottom: 1px solid #e2e8f0;
-}
-
-.site-content article .task-instructions h3 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    font-size: 1.12rem;
-    color: #0f172a;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.site-content article .task-instructions h3::before {
-    content: "";
-    display: inline-block;
-    width: 5px;
-    height: 1.05em;
-    background: #2563eb;
-    border-radius: 2px;
-    flex-shrink: 0;
-}
-
-.site-content article .task-instructions li {
+.lab-intro p {
     margin-bottom: 0.35rem;
+    color: #475569;
+    font-size: 0.95rem;
 }
 
-.site-content article .task-instructions ul {
-    margin: 0 0 0.5rem 1.25rem;
-    padding: 0;
-    color: #4b5563;
+.lab-intro p:last-child {
+    margin-bottom: 0;
 }
 
-.site-content article .task-interactive {
-    padding: 1.25rem 1.5rem;
-    background: #fff;
-    border-top: 1px solid #f1f5f9;
+/* TASK CARD */
+.task-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1.2rem;
+    background: white;
 }
 
-.site-content article .task-interactive > p:first-child {
-    margin-top: 0;
+.task-card h3 {
+    background: #f8fafc;
+    padding: 0.9rem 1rem;
+    font-size: 1rem;
+    color: #0f172a;
+    border-bottom: 1px solid #e5e7eb;
 }
 
-.site-content article .code-panel {
-    background: #0f172a;
-    border-top: 1px solid #334155;
+/* TASK DESCRIPTION */
+.task-description {
+    padding: 0.8rem 1rem;
+    background: #ffffff;
 }
 
-.site-content article .code-panel__label {
+/* CODE PANEL */
+.code-panel {
+    border-top: 1px solid #e5e7eb;
+}
+
+.code-panel__label {
     display: block;
-    padding: 0.5rem 1rem;
+    padding: 0.45rem 1rem;
+    background: #111827;
+    color: #cbd5e1;
     font-size: 0.72rem;
     font-weight: 600;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
-    letter-spacing: 0.07em;
-    color: #94a3b8;
-    background: #020617;
-    border-bottom: 1px solid #334155;
-    font-family: inherit;
 }
 
-.site-content article .code-panel pre {
+/* CODE BLOCKS */
+pre {
     margin: 0;
-    padding: 1.25rem 1.5rem;
-    background: transparent;
-    border-left: none;
-    color: #e2e8f0;
+    overflow-x: auto;
     border-radius: 0;
 }
 
-.site-content article .code-panel code {
-    color: inherit;
+.task-description pre {
+    background: #f8fafc;
+    padding: 0.9rem;
+    border-left: 3px solid #3b82f6;
 }
 
-.site-content article .code-panel .snippet-well pre {
-    margin: 0;
+.code-panel pre {
+    background: #0f172a;
+    padding: 1rem;
 }
 
-.site-content code {
-    font-family: 'Monaco', 'Menlo', monospace;
-    font-size: 0.9rem;
+code {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.84rem;
+    line-height: 1.45;
 }
 
-/* Sidebar Navigation */
+/* INLINE CODE */
+.site-content p code,
+.site-content h2 code,
+.site-content h3 code {
+    background: #eef2ff;
+    padding: 0.12rem 0.35rem;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+
+/* SIDEBAR */
 .site-outline {
     background: white;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    height: fit-content;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     position: sticky;
-    top: 2rem;
+    top: 1rem;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
 }
 
 .site-outline h2 {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     color: #6b7280;
-    letter-spacing: 0.5px;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.05em;
 }
 
 .site-outline nav ul {
@@ -216,60 +171,86 @@ body {
 }
 
 .site-outline details {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .site-outline summary {
     cursor: pointer;
-    padding: 0.5rem;
-    color: #0066cc;
+    padding: 0.45rem 0.5rem;
+    border-radius: 6px;
+    color: #2563eb;
     font-weight: 500;
-    user-select: none;
+    font-size: 0.92rem;
 }
 
 .site-outline summary:hover {
-    text-decoration: underline;
-}
-
-.site-outline details[open] > summary {
-    color: #0052a3;
+    background: #eff6ff;
 }
 
 .site-outline details ul {
-    list-style: none;
-    margin-left: 1rem;
-    margin-top: 0.25rem;
+    margin-left: 0.7rem;
+    margin-top: 0.2rem;
 }
 
 .site-outline a {
     display: block;
-    padding: 0.4rem 0.5rem;
-    color: #0066cc;
+    padding: 0.38rem 0.5rem;
+    border-radius: 6px;
+    color: #4b5563;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
 }
 
 .site-outline a:hover {
-    background-color: #f0f4ff;
-    border-radius: 4px;
+    background: #f3f4f6;
+    color: #111827;
 }
 
 .site-outline a[aria-current="page"] {
-    color: #0052a3;
-    font-weight: bold;
-    background-color: #e0f2ff;
-    border-radius: 4px;
+    background: #dbeafe;
+    color: #1d4ed8;
+    font-weight: 600;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* SCROLLBAR */
+.site-outline::-webkit-scrollbar {
+    width: 6px;
+}
+
+.site-outline::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+
     .page-shell {
         grid-template-columns: 1fr;
-        gap: 1rem;
-        padding: 1rem;
     }
 
     .site-outline {
         position: static;
+        max-height: none;
+        order: -1;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .site-content {
+        padding: 1rem;
+    }
+
+    .task-card h3 {
+        font-size: 0.95rem;
+    }
+
+    code {
+        font-size: 0.78rem;
+    }
+
+    .site-header h1 {
+        font-size: 1.5rem;
     }
 }
