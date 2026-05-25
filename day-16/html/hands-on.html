@@ -62,40 +62,32 @@
 <!-- TASK 1 -->
 <section class="task-card">
 
-    <h3>Task 1 — Inspect a Prototype</h3>
+<h3>Task 1 — Inspect a Prototype</h3>
 
-    <div class="task-description">
+<div class="task-description">
 <pre><code class="language-js">/* Task 1 Inspect a Prototype
 
 Create const arr = [1, 2, 3];
 
-Use Object.getPrototypeOf(arr) and log it.
-Now log:
-Object.getPrototypeOf(Object.getPrototypeOf(arr))
+Use Object.getPrototypeOf(arr)
+and log it.
 
-Log the next step.
+Log the next prototype step.
 What value ends the chain?
 
-Draw the prototype chain in a comment.
+Draw the prototype chain
+in a comment.
 */</code></pre>
-    </div>
+</div>
 
-    <div class="code-panel">
-        <span class="code-panel__label">Solution</span>
+<div class="code-panel">
+<span class="code-panel__label">Solution</span>
 
 <pre><code class="language-js">const arr = [1, 2, 3];
 
 console.log(Object.getPrototypeOf(arr));
-
-console.log(
-  Object.getPrototypeOf(
-    Object.getPrototypeOf(arr)
-  )
-);
-
-console.log(
-  Object.getPrototypeOf(Object.prototype)
-);
+console.log(Object.getPrototypeOf(Object.getPrototypeOf(arr)));
+console.log(Object.getPrototypeOf(Object.prototype));
 
 // arr
 // ↓
@@ -105,17 +97,16 @@ console.log(
 // ↓
 // null</code></pre>
 
-    </div>
-
+</div>
 </section>
 
 
 <!-- TASK 2 -->
 <section class="task-card">
 
-    <h3>Task 2 — Build with Object.create()</h3>
+<h3>Task 2 — Build with Object.create()</h3>
 
-    <div class="task-description">
+<div class="task-description">
 <pre><code class="language-js">/* Task 2 Build with Object.create()
 
 Create a vehicle object with:
@@ -130,21 +121,17 @@ bike.name = "Royal Enfield"
 
 Call start() on both.
 
-Use:
-hasOwnProperty()
-and in
-
-to check:
+Check:
 - own properties
 - inherited properties
 */</code></pre>
-    </div>
+</div>
 
-    <div class="code-panel">
-        <span class="code-panel__label">Solution</span>
+<div class="code-panel">
+<span class="code-panel__label">Solution</span>
 
 <pre><code class="language-js">const vehicle = {
-  start: function () {
+  start() {
     console.log(`${this.name} starting`);
   }
 };
@@ -160,50 +147,42 @@ bike.start();
 
 console.log(car.hasOwnProperty("name"));
 console.log(car.hasOwnProperty("start"));
-
 console.log("start" in car);</code></pre>
 
-    </div>
-
+</div>
 </section>
 
 
 <!-- TASK 3 -->
 <section class="task-card">
 
-    <h3>Task 3 — Constructor Function Inheritance</h3>
+<h3>Task 3 — Constructor Function Inheritance</h3>
 
-    <div class="task-description">
+<div class="task-description">
 <pre><code class="language-js">/* Task 3 Constructor Function Inheritance
 
 Create Person(name)
-and set:
-this.name = name
+and Student(name, school).
 
-Add:
-Person.prototype.greet()
-
-Create Student(name, school)
-
-Call:
+Use:
 Person.call(this, name)
 
 Inherit using:
 Object.create(Person.prototype)
 
 Add:
+greet()
 study()
 
 Create:
 new Student("Riya", "IIT Delhi")
 
-Call:
-greet() and study()
+Call both methods.
 */</code></pre>
-    </div>
+</div>
 
-    <div class="code-panel">
-        <span class="code-panel__label">Solution</span>
+<div class="code-panel">
+<span class="code-panel__label">Solution</span>
 
 <pre><code class="language-js">function Person(name) {
   this.name = name;
@@ -218,36 +197,28 @@ function Student(name, school) {
   this.school = school;
 }
 
-Student.prototype =
-  Object.create(Person.prototype);
-
+Student.prototype = Object.create(Person.prototype);
 Student.prototype.constructor = Student;
 
 Student.prototype.study = function () {
-  console.log(
-    this.name +
-    " studies at " +
-    this.school
-  );
+  console.log(this.name + " studies at " + this.school);
 };
 
-const student1 =
-  new Student("Riya", "IIT Delhi");
+const student1 = new Student("Riya", "IIT Delhi");
 
 student1.greet();
 student1.study();</code></pre>
 
-    </div>
-
+</div>
 </section>
 
 
 <!-- BONUS -->
 <section class="task-card">
 
-    <h3>Bonus — hasOwnProperty vs in</h3>
+<h3>Bonus — hasOwnProperty vs in</h3>
 
-    <div class="task-description">
+<div class="task-description">
 <pre><code class="language-js">/* Bonus
 
 Create:
@@ -259,21 +230,16 @@ const dog = Object.create({
 dog.name = "Bruno";
 
 Predict results for:
+- hasOwnProperty()
+- in
 
-dog.hasOwnProperty("name")
-dog.hasOwnProperty("species")
-
-"name" in dog
-"species" in dog
-"toString" in dog
-
-Write the rule for:
-hasOwnProperty vs in
+Write the difference
+between both.
 */</code></pre>
-    </div>
+</div>
 
-    <div class="code-panel">
-        <span class="code-panel__label">Solution</span>
+<div class="code-panel">
+<span class="code-panel__label">Solution</span>
 
 <pre><code class="language-js">const dog = Object.create({
   species: "Canis"
@@ -281,13 +247,8 @@ hasOwnProperty vs in
 
 dog.name = "Bruno";
 
-console.log(
-  dog.hasOwnProperty("name")
-); // true
-
-console.log(
-  dog.hasOwnProperty("species")
-); // false
+console.log(dog.hasOwnProperty("name")); // true
+console.log(dog.hasOwnProperty("species")); // false
 
 console.log("name" in dog); // true
 console.log("species" in dog); // true
@@ -299,14 +260,8 @@ console.log("toString" in dog); // true
 // in
 // → own + inherited</code></pre>
 
-    </div>
-
+</div>
 </section>
-</code></pre>
-
-                    </div>
-
-                </section>
 
             </article>
 
