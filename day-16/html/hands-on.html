@@ -44,34 +44,25 @@
                     </p>
                 </div>
 
-
                 <!-- TASK 1 -->
                 <section class="task-card">
 
                     <h3>Task 1 — Inspect a Prototype</h3>
-
                     <div class="task-description">
-
                         <p>
                             Create:
                             <code>const arr = [1, 2, 3]</code>
                         </p>
-
                         <p>
                             Use:
                             <code>Object.getPrototypeOf()</code>
                             to inspect the prototype chain.
                         </p>
-
                         <p>
                             Find what value ends the chain.
                         </p>
-
                     </div>
-
-
                     <details class="solution-box">
-
                         <summary>View Solution</summary>
 
 <pre><code class="language-js">
@@ -79,15 +70,9 @@ const arr = [1, 2, 3];
 
 console.log(Object.getPrototypeOf(arr));
 
-console.log(
-  Object.getPrototypeOf(
-    Object.getPrototypeOf(arr)
-  )
-);
+console.log(Object.getPrototypeOf(Object.getPrototypeOf(arr)));
 
-console.log(
-  Object.getPrototypeOf(Object.prototype)
-);
+console.log(Object.getPrototypeOf(Object.prototype));
 
 // Prototype chain:
 // arr
@@ -98,186 +83,121 @@ console.log(
 // ↓
 // null
 </code></pre>
-
                     </details>
-
                 </section>
-
-
 
                 <!-- TASK 2 -->
                 <section class="task-card">
-
                     <h3>Task 2 — Build with Object.create()</h3>
-
                     <div class="task-description">
-
                         <p>
                             Create a <code>vehicle</code> object
                             with a <code>start()</code> method.
                         </p>
-
                         <p>
                             Use <code>Object.create()</code>
                             to create:
                         </p>
-
                         <ul>
                             <li>car → Tata Nexon</li>
                             <li>bike → Royal Enfield</li>
                         </ul>
-
                         <p>
                             Verify:
                             <code>name</code> is own property
                             and
                             <code>start</code> is inherited.
                         </p>
-
                     </div>
-
-
                     <details class="solution-box">
-
                         <summary>View Solution</summary>
 
 <pre><code class="language-js">
 const vehicle = {
-
   start: function () {
 
     console.log(`${this.name} starting`);
   }
 };
 
-
 const car = Object.create(vehicle);
-
 car.name = "Tata Nexon";
 
-
 const bike = Object.create(vehicle);
-
 bike.name = "Royal Enfield";
 
-
 car.start();
-
 bike.start();
 
-
 // Own property checks
-console.log(
-  car.hasOwnProperty("name")
-);
+console.log(car.hasOwnProperty("name"));
 
-console.log(
-  car.hasOwnProperty("start")
-);
-
+console.log(car.hasOwnProperty("start"));
 
 // Inherited property checks
 console.log("start" in car);
 </code></pre>
-
                     </details>
-
                 </section>
-
-
 
                 <!-- TASK 3 -->
                 <section class="task-card">
-
                     <h3>Task 3 — Constructor Function Inheritance</h3>
-
                     <div class="task-description">
-
                         <p>
                             Build:
                         </p>
-
                         <ul>
                             <li><code>Person(name)</code></li>
                             <li><code>Student(name, school)</code></li>
                         </ul>
-
                         <p>
                             Use:
                         </p>
-
                         <ul>
                             <li><code>Person.call()</code></li>
                             <li><code>Object.create()</code></li>
                             <li>prototype inheritance</li>
                         </ul>
-
                     </div>
-
-
                     <details class="solution-box">
-
                         <summary>View Solution</summary>
 
 <pre><code class="language-js">
 function Person(name) {
-
-  this.name = name;
+this.name = name;
 }
-
 
 Person.prototype.greet = function () {
 
-  console.log(
-    "Hi, I'm " + this.name
-  );
+  console.log("Hi, I'm " + this.name);
 };
-
 
 function Student(name, school) {
 
   Person.call(this, name);
-
   this.school = school;
 }
 
+Student.prototype =Object.create(Person.prototype);
 
-Student.prototype =
-  Object.create(Person.prototype);
-
-
-Student.prototype.constructor =
-  Student;
-
+Student.prototype.constructor =Student;
 
 Student.prototype.study =
   function () {
-
-    console.log(
-      this.name +
-      " studies at " +
-      this.school
-    );
+    console.log(this.name +" studies at " +this.school);
   };
 
-
-const student1 =
-  new Student(
-    "Riya",
-    "IIT Delhi"
-  );
-
+const student1 =new Student("Riya","IIT Delhi");
 
 student1.greet();
-
 student1.study();
+
 </code></pre>
 
                     </details>
 
                 </section>
-
-
 
                 <!-- BONUS -->
                 <section class="task-card">
@@ -291,8 +211,7 @@ student1.study();
                         </p>
 
                         <code>
-                            const dog =
-                            Object.create({ species: "Canis" })
+                            const dog = Object.create({ species: "Canis" })
                         </code>
 
                         <p>
@@ -317,37 +236,20 @@ student1.study();
                         <summary>View Solution</summary>
 
 <pre><code class="language-js">
-const dog =
-  Object.create({
-    species: "Canis"
-  });
+const dog = Object.create({species: "Canis"});
 
 dog.name = "Bruno";
 
 
-console.log(
-  dog.hasOwnProperty("name")
-);
-// true
+console.log(dog.hasOwnProperty("name"));// true
 
+console.log(dog.hasOwnProperty("species")); // false
 
-console.log(
-  dog.hasOwnProperty("species")
-);
-// false
+console.log("name" in dog);// true
 
+console.log("species" in dog);// true
 
-console.log("name" in dog);
-// true
-
-
-console.log("species" in dog);
-// true
-
-
-console.log("toString" in dog);
-// true
-
+console.log("toString" in dog);// true
 
 // Rule:
 // hasOwnProperty()
@@ -498,8 +400,6 @@ console.log("toString" in dog);
                             <li><a href="homework.html">Homework</a></li>
                         </ul>
                     </details>
-
-
                 </ul>
             </nav>
         </aside>
