@@ -3,117 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Day 12 Error Handling | JavaScript Curriculum</title>
+    <title>Day 16 Practice | JavaScript Curriculum</title>
     <link rel="stylesheet" href="../../shared/css/style.css">
 </head>
 <body>
     <div class="page-shell">
         <header class="site-header">
-            <h1>Day 12: Error Handling</h1>
+            <h1>Day 16: Practice</h1>
             <p class="subtitle">Hands-on: In-class Tasks</p>
         </header>
         <main class="site-content">
             <article>
-                <h2>Hands-on</h2>
+                <h2>Hands-on: <code>this</code> and binding</h2>
                 <div class="lab-intro">
-                    <p>Same source as <code>hands-on.js</code>. <strong>Tasks</strong> are in comments; <strong>code</strong> is below. Use <strong>DevTools (F12) → Console</strong> where needed.</p>
+                    <p><strong>Step 1 — Tasks.</strong> Read each <code>/* Task … */</code> block in the script.</p>
+                    <p><strong>Step 2 — Code.</strong> The panel below is the full <code>hands-on.js</code> source. <strong>Step 3 — Run.</strong> Open <strong>DevTools (F12) → Console</strong> for output.</p>
                 </div>
                 <section class="task-section">
                     <div class="task-instructions">
-                        <h3>Hands-on overview</h3>
-                        <p>Read the <strong>task</strong> notes in comments, then study the <strong>code</strong> in the panel below.</p>
+                        <h3>Tasks in this lab</h3>
+                        <p>Task 1 ask 1 Inspect a Prototype, Task 2 Build with <code>Object.create</code>, Task 3  Constructor Function Inheritance, and a bonus <code>hasOwnProperty vs in</code>vs<code>in</code> .</p>
                     </div>
                     <div class="code-panel">
                         <span class="code-panel__label">Code — hands-on.js</span>
-                        <pre><code>// Task 1 Safe JSON Parse
-// Write a function safeParse(str) that uses try/catch around JSON.parse(str).
-// If parsing succeeds, return the parsed object.
-// If it fails, log &quot;Invalid JSON:&quot; plus the error message, and return null.
-// Test with &#x27;{&quot;name&quot;:&quot;Priya&quot;}&#x27; (valid) and &#x27;{&quot;name&quot;:&quot;Priya&quot;&#x27; (broken).
-function safeparse(str){
-    try{
-    return JSON.parse(str);   
-    }
-    catch(error){
-    console.log(&quot;Invalid JSON:&quot;,error.message);
-    }
-}
-console.log(safeparse(&#x27;{&quot;name&quot;:&quot;Priya&quot;}&#x27;));
-console.log(safeparse(&#x27;{&quot;name&quot;:&quot;Priya&quot;&#x27;}));
-// Task 2 Throw on Bad Age
-// Write a function setAge(age) that:
-// Throws an Error with message &quot;Age must be a number&quot; if typeof age !== &quot;number&quot;.
-// Throws an Error with message &quot;Age must be 0–120&quot; if age is out of range.
-// Otherwise returns age.
-// Wrap calls in try/catch. Test: setAge(25), setAge(&quot;twenty&quot;), setAge(200).
-function setAge(age){
-    if(typeof(age) !== &quot;number&quot;){
-        throw new Error(&quot;Age must be a number&quot;);
-    }
-    if(age&gt;120 || age&lt;0)
-    {
-        throw new Error(&quot;Age must be 0-120&quot;);
-    }
-    return age;
-}
-try {
-    console.log(setAge(25));
-    console.log(setAge(&quot;twenty&quot;));
-    console.log(setAge(200));
+                        <pre><code>/*Task 1 Inspect a Prototype
+Create const arr = [1, 2, 3];
+Use Object.getPrototypeOf(arr) and log it. What is it?
+Now log Object.getPrototypeOf(Object.getPrototypeOf(arr)) . What is it?
+And once more — log the next step. What value ends the chain?
+In a comment, draw the chain.*/
 
-} catch (error) {
-    console.log(error.message);
+const arr = [1, 2, 3];
+
+console.log(Object.getPrototypeOf(arr));
+console.log(Object.getPrototypeOf(Object.getPrototypeOf(arr)));
+console.log(Object.getPrototypeOf(Object.prototype));
+// arr -> Object.Prototype -> end
+
+/*Task 2 Build with Object.create
+Create an object vehicle with method start() { console.log(`${this.name} starting`); }
+Use Object.create(vehicle) to make car and set car.name = "Tata Nexon" .
+Make bike the same way with name = "Royal Enfield" .
+Call start() on both.
+Use hasOwnProperty and in to confirm name is own and start is inherited.*/
+
+const vehicle = {
+    start : function(){
+  console.log(`${this.name} starting`);    }
 }
+const car = Object.create(vehicle);
+car.name = "Tata Nexon";
 
-// Task 3 Custom ValidationError on Email
-// Define a class ValidationError extends Error that sets this.name = &quot;ValidationError&quot;.
-// Write validateEmail(email) that throws a ValidationError if the email doesn&#x27;t include &quot;@&quot;.
-// Wrap a call in try/catch. Inside catch, branch on err instanceof ValidationError.
-// Test with &quot;priya@example.com&quot; and &quot;priya-no-at&quot;.
+const bike = Object.create(vehicle);
+bike.name = "Royal Enfield";
 
-class ValidationError extends Error{
-constructor(message) {
-        super(message);
-        this.name = &quot;ValidationError&quot;;
-    }
-}
+car.start();
+bike.start();
 
-function validateEmail(email){
-    if(!email.includes(&#x27;@&#x27;)){
-        throw new ValidationError(&quot;Email must contain @&quot;);
-    }
-    return &quot;Valid Email&quot;;
+console.log(car.hasOwnProperty("name"));
+console.log(car.hasOwnProperty("start"));
+console.log(bike.hasOwnProperty("name"));
+console.log(bike.hasOwnProperty("start"));
+
+/*Task 3 Constructor Function Inheritance
+Build a Person(name) constructor that sets this.name = name .
+Add Person.prototype.greet = function () { console.log("Hi, I'm " + this.name); } .
+Build a Student(name, school) constructor that calls Person.call(this, name) and sets
+this.school = school .
+Link Student.prototype to inherit from Person.prototype using Object.create .
+Add Student.prototype.study = function () { console.log(this.name + " studies at " +
+this.school); } .
+Create a new Student("Riya", "IIT Delhi") and call both greet and study .*/
+
+
+function Person(name) {
+
+  this.name = name;
 }
 
-try {
-    console.log(validateEmail(&quot;priya@example.com&quot;)); //Valid Email
+// Method on prototype
+Person.prototype.greet = function () {
 
-} catch (err) {
+  console.log("Hi, I'm " + this.name);
+};
 
-    if (err instanceof ValidationError) {
-        console.log(&quot;Validation Error:&quot;, err.message);
-    } else {
-        console.log(&quot;Other Error:&quot;, err.message);
-    }
-}
-try {
-    console.log(validateEmail(&quot;priya-no-at&quot;)); //Validation Error: Email must contain @
 
-} catch (err) {
+// Child constructor
+function Student(name, school) {
 
-    if (err instanceof ValidationError) {
-        console.log(&quot;Validation Error:&quot;, err.message);
-    } else {
-        console.log(&quot;Other Error:&quot;, err.message);
-    }
+  // Call parent constructor
+  Person.call(this, name);
+
+  this.school = school;
 }
 
-// Bonus Two-File Module Setup
-// Create mathUtils.js exporting (named): PI, add(a, b), multiply(a, b).
-// Create mathUtils.js exporting (default): a function formatPrice(n) that returns &quot;₹&lt;n&gt;&quot;.
-// Create app.js that imports all of them and uses each.
-// Don&#x27;t forget &lt;script type=&quot;module&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt; in HTML.
-//Done check app.js and mathUtils.js
+
+// Inherit from Person.prototype
+Student.prototype = Object.create(Person.prototype);
+
+
+// Fix constructor reference
+Student.prototype.constructor = Student;
+
+
+// Student-specific method
+Student.prototype.study = function () {
+
+  console.log(this.name + " studies at " + this.school);
+};
+
+
+// Create student
+const student1 = new Student("Riya", "IIT Delhi");
+
+
+// Call inherited method
+student1.greet();
+
+
+// Call own method
+student1.study();
+
+
+/*Bonus hasOwnProperty vs in
+Create const dog = Object.create({ species: "Canis" }); dog.name = "Bruno";
+Predict the result of: dog.hasOwnProperty("name") , dog.hasOwnProperty("species") , "name" in
+dog , "species" in dog , "toString" in dog .
+Run all five. Match against your prediction.
+In a comment, write the one-line rule for when to use which.*/
+
+// Prototype object
+const dog = Object.create({ species: "Canis" });
+
+dog.name = "Bruno";
+
+
+// Checks
+console.log(dog.hasOwnProperty("name"));
+
+console.log(dog.hasOwnProperty("species"));
+
+console.log("name" in dog);
+
+console.log("species" in dog);
+
+console.log("toString" in dog);
+
 </code></pre>
                     </div>
                 </section>
@@ -214,12 +249,12 @@ try {
                             <li><a href="../../day-11/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    <details open>
+                    <details>
                         <summary>Day 12 — Error Handling</summary>
                         <ul>
-                            <li><a href="lesson.html">Lesson</a></li>
-                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
-                            <li><a href="homework.html">Homework</a></li>
+                            <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-12/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-12/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
                     <details>
@@ -238,14 +273,16 @@ try {
                             <li><a href="../../day-14/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    <details>
+                    <details open>
                         <summary>Day 15 — Practice</summary>
                         <ul>
-                            <li><a href="../../day-15/html/lesson.html">Lesson</a></li>
-                            <li><a href="../../day-15/html/hands-on.html">Hands-on</a></li>
-                            <li><a href="../../day-15/html/homework.html">Homework</a></li>
+                            <li><a href="lesson.html">Lesson</a></li>
+                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
+                            <li><a href="homework.html">Homework</a></li>
                         </ul>
                     </details>
+
+
                 </ul>
             </nav>
         </aside>
