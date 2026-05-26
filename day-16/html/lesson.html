@@ -4,15 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Day 16 Practice | JavaScript Curriculum</title>
+    <title>Day 16 Lesson | JavaScript Curriculum</title>
 
     <link rel="stylesheet" href="../../shared/css/style.css" />
 
-    <!-- Prism.js -->
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/prismjs/themes/prism.css"
-    />
 </head>
 
 <body>
@@ -24,50 +19,321 @@
 
             <h1>Day 16: Practice</h1>
 
-            <p class="subtitle">
-                Hands-on: In-class Tasks
-            </p>
+            <p class="subtitle">Lesson:Topics and Demo Code</p>
 
         </header>
-
-
-
         <!-- MAIN CONTENT -->
         <main class="site-content">
-
             <article>
-
-                <h2>
-                    Hands-on:
-                    <code>Prototype & Inheritance</code>
-                </h2>
-
-
+                <h2>Lesson</h2>
                 <div class="lab-intro">
 
-                    <p>
-                        Read the task first, then check the solution.
-                    </p>
-
-                    <p>
-                        Open
-                        <strong>DevTools → Console</strong>
-                        to view output.
-                    </p>
-
+                   <p>Same source as <code>lesson.js</code> (loaded at the bottom of this page). <strong>Tasks</strong> are in comments in the script; <strong>code</strong> is below. Open <strong>DevTools (F12) → Console</strong> for output.</p>
                 </div>
+                <!-- Topic 1 -->
+                <section class="task-card">
 
+                    <h3>Topic 1 — Every Object Has a Prototype</h3>
 
+                    <div class="task-description">
 
+<pre><code class="code-panel__label">
+const user = { name: "Priya" };
 
+// Every object literal's prototype is Object.prototype
 
+console.log(
+    Object.getPrototypeOf(user) === Object.prototype
+); // true
 
+// user has no .toString() of its own
 
+console.log(user.toString());
+
+// Why?
+// toString lives on Object.prototype
+
+console.log(
+    Object.prototype.hasOwnProperty("toString")
+); // true
+
+// End of the chain
+
+console.log(
+    Object.getPrototypeOf(Object.prototype)
+); // null
+</code></pre>
+
+                    </div>
+
+                </section>
+
+                <!-- Topic 2 -->
+                <section class="task-card">
+
+                    <h3>Topic 2 — Object.create()</h3>
+
+                    <div class="task-description">
+
+<pre><code class="code-panel__label">
+const animal = {
+
+    eat() {
+        console.log(`${this.name} is eating`);
+    },
+
+    sleep() {
+        console.log(`${this.name} is sleeping`);
+    }
+};
+
+// dog inherits from animal
+
+const dog = Object.create(animal);
+
+dog.name = "Bruno";
+
+dog.eat();
+
+dog.sleep();
+
+console.log(
+    Object.getPrototypeOf(dog) === animal
+); // true
+
+console.log(
+    dog.hasOwnProperty("name")
+); // true
+
+console.log(
+    dog.hasOwnProperty("eat")
+); // false
+</code></pre>
+                        <!-- Topic 3 -->
+                <section class="task-card">
+
+                    <h3>Topic 3 — The Prototype Chain</h3>
+
+                    <div class="task-description">
+
+<pre><code class="code-panel__label">
+const grandparent = {
+
+    lastName: "Sharma"
+};
+
+const parent = Object.create(grandparent);
+
+parent.firstName = "Priya";
+
+const child = Object.create(parent);
+
+child.age = 5;
+
+// READ — walks up
+
+console.log(child.age);
+
+console.log(child.firstName);
+
+console.log(child.lastName);
+
+console.log(child.toString);
+
+// WRITE — creates own property
+
+child.firstName = "Anaya";
+
+console.log(child.firstName);
+
+console.log(parent.firstName);
+</code></pre>
+
+                    </div>
+
+                </section>
+
+                <!-- Topic 4 -->
+                <section class="task-card">
+
+                    <h3>Topic 4 — hasOwnProperty vs in</h3>
+
+                    <div class="task-description">
+
+<pre><code class="code-panel__label">
+const animal = {
+
+    eat() {}
+};
+
+const dog = Object.create(animal);
+
+dog.bark = () => console.log("woof");
+
+console.log(
+    dog.hasOwnProperty("bark")
+); // true
+
+console.log(
+    dog.hasOwnProperty("eat")
+); // false
+
+console.log(
+    "bark" in dog
+); // true
+
+console.log(
+    "eat" in dog
+); // true
+
+console.log(
+    "toString" in dog
+); // true
+</code></pre>
+
+                    </div>
+
+                </section>
+
+                <!-- Topic 5 -->
+                <section class="task-card">
+
+                    <h3>Topic 5 — Constructor Functions</h3>
+
+                    <div class="task-description">
+
+<pre><code class="code-panel__label">
+function User(name, city) {
+
+    this.name = name;
+
+    this.city = city;
+}
+
+User.prototype.greet = function () {
+
+    console.log(
+        `Hi, I'm ${this.name} from ${this.city}`
+    );
+};
+
+const a = new User("Priya", "Jaipur");
+
+const b = new User("Aarav", "Mumbai");
+
+a.greet();
+
+b.greet();
+
+console.log(
+    a.greet === b.greet
+); // true
+
+console.log(
+    Object.getPrototypeOf(a) === User.prototype
+); // true
+
+// Inheritance
+
+function Admin(name, city, level) {
+
+    User.call(this, name, city);
+
+    this.level = level;
+}
+
+Admin.prototype = Object.create(User.prototype);
+
+Admin.prototype.constructor = Admin;
+
+Admin.prototype.power = function () {
+
+    console.log(
+        `${this.name} has level ${this.level}`
+    );
+};
+
+const ad = new Admin(
+    "Riya",
+    "Bangalore",
+    5
+);
+
+ad.greet();
+
+ad.power();
+</code></pre>
+
+                    </div>
+
+                </section>
+
+                <!-- Topic 6 -->
+                <section class="task-card">
+
+                    <h3>Topic 6 — Don't Modify Built-in Prototypes</h3>
+
+                    <div class="task-description">
+
+<pre><code class="code-panel__label">
+Array.prototype.last = function () {
+
+    return this[this.length - 1];
+};
+
+const fruits = [
+    "apple",
+    "mango",
+    "banana"
+];
+
+console.log(
+    fruits.last()
+);
+
+// Safer alternative
+
+function last(arr) {
+
+    return arr[arr.length - 1];
+}
+
+console.log(
+    last(fruits)
+);
+</code></pre>
+
+                    </div>
+
+                </section>
+
+                <!-- Topic 7 -->
+                <section class="task-card">
+
+                    <h3>Topic 7 — Mental Model</h3>
+
+                    <div class="task-description">
+
+<pre><code class="language-js">
+// Property read
+// walks UP the prototype chain
+
+// Property write
+// creates own property
+
+// Method call
+// searches current object first
+
+// End of chain
+// Object.prototype → null
+</code></pre>
+
+                    </div>
+
+                </section>
 
             </article>
-
         </main>
-
                 <aside class="site-outline">
             <h2>Curriculum</h2>
             <nav>

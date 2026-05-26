@@ -95,20 +95,20 @@ body {
     padding: 0.8rem 1rem;
     background: #ffffff;
 }
-
 /* CODE PANEL */
 .code-panel {
-    border-top: 1px solid #e5e7eb;
+    border-top: 1px solid #d1d5db;
 }
 
+/* SOLUTION LABEL */
 .code-panel__label {
     display: block;
-    padding: 0.45rem 1rem;
-    background: #111827;
-    color: #cbd5e1;
+    padding: 0.5rem 1rem;
+    background: #000;
+    color: #fff;
     font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
+    font-weight: 700;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
 }
 
@@ -119,29 +119,37 @@ pre {
     border-radius: 0;
 }
 
+/* TASK CODE */
 .task-description pre {
-    background: #f8fafc;
-    padding: 0.9rem;
-    border-left: 3px solid #3b82f6;
+    background: #f3f4f6;
+    color: #111827;
+    padding: 1rem;
+    border-left: 4px solid #2563eb;
 }
 
+/* SOLUTION CODE */
 .code-panel pre {
-    background: #0f172a;
+    background: #000;
+    color: #fff;
     padding: 1rem;
 }
 
+/* CODE TEXT */
 code {
     font-family: 'Fira Code', 'Consolas', monospace;
-    font-size: 0.84rem;
-    line-height: 1.45;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: inherit;
 }
 
 /* INLINE CODE */
 .site-content p code,
 .site-content h2 code,
-.site-content h3 code {
-    background: #eef2ff;
-    padding: 0.12rem 0.35rem;
+.site-content h3 code,
+.site-content li code {
+    background: #111827;
+    color: #fff;
+    padding: 0.14rem 0.4rem;
     border-radius: 4px;
     font-size: 0.85em;
 }
