@@ -148,10 +148,10 @@ code {
 
 /* SIDEBAR */
 .site-outline {
-    background: white;
+    background: #111827;
     padding: 1rem;
-    border-radius: 10px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
     position: sticky;
     top: 1rem;
     max-height: calc(100vh - 2rem);
@@ -161,8 +161,8 @@ code {
 .site-outline h2 {
     font-size: 0.85rem;
     text-transform: uppercase;
-    color: #6b7280;
-    margin-bottom: 0.8rem;
+    color: #cbd5e1;
+    margin-bottom: 1rem;
     letter-spacing: 0.05em;
 }
 
@@ -171,54 +171,64 @@ code {
 }
 
 .site-outline details {
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.45rem;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #1f2937;
 }
 
 .site-outline summary {
     cursor: pointer;
-    padding: 0.45rem 0.5rem;
-    border-radius: 6px;
-    color: #2563eb;
-    font-weight: 500;
+    padding: 0.7rem 0.8rem;
+    color: #f9fafb;
+    font-weight: 600;
     font-size: 0.92rem;
+    transition: 0.2s;
+    list-style: none;
 }
 
 .site-outline summary:hover {
-    background: #eff6ff;
+    background: #374151;
+}
+
+.site-outline details[open] summary {
+    background: #2563eb;
 }
 
 .site-outline details ul {
-    margin-left: 0.7rem;
-    margin-top: 0.2rem;
+    margin: 0;
+    padding: 0.4rem;
+    background: #111827;
 }
 
 .site-outline a {
     display: block;
-    padding: 0.38rem 0.5rem;
+    padding: 0.5rem 0.7rem;
     border-radius: 6px;
-    color: #4b5563;
+    color: #d1d5db;
     text-decoration: none;
     font-size: 0.88rem;
+    transition: 0.2s;
 }
 
 .site-outline a:hover {
-    background: #f3f4f6;
-    color: #111827;
+    background: #374151;
+    color: white;
 }
 
 .site-outline a[aria-current="page"] {
-    background: #dbeafe;
-    color: #1d4ed8;
+    background: #3b82f6;
+    color: white;
     font-weight: 600;
 }
 
 /* SCROLLBAR */
 .site-outline::-webkit-scrollbar {
-    width: 6px;
+    width: 7px;
 }
 
 .site-outline::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
+    background: #4b5563;
     border-radius: 20px;
 }
 
