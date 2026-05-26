@@ -148,10 +148,10 @@ code {
 
 /* SIDEBAR */
 .site-outline {
-    background: #111827;
+    background: #dbeafe;
     padding: 1rem;
     border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
     position: sticky;
     top: 1rem;
     height: fit-content;
@@ -161,7 +161,7 @@ code {
 .site-outline h2 {
     font-size: 0.85rem;
     text-transform: uppercase;
-    color: #cbd5e1;
+    color: #1e3a8a;
     margin-bottom: 1rem;
     letter-spacing: 0.05em;
 }
@@ -174,14 +174,14 @@ code {
     margin-bottom: 0.45rem;
     border-radius: 8px;
     overflow: hidden;
-    background: #1f2937;
+    background: #bfdbfe;
     display: block;
 }
 
 .site-outline summary {
     cursor: pointer;
     padding: 0.7rem 0.8rem;
-    color: #f9fafb;
+    color: #1e40af;
     font-weight: 600;
     font-size: 0.92rem;
     transition: 0.2s;
@@ -189,36 +189,36 @@ code {
 }
 
 .site-outline summary:hover {
-    background: #374151;
+    background: #93c5fd;
 }
 
 .site-outline details[open] summary {
-    background: #2563eb;
-}
+    background: #60a5fa;
+    color: white;}
 
 .site-outline details ul {
     margin: 0;
     padding: 0.4rem;
-    background: #111827;
+    background: #dbeafe;
 }
 
 .site-outline a {
     display: block;
     padding: 0.5rem 0.7rem;
     border-radius: 6px;
-    color: #d1d5db;
+    color: #1f2937;
     text-decoration: none;
     font-size: 0.88rem;
     transition: 0.2s;
 }
 
 .site-outline a:hover {
-    background: #374151;
-    color: white;
+    background: #93c5fd;
+    color: #111827;
 }
 
 .site-outline a[aria-current="page"] {
-    background: #3b82f6;
+    background: #2563eb;
     color: white;
     font-weight: 600;
 }
