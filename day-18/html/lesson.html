@@ -1,17 +1,413 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Day 18 Lesson | JavaScript Curriculum</title>
+
+    <link rel="stylesheet" href="../../shared/css/style.css" />
+
 </head>
+
 <body>
 
-    <h1>JavaScript Lesson</h1>
+    <div class="page-shell">
 
-    <p>Open DevTools Console (F12) to view the output.</p>
+        <!-- HEADER -->
+        <header class="site-header">
 
-    <script src="../js/lesson.js"></script>
+            <h1>Day 18: Async: Callbacks & Promises</h1>
 
+            <p class="subtitle">Lesson:Topics and Demo Code</p>
+
+        </header>
+        <!-- MAIN CONTENT -->
+        <main class="site-content">
+            <article>
+                <h2>Lesson</h2>
+                <div class="lab-intro">
+
+                   <p>Same source as <code>lesson.js</code> (loaded at the bottom of this page). <strong>Tasks</strong> are in comments in the script; <strong>code</strong> is below. Open <strong>DevTools (F12) → Console</strong> for output.</p>
+                </div>
+                <!-- Topic 1 -->
+                <section class="task-card">
+
+                    <h3>Topic 1 — Sync vs Async</h3>
+
+                    <div class="task-description">
+
+<pre><code class="code-panel__label">
+// SYNCHRONOUS — top to bottom, no surprises
+console.log("1");
+console.log("2");
+console.log("3");
+// Output: 1, 2, 3
+// ASYNCHRONOUS — setTimeout schedules; doesn't pause
+console.log("1");
+setTimeout(() => console.log("2"), 0); // scheduled — runs LATER
+console.log("3");
+// Output: 1, 3, 2
+//
+// Even with delay 0! "2" goes through the event loop (Day 8).
+// JS keeps running synchronous code first; async callbacks wait their turn.
+</code></pre>
+
+                    </div>
+
+                </section>
+        
+                 <!-- Topic 2 -->
+                <section class="task-card">
+
+                    <h3>Topic 2 — Callbacks</h3>
+
+                    <div class="task-description">
+
+<pre><code class="code-panel__label">
+// Simulate fetching a user from a server
+function fetchUser(id, callback) {
+console.log(`Fetching user ${id}...`);
+setTimeout(() => {
+const user = { id, name: "Priya" };
+callback(null, user); // Node-style: (err, data)
+}, 1000);
+}
+fetchUser(7, (err, user) => {
+if (err) {
+console.error("Failed:", err);
+return;
+}
+console.log("Got user:", user);
+});
+// Logs:
+// Fetching user 7...
+// (1 second later)
+// Got user: { id: 7, name: "Priya" }
+
+</code></pre>
+
+                    </div>
+
+                </section>
+
+                <!-- Topic 3 -->
+                <section class="task-card">
+
+                    <h3>Topic 3 — Callback Hell</h3>
+
+                    <div class="task-description">
+
+<pre><code class="code-panel__label">
+// The "pyramid of doom"
+fetchUser(7, (err, user) => {
+if (err) { console.error(err); return; }
+    fetchOrders(user.id, (err, orders) => {
+    if (err) { console.error(err); return; }
+        fetchItems(orders[0].id, (err, items) => {
+        if (err) { console.error(err); return; }
+            console.log(items); // finally got there!
+        });
+    });
+});
+// Problems:
+// 1. Indentation explodes — hard to read
+// 2. Error handling repeated at every level
+// 3. Hard to add steps without rewriting
+// 4. No way to return a value through this — only nest deeper
+
+</code></pre>
+
+                    </div>
+
+                </section>
+
+                <!-- Topic 4 -->
+                <section class="task-card">
+
+                    <h3>Topic 4 — Promise States</h3>
+
+                    <div class="task-description">
+
+<pre><code class="code-panel__label">
+// Create a promise
+const p = new Promise((resolve, reject) => {
+// do async work...
+setTimeout(() => {
+const success = true;
+if (success) resolve("Done!"); // → fulfilled
+else reject(new Error("Oops")); // → rejected
+}, 1000);
+});
+// p is now PENDING. After 1s, it settles.
+// Real-world: wrapping an async API
+function delay(ms) {
+return new Promise((resolve) => {
+setTimeout(resolve, ms); // resolve with no value
+});
+}
+delay(500).then(() => console.log("half a second passed"))
+
+</code></pre>
+
+                    </div>
+
+                </section>
+
+                <!-- Topic 5 -->
+                <section class="task-card">
+
+                    <h3>Topic 5 — .then / .catch / .finally</h3>
+
+                    <div class="task-description">
+
+<pre><code class="code-panel__label">
+function fetchUser(id) {
+    return new Promise((resolve, reject) => {
+    setTimeout(() => {
+        if (id < 0) reject(new Error("Bad id"));
+        else resolve({ id, name: "Priya" });
+            }, 500);
+    });
+}
+// Chain — flat, not nested
+fetchUser(7)
+    .then((user) => {
+    console.log("got user:", user);
+    return user.id; // value passed to next .then
+    })
+    .then((id) => {
+    return fetchUser(id + 1); // returning a Promise — chain awaits it
+    })
+    .then((nextUser) => {
+    console.log("next user:", nextUser);
+    })
+    .catch((err) => {
+    console.error("any failure caught here:", err.message);
+    })
+    .finally(() => {
+    console.log("done — runs whether success or fail");
+    });
+</code></pre>
+
+                    </div>
+
+                </section>
+
+                <!-- Topic 6 -->
+                <section class="task-card">
+
+                    <h3>Topic 6 — Promise Combinators</h3>
+
+                    <div class="task-description">
+
+<pre><code class="code-panel__label">
+const p1 = fetch("/user");
+const p2 = fetch("/orders");
+const p3 = fetch("/items");
+
+// 1. all — wait for everything; fail if any fails
+Promise.all([p1, p2, p3])
+    .then(([user, orders, items]) => console.log("all done"))
+    .catch((err) => console.error("at least one failed:", err));
+
+// 2. allSettled — wait for everything, never throws
+Promise.allSettled([p1, p2, p3])
+    .then((results) => {
+    results.forEach((r) => {
+    if (r.status === "fulfilled") console.log("ok:", r.value);
+    else console.log("fail:", r.reason);
+    });
+    });
+
+// 3. race — first to settle wins (success OR fail)
+Promise.race([p1, delay(5000)]) // timeout pattern
+    .then((winner) => console.log("first done:", winner));
+
+// 4. any — first to FULFILL wins; all-reject = AggregateError
+Promise.any([p1, p2, p3])
+    .then((firstSuccess) => console.log("got one:", firstSuccess))
+    .catch((err) => console.error("everyone failed"));
+
+</code></pre>
+
+                    </div>
+
+                </section>
+
+                <!-- Topic 7 -->
+                <section class="task-card">
+
+                    <h3>Topic 7 — Promise.resolve / .reject </h3>
+
+                    <div class="task-description">
+
+<pre><code class="code-panel__label">
+
+// Already-fulfilled promise
+const cached = Promise.resolve({ id: 1, name: "Priya" });
+cached.then((u) => console.log(u)); // logs the cached value
+
+// Already-rejected promise
+const failed = Promise.reject(new Error("nope"));
+failed.catch((e) => console.log("caught:", e.message));
+
+// Common pattern: cache or fetch
+function getUser(id, cache) {
+    if (cache[id]) return Promise.resolve(cache[id]); // instant
+        return fetchUser(id); // real async
+}
+
+// Caller doesn't care which path — both return a Promise
+getUser(7, {}).then(console.log);
+</code></pre>
+
+                    </div>
+
+                </section>
+
+            </article>
+
+        </main>
+                <aside class="site-outline">
+            <h2>Curriculum</h2>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Overview</a></li>
+                    <details>
+                        <summary>Day 1 — Basics</summary>
+                        <ul>
+                            <li><a href="../../day-1/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-1/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-1/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 2 — Variables</summary>
+                        <ul>
+                            <li><a href="../../day-2/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-2/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-2/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 3 — Operators</summary>
+                        <ul>
+                            <li><a href="../../day-3/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-3/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-3/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 4 — Control Flow</summary>
+                        <ul>
+                            <li><a href="../../day-4/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-4/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-4/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 5 — Loops</summary>
+                        <ul>
+                            <li><a href="../../day-5/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-5/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-5/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 6 — Functions</summary>
+                        <ul>
+                            <li><a href="../../day-6/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-6/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-6/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 7 — Arrays</summary>
+                        <ul>
+                            <li><a href="../../day-7/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-7/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-7/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 8 — Objects</summary>
+                        <ul>
+                            <li><a href="../../day-8/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-8/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-8/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 9 — Modern Syntax</summary>
+                        <ul>
+                            <li><a href="../../day-9/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-9/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-9/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 10 — DOM Basics</summary>
+                        <ul>
+                            <li><a href="../../day-10/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-10/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-10/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 11 — Events</summary>
+                        <ul>
+                            <li><a href="../../day-11/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-11/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-11/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 12 — Error Handling</summary>
+                        <ul>
+                            <li><a href="../../day-12/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-12/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-12/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 13 — Hoisting &amp; TDZ</summary>
+                        <ul>
+                            <li><a href="../../day-13/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-13/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-13/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 14 — Practice</summary>
+                        <ul>
+                            <li><a href="../../day-14/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-14/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-14/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details open>
+                        <summary>Day 15 — Practice</summary>
+                        <ul>
+                            <li><a href="lesson.html">Lesson</a></li>
+                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
+                            <li><a href="homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details >
+                        <summary>Day 16 — Prototypes and Prototype Chain</summary>
+                        <ul>
+                            <li><a href="lesson.html">Lesson</a></li>
+                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
+                            <li><a href="homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+
+
+                </ul>
+            </nav>
+        </aside>
+    </div>
+    <script src="../js/homework.js"></script>
 </body>
-</html>
+</html>  
