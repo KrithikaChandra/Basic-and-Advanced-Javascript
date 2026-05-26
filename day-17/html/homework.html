@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Day 16 Homework | JavaScript Curriculum</title>
+    <title>Day 17 Homework | JavaScript Curriculum</title>
 
     <link rel="stylesheet" href="../../shared/css/style.css" />
 </head>
@@ -14,7 +14,7 @@
 
         <!-- HEADER -->
         <header class="site-header">
-            <h1>Day 16: Prototypes and Prototype Chain </h1>
+            <h1>Day 17: Classes and OOPs</h1>
             <p class="subtitle">Homework: Take-home Practice</p>
         </header>
 
@@ -24,7 +24,7 @@
 
             <article>
 
-                <h2>Homework: <code>Prototype & Inheritance</code></h2>
+                <h2>Homework: <code>Classes and OOPs</code></h2>
 
                 <div class="lab-intro">
                     <p>
@@ -41,39 +41,80 @@
 <!-- TASK 1 -->
 <section class="task-card">
 
-<h3>Task 1 — Object.create() Chain</h3>
+<h3>Task 1 — Vehicle Inheritance</h3>
 
 <div class="task-description">
 <p>
-Use Object.create to build a 3-level chain:
-tool → vehicle → car
-Each level should addone method.Confirm a car instance can call all three methods.
-*/</code></pre>
+Build a <code>Vehicle(brand)</code> class with a
+<code>start()</code> method.
+</p>
+
+<p>
+Then build:
+</p>
+
+<ul>
+    <li><code>Car(brand, doors)</code></li>
+    <li><code>Bike(brand)</code></li>
+</ul>
+
+<p>
+Both should extend Vehicle.
+Override <code>start()</code> in Car to call
+<code>super.start()</code> then log
+<code>"Car-specific check"</code>.
+</p>
+
+<p>
+Test both classes.
 </p>
 </div>
 
 <details class="solution-box">
 <summary>View Solution</summary>
 
-<pre><code class="code-panel__label">const tool = {
-  useTool() {
-    console.log("Using a tool");
-  }
-};
+<pre><code class="code-panel__label">
+class Vehicle {
 
-const vehicle = Object.create(tool);
+    constructor(brand) {
+        this.brand = brand;
+    }
 
-vehicle.drive = function () {
-  console.log("Driving vehicle");
-};
+    start() {
+        console.log(`${this.brand} is starting`);
+    }
+}
 
-const car = Object.create(vehicle);
+class Car extends Vehicle {
 
-car.honk = function () {console.log("Car honks");};
+    constructor(brand, doors) {
+        super(brand);
+        this.doors = doors;
+    }
 
-car.useTool();
-car.drive();
-car.honk();</code></pre>
+    start() {
+        super.start();
+        console.log("Car-specific check");
+    }
+}
+
+class Bike extends Vehicle {
+
+    constructor(brand) {
+        super(brand);
+    }
+
+    start() {
+        super.start();
+    }
+}
+
+const c = new Car("Tata", 4);
+c.start();
+
+const b = new Bike("RE");
+b.start();
+</code></pre>
 
 </details>
 
@@ -82,45 +123,39 @@ car.honk();</code></pre>
 <!-- TASK 2 -->
 <section class="task-card">
 
-<h3>Task 2 — Shape & Circle Inheritance</h3>
+<h3>Task 2 — Static Counter</h3>
 
 <div class="task-description">
 <p>
-Build a Shape(name) constructor with: describe() on the prototype.
-Then build: Circle(name, radius) that inherits from Shape and adds: area()
-Test using: new Circle("C1", 5)
-*/</code></pre>
+Add a static <code>count</code> property to a
+<code>Counter</code> class that tracks how many
+counter objects have been created.
+</p>
+
+<p>
+Increment the count inside the constructor.
 </p>
 </div>
 
 <details class="solution-box">
 <summary>View Solution</summary>
 
-<pre><code class="code-panel__label">function Shape(name) {
-  this.name = name;
+<pre><code class="code-panel__label">
+class Counter {
+
+    static count = 0;
+
+    constructor() {
+        Counter.count++;
+    }
 }
 
-Shape.prototype.describe = function () {
-  console.log(`This shape is ${this.name}`);
-};
+const c1 = new Counter();
+const c2 = new Counter();
+const c3 = new Counter();
 
-function Circle(name, radius) {
-  Shape.call(this, name);
-  this.radius = radius;
-}
-
-Circle.prototype = Object.create(Shape.prototype);
-
-Circle.prototype.constructor = Circle;
-
-Circle.prototype.area = function () {
-  return Math.PI * this.radius * this.radius;
-};
-
-const c1 = new Circle("C1", 5);
-
-c1.describe();
-console.log(c1.area());</code></pre>
+console.log(Counter.count);
+</code></pre>
 
 </details>
 
@@ -129,72 +164,154 @@ console.log(c1.area());</code></pre>
 <!-- TASK 3 -->
 <section class="task-card">
 
-<h3>Task 3 — Inspect Built-in Prototypes</h3>
+<h3>Task 3 — Private Temperature Class</h3>
 
 <div class="task-description">
 <p>
-Take any built-in prototype:
-Example:
-String.prototype
-Inspect it in the console.
-Find five methods
-you didn't know about.
-Document one method
-with a code example.
-*/</code></pre>
+Build a <code>Temperature</code> class with a private
+<code>#celsius</code> field.
+</p>
+
+<p>
+Add:
+</p>
+
+<ul>
+    <li>Getter for <code>celsius</code></li>
+    <li>Getter for <code>fahrenheit</code></li>
+    <li>Setter for <code>celsius</code></li>
+</ul>
+
+<p>
+Validate that temperature cannot go below
+<code>-273.15</code>.
 </p>
 </div>
 
 <details class="solution-box">
 <summary>View Solution</summary>
 
-<pre><code class="code-panel__label">console.log(String.prototype);
+<pre><code class="code-panel__label">
+class Temperature {
 
-// Example methods:
-// at()
-// padStart()
-// padEnd()
+    #celsius;
 
-const str = "JavaScript";
+    constructor(celsius) {
+        this.#celsius = celsius;
+    }
 
-console.log(str.at(0));
-console.log(str.at(-1));</code></pre>
+    get tempInCelsius() {
+        return this.#celsius;
+    }
+
+    get tempInFahrenheit() {
+        return (this.#celsius * 1.8) + 32;
+    }
+
+    set validCelsius(value) {
+
+        if (value < -273.15) {
+            throw new Error("Invalid temperature");
+        }
+
+        this.#celsius = value;
+    }
+}
+
+const t = new Temperature(32);
+
+console.log(t.tempInCelsius);
+console.log(t.tempInFahrenheit);
+
+t.validCelsius = 40;
+
+console.log(t.tempInCelsius);
+</code></pre>
 
 </details>
+
 </section>
 
 <!-- TASK 4 -->
 <section class="task-card">
 
-<h3>Task 4 — Prototype Chain Function</h3>
+<h3>Task 4 — Custom ValidationError Class</h3>
 
 <div class="task-description">
 <p>
-Write a function:
-chainOf(obj)
-Return an array of every
-prototype in obj's chain.
-Stop before null.
-*/</code></pre>
+Convert a basic validation error into a proper
+class extending <code>Error</code>.
+</p>
+
+<p>
+Test that:
+</p>
+
+<ul>
+    <li><code>instanceof ValidationError</code></li>
+    <li><code>instanceof Error</code></li>
+</ul>
+
+<p>
+both return true.
 </p>
 </div>
 
 <details class="solution-box">
 <summary>View Solution</summary>
 
-<pre><code class="code-panel__label">function chainOf(obj) {
+<pre><code class="code-panel__label">
+class ValidationError extends Error {
 
-  const chain = [];
+    constructor(message) {
+        super(message);
+        this.name = "ValidationError";
+    }
+}
 
-  let current = Object.getPrototypeOf(obj);
+function validateEmail(email) {
 
-  while (current !== null) {
-    chain.push(current);
-    current =Object.getPrototypeOf(current);
-  }
+    if (!email.includes("@")) {
+        throw new ValidationError(
+            "Email must contain @"
+        );
+    }
 
-  return chain;
-}</code></pre>
+    return "Valid Email";
+}
+
+try {
+
+    console.log(
+        validateEmail("priya-no-at")
+    );
+
+} catch (err) {
+
+    console.log(
+        err instanceof ValidationError
+    );
+
+    console.log(
+        err instanceof Error
+    );
+
+    if (err instanceof ValidationError) {
+
+        console.log(
+            "Validation Error:",
+            err.message
+        );
+
+    } else {
+
+        console.log(
+            "Other Error:",
+            err.message
+        );
+    }
+}
+</code></pre>
 
 </details>
 
@@ -329,15 +446,77 @@ Stop before null.
                             <li><a href="homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    <details >
-                        <summary>Day 16 — Prototypes and Prototype Chain</summary>
+                    <details>
+                        <summary>Day 16 — Prototypes & Prototype Chain</summary>
                         <ul>
-                            <li><a href="lesson.html">Lesson</a></li>
-                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
-                            <li><a href="homework.html">Homework</a></li>
+                            <li><a href="day-16/html/lesson.html">Lesson</a></li>
+                            <li><a href="day-16/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="day-16/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
 
+                    <details>
+                        <summary>Day 17 — Classes and OOPs</summary>
+                        <ul>
+                            <li><a href="day-17/html/lesson.html">Lesson</a></li>
+                            <li><a href="day-17/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="day-17/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+
+                    <details>
+                        <summary>Day 18 — Async: Callbacks & Promises</summary>
+                        <ul>
+                            <li><a href="day-18/html/lesson.html">Lesson</a></li>
+                            <li><a href="day-18/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="day-18/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+
+                    <details>
+                        <summary>Day 19 — Async / Await</summary>
+                        <ul>
+                            <li><a href="day-19/html/lesson.html">Lesson</a></li>
+                            <li><a href="day-19/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="day-19/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+
+                    <details>
+                        <summary>Day 20 — The Event Loop</summary>
+                        <ul>
+                            <li><a href="day-20/html/lesson.html">Lesson</a></li>
+                            <li><a href="day-20/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="day-20/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+
+                    <details>
+                        <summary>Day 21 — Advanced Array & Object Patterns</summary>
+                        <ul>
+                            <li><a href="day-21/html/lesson.html">Lesson</a></li>
+                            <li><a href="day-21/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="day-21/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+
+                    <details>
+                        <summary>Day 22 — Map / Set / WeakMap / WeakSet</summary>
+                        <ul>
+                            <li><a href="day-22/html/lesson.html">Lesson</a></li>
+                            <li><a href="day-22/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="day-22/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+
+                    <details>
+                        <summary>Day 23 — Practice</summary>
+                        <ul>
+                            <li><a href="day-23/html/lesson.html">Lesson</a></li>
+                            <li><a href="day-23/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="day-23/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
 
                 </ul>
             </nav>
