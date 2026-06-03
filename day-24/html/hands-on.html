@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Day 23 Homework | JavaScript Curriculum</title>
+    <title>Day 24 Hands-on | JavaScript Curriculum</title>
 
     <link rel="stylesheet" href="../../shared/css/style.css" />
-</head>
+</head> 
 
 <body>
 
@@ -14,232 +14,260 @@
 
         <!-- HEADER -->
         <header class="site-header">
-            <h1>Day 23: Iterators and Generators</h1>
-            <p class="subtitle">Homework: Take-home Practice</p>
+            <h1>Day 24: ES Modules </h1>
+            <p class="subtitle">Hands-on: In-class Tasks</p>
         </header>
 
 
         <!-- MAIN CONTENT -->
         <main class="site-content">
 
-<article>
+            <article>
 
-    <h2>Homework: <code>Iterators &amp; Generators</code></h2>
+                <h2>Hands-on: <code>In-class Tasks</code></h2>
 
-    <div class="lab-intro">
+                <div class="lab-intro">
+                    <p>
+                        Read each task carefully.
+                        Open the solution to compare your answer.
+                    </p>
+
+                    <p>
+                        Open <strong>DevTools → Console</strong>
+                        to see outputs.
+                    </p>
+                </div>
+
+<section class="task-card">
+
+    <h3>Task 3 — Dynamic import()</h3>
+
+    <div class="task-description">
+
         <p>
-            Read each task carefully.
-            Open the solution to compare your answer.
+            Create a
+            <code>heavy.js</code>
+            module that exports a
+            <code>compute()</code>
+            function.
         </p>
 
         <p>
-            Open <strong>DevTools → Console</strong>
-            to see outputs.
+            Use
+            <code>await import()</code>
+            to load the module only when needed.
         </p>
+
+        <p>
+            Call the exported function after loading.
+        </p>
+
     </div>
 
-    <!-- TASK 1 -->
-    <section class="task-card">
+    <details class="solution-box">
 
-        <h3>Task 1 — Chunked Generator</h3>
-
-        <div class="task-description">
-
-            <p>
-                Write a generator
-                <code>chunked(arr, size)</code>
-                that yields successive chunks of an array.
-            </p>
-
-            <p>
-                Example:
-                <code>[...chunked([1,2,3,4,5], 2)]</code>
-                should produce:
-                <code>[[1,2], [3,4], [5]]</code>.
-            </p>
-
-        </div>
-
-        <details class="solution-box">
-
-            <summary>View Solution</summary>
+        <summary>View Solution</summary>
 
 <pre><code class="code-panel__label">
-function* chunked(arr, size) {
-  for (let i = 0; i < arr.length; i += size) {
-    yield arr.slice(i, i + size);
-  }
+export function compute() {
+  return "computed!";
 }
 
-console.log([...chunked([1, 2, 3, 4, 5], 2)]);
-// [[1,2],[3,4],[5]]
+async function loadAndRun() {
+  const module =
+    await import("./heavy.js");
+
+  console.log(
+    module.compute()
+  );
+}
+
+loadAndRun();
+
+// computed!
 </code></pre>
 
-        </details>
+    </details>
 
-    </section>
+</section>
+<section class="task-card">
 
+    <h3>Task 2 — Default + Named Export</h3>
 
-    <!-- TASK 2 -->
-    <section class="task-card">
+    <div class="task-description">
 
-        <h3>Task 2 — Infinite Prime Generator</h3>
+        <p>
+            Create a module named
+            <code>Button.js</code>.
+        </p>
 
-        <div class="task-description">
+        <p>
+            Export a default
+            <code>Button()</code>
+            function.
+        </p>
 
-            <p>
-                Build an infinite generator of prime numbers.
-            </p>
+        <p>
+            Also export a named object:
+            <code>ButtonStyles</code>.
+        </p>
 
-            <p>
-                Use:
-                <code>take(primes(), 10)</code>
-                to retrieve the first 10 primes.
-            </p>
+        <p>
+            Import both using a single import statement.
+        </p>
 
-        </div>
+    </div>
 
-        <details class="solution-box">
+    <details class="solution-box">
 
-            <summary>View Solution</summary>
+        <summary>View Solution</summary>
 
 <pre><code class="code-panel__label">
-function isPrime(num) {
-  if (num < 2) return false;
-
-  for (let i = 2; i <= Math.sqrt(num); i++) {
-    if (num % i === 0) return false;
-  }
-
-  return true;
+export default function Button(label) {
+  return `Button: ${label}`;
 }
 
-function* primes() {
-  let n = 2;
+export const ButtonStyles = {
+  primary: "btn-primary",
+  secondary: "btn-secondary"
+};
 
-  while (true) {
-    if (isPrime(n)) {
-      yield n;
-    }
+import Button, {
+  ButtonStyles
+} from "./Button.js";
 
-    n++;
-  }
-}
+console.log(Button("Submit"));
+console.log(ButtonStyles.primary);
+console.log(ButtonStyles.secondary);
 
-console.log(take(primes(), 10));
-// [2,3,5,7,11,13,17,19,23,29]
+// Button: Submit
+// btn-primary
+// btn-secondary
 </code></pre>
 
-        </details>
+    </details>
 
-    </section>
+</section>
 
+<section class="task-card">
 
-    <!-- TASK 3 -->
-    <section class="task-card">
+    <h3>Task 3 — Dynamic import()</h3>
 
-        <h3>Task 3 — Zip Generator</h3>
+    <div class="task-description">
 
-        <div class="task-description">
+        <p>
+            Create a
+            <code>heavy.js</code>
+            module that exports a
+            <code>compute()</code>
+            function.
+        </p>
 
-            <p>
-                Write a generator
-                <code>zip(a, b)</code>
-                that combines values from two iterables.
-            </p>
+        <p>
+            Use
+            <code>await import()</code>
+            to load the module only when needed.
+        </p>
 
-            <p>
-                Stop when either iterable ends.
-            </p>
+        <p>
+            Call the exported function after loading.
+        </p>
 
-        </div>
+    </div>
 
-        <details class="solution-box">
+    <details class="solution-box">
 
-            <summary>View Solution</summary>
+        <summary>View Solution</summary>
 
 <pre><code class="code-panel__label">
-function* zip(a, b) {
-
-  const itA = a[Symbol.iterator]();
-  const itB = b[Symbol.iterator]();
-
-  while (true) {
-
-    const x = itA.next();
-    const y = itB.next();
-
-    if (x.done || y.done) {
-      return;
-    }
-
-    yield [x.value, y.value];
-  }
+export function compute() {
+  return "computed!";
 }
 
-console.log(
-  [...zip([1, 2, 3], ["a", "b"])]
-);
+async function loadAndRun() {
+  const module =
+    await import("./heavy.js");
 
-// [[1,"a"], [2,"b"]]
+  console.log(
+    module.compute()
+  );
+}
+
+loadAndRun();
+
+// computed!
 </code></pre>
 
-        </details>
+    </details>
 
-    </section>
+</section>
 
+<section class="task-card">
 
-    <!-- TASK 4 -->
-    <section class="task-card">
+    <h3>Bonus — Singleton Cache Module</h3>
 
-        <h3>Task 4 — Fibonacci Generator</h3>
+    <div class="task-description">
 
-        <div class="task-description">
+        <p>
+            Create a shared
+            <code>cache.js</code>
+            module exporting a single
+            <code>Map</code>.
+        </p>
 
-            <p>
-                Re-do the Fibonacci homework using a generator.
-            </p>
+        <p>
+            Create:
+        </p>
 
-            <p>
-                Use:
-                <code>take(fibonacci(), 10)</code>
-                to retrieve the first 10 values.
-            </p>
+        <ul>
+            <li><code>userService.js</code></li>
+            <li><code>productService.js</code></li>
+        </ul>
 
-        </div>
+        <p>
+            Both modules should write to the same cache instance.
+        </p>
 
-        <details class="solution-box">
+        <p>
+            Verify that all data is visible from
+            <code>main.js</code>.
+        </p>
 
-            <summary>View Solution</summary>
+    </div>
+
+    <details class="solution-box">
+
+        <summary>View Solution</summary>
 
 <pre><code class="code-panel__label">
-function* fibonacci() {
+const cache = new Map();
 
-  let a = 0;
-  let b = 1;
+export default cache;
 
-  while (true) {
+// userService.js
+cache.set("u1", {
+  id: "u1",
+  name: "Alice"
+});
 
-    yield a;
+// productService.js
+cache.set("p1", {
+  id: "p1",
+  name: "Laptop"
+});
 
-    [a, b] = [b, a + b];
-  }
-}
+console.log(cache);
 
-console.log(
-  take(fibonacci(), 10)
-);
-
-// [0,1,1,2,3,5,8,13,21,34]
+// Map(2)
 </code></pre>
 
-        </details>
+    </details>
 
-    </section>
+</section>
 
-</article>      
+            </article>
 
-</main>
+        </main>
 
                 <aside class="site-outline">
             <h2>Curriculum</h2>
@@ -428,28 +456,27 @@ console.log(
                             <li><a href="../../day-22/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-
-                    <details open>
+                    <details>
                         <summary>Day 23 — Iterators and Generators</summary>
                         <ul>
-                            <li><a href="lesson.html">Lesson</a></li>
-                            <li><a href="hands-on.html">Hands-on</a></li>
-                            <li><a href="homework.html" aria-current="page">Homework</a></li>
+                            <li><a href="../../day-23/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-23/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-23/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    <details>
+                    <details open>
                         <summary>Day 24 — ES Modules</summary>
                         <ul>
-                            <li><a href="../../day-24/html/lesson.html">Lesson</a></li>
-                            <li><a href="../../day-24/html/hands-on.html">Hands-on</a></li>
-                            <li><a href="../../day-24/html/homework.html">Homework</a></li>
+                            <li><a href="lesson.html">Lesson</a></li>
+                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
+                            <li><a href="homework.html">Homework</a></li>
                         </ul>
                     </details>
-                    <details>
+                    <details open>
                         <summary>Day 25 — Functional Programming Patterns</summary>
                         <ul>
                             <li><a href="../../day-25/html/lesson.html">Lesson</a></li>
-                            <li><a href="../../day-25/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-25/html/hands-on.html" >Hands-on</a></li>
                             <li><a href="../../day-25/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
@@ -470,11 +497,10 @@ console.log(
                             <li><a href="../../day-27/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
-
                 </ul>
             </nav>
         </aside>
     </div>
-    <script src="../js/homework.js"></script>
+    <script src="../js/hands-on.js"></script>
 </body>
 </html>  
