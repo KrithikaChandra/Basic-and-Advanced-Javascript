@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Day 23 Hands-on | JavaScript Curriculum</title>
+    <title>Day 22 Homework | JavaScript Curriculum</title>
 
     <link rel="stylesheet" href="../../shared/css/style.css" />
-</head> 
+</head>
 
 <body>
 
@@ -14,268 +14,232 @@
 
         <!-- HEADER -->
         <header class="site-header">
-            <h1>Day 23: Iterators & Generators</h1>
-            <p class="subtitle">Hands-on: In-class Tasks</p>
+            <h1>Day 22: Map / Set / WeakMap / WeakSet</h1>
+            <p class="subtitle">Homework: Take-home Practice</p>
         </header>
 
 
         <!-- MAIN CONTENT -->
         <main class="site-content">
 
-            <article>
+<article>
 
-                <h2>Hands-on: <code>In-class Tasks</code></h2>
+    <h2>Homework: <code>Iterators &amp; Generators</code></h2>
 
-                <div class="lab-intro">
-                    <p>
-                        Read each task carefully.
-                        Open the solution to compare your answer.
-                    </p>
-
-                    <p>
-                        Open <strong>DevTools → Console</strong>
-                        to see outputs.
-                    </p>
-                </div>
-
-<section class="task-card">
-
-    <h3>Task 1 — Manual Iterator</h3>
-
-    <div class="task-description">
-
+    <div class="lab-intro">
         <p>
-            Build a <code>range(from, to)</code> ITERABLE OBJECT
-            (not a generator) using <code>[Symbol.iterator]</code>.
+            Read each task carefully.
+            Open the solution to compare your answer.
         </p>
 
         <p>
-            Test with <code>for...of</code> over
-            <code>range(3, 7)</code>.
+            Open <strong>DevTools → Console</strong>
+            to see outputs.
         </p>
-
-        <p>
-            Should log:
-            <code>3, 4, 5, 6, 7</code>.
-        </p>
-
-        <p>
-            Test with:
-            <code>[...range(1, 3)]</code>
-            and verify:
-            <code>[1, 2, 3]</code>.
-        </p>
-
     </div>
 
-    <details class="solution-box">
+    <!-- TASK 1 -->
+    <section class="task-card">
 
-        <summary>View Solution</summary>
+        <h3>Task 1 — Chunked Generator</h3>
 
-<pre><code class="code-panel__label">
-function range(from, to) {
-  return {
-    [Symbol.iterator]() {
-      let current = from;
+        <div class="task-description">
 
-      return {
-        next() {
-          return current <= to
-            ? { value: current++, done: false }
-            : { done: true };
-        }
-      };
-    }
-  };
-}
+            <p>
+                Write a generator
+                <code>chunked(arr, size)</code>
+                that yields successive chunks of an array.
+            </p>
 
-for (const n of range(3, 7)) {
-  console.log(n);
-}
+            <p>
+                Example:
+                <code>[...chunked([1,2,3,4,5], 2)]</code>
+                should produce:
+                <code>[[1,2], [3,4], [5]]</code>.
+            </p>
 
-console.log([...range(1, 3)]);
-</code></pre>
+        </div>
 
-    </details>
+        <details class="solution-box">
 
-</section>
-<section class="task-card">
-
-    <h3>Task 2 — Range Generator</h3>
-
-    <div class="task-description">
-
-        <p>
-            Re-do Task 1 using a
-            <code>function*</code> generator.
-        </p>
-
-        <p>
-            Verify the same
-            <code>for...of</code>
-            and spread tests pass.
-        </p>
-
-        <p>
-            Compare the line count with the manual iterator.
-        </p>
-
-    </div>
-
-    <details class="solution-box">
-
-        <summary>View Solution</summary>
+            <summary>View Solution</summary>
 
 <pre><code class="code-panel__label">
-function* rangeGenerator(from, to) {
-  for (let i = from; i <= to; i++) {
-    yield i;
+function* chunked(arr, size) {
+  for (let i = 0; i < arr.length; i += size) {
+    yield arr.slice(i, i + size);
   }
 }
 
-for (const n of rangeGenerator(3, 7)) {
-  console.log(n);
-}
-
-console.log([...rangeGenerator(1, 3)]);
-
-// Generator version is much shorter because
-// JavaScript creates the iterator automatically.
+console.log([...chunked([1, 2, 3, 4, 5], 2)]);
+// [[1,2],[3,4],[5]]
 </code></pre>
 
-    </details>
+        </details>
 
-</section>
+    </section>
 
 
-<section class="task-card">
+    <!-- TASK 2 -->
+    <section class="task-card">
 
-    <h3>Task 3 — Take from Infinite</h3>
+        <h3>Task 2 — Infinite Prime Generator</h3>
 
-    <div class="task-description">
+        <div class="task-description">
 
-        <p>
-            Write <code>take(iter, n)</code>
-            that takes only the first
-            <code>n</code> values from any iterator.
-        </p>
+            <p>
+                Build an infinite generator of prime numbers.
+            </p>
 
-        <p>
-            Build an infinite
-            <code>naturals()</code>
-            generator:
-            <code>1, 2, 3, ...</code>
-        </p>
+            <p>
+                Use:
+                <code>take(primes(), 10)</code>
+                to retrieve the first 10 primes.
+            </p>
 
-        <p>
-            Use:
-            <code>take(naturals(), 5)</code>
-            to safely get:
-            <code>[1, 2, 3, 4, 5]</code>.
-        </p>
+        </div>
 
-    </div>
+        <details class="solution-box">
 
-    <details class="solution-box">
-
-        <summary>View Solution</summary>
+            <summary>View Solution</summary>
 
 <pre><code class="code-panel__label">
-function* naturals() {
-  let n = 1;
+function isPrime(num) {
+  if (num < 2) return false;
+
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) return false;
+  }
+
+  return true;
+}
+
+function* primes() {
+  let n = 2;
 
   while (true) {
-    yield n++;
-  }
-}
-
-function take(iter, count) {
-  const result = [];
-
-  for (const value of iter) {
-    result.push(value);
-
-    if (result.length === count) {
-      break;
+    if (isPrime(n)) {
+      yield n;
     }
-  }
 
-  return result;
+    n++;
+  }
 }
 
-console.log(take(naturals(), 5));
+console.log(take(primes(), 10));
+// [2,3,5,7,11,13,17,19,23,29]
 </code></pre>
 
-    </details>
+        </details>
 
-</section>
+    </section>
 
-<section class="task-card">
 
-    <h3>Bonus — Tree Walk with yield*</h3>
+    <!-- TASK 3 -->
+    <section class="task-card">
 
-    <div class="task-description">
+        <h3>Task 3 — Zip Generator</h3>
 
-        <p>
-            Build a tree structure and traverse it
-            in depth-first order.
-        </p>
+        <div class="task-description">
 
-        <p>
-            Use a generator and
-            <code>yield*</code>
-            for recursion.
-        </p>
+            <p>
+                Write a generator
+                <code>zip(a, b)</code>
+                that combines values from two iterables.
+            </p>
 
-        <p>
-            The result should be:
-            <code>[1, 2, 3, 4]</code>.
-        </p>
+            <p>
+                Stop when either iterable ends.
+            </p>
 
-    </div>
+        </div>
 
-    <details class="solution-box">
+        <details class="solution-box">
 
-        <summary>View Solution</summary>
+            <summary>View Solution</summary>
 
 <pre><code class="code-panel__label">
-const tree = {
-  value: 1,
-  children: [
-    {
-      value: 2,
-      children: [
-        {
-          value: 3,
-          children: []
-        }
-      ]
-    },
-    {
-      value: 4,
-      children: []
+function* zip(a, b) {
+
+  const itA = a[Symbol.iterator]();
+  const itB = b[Symbol.iterator]();
+
+  while (true) {
+
+    const x = itA.next();
+    const y = itB.next();
+
+    if (x.done || y.done) {
+      return;
     }
-  ]
-};
 
-function* walk(node) {
-  yield node.value;
-
-  for (const child of node.children) {
-    yield* walk(child);
+    yield [x.value, y.value];
   }
 }
 
-console.log([...walk(tree)]);
+console.log(
+  [...zip([1, 2, 3], ["a", "b"])]
+);
+
+// [[1,"a"], [2,"b"]]
 </code></pre>
 
-    </details>
+        </details>
 
-</section>
+    </section>
 
-            </article>
 
-        </main>
+    <!-- TASK 4 -->
+    <section class="task-card">
+
+        <h3>Task 4 — Fibonacci Generator</h3>
+
+        <div class="task-description">
+
+            <p>
+                Re-do the Fibonacci homework using a generator.
+            </p>
+
+            <p>
+                Use:
+                <code>take(fibonacci(), 10)</code>
+                to retrieve the first 10 values.
+            </p>
+
+        </div>
+
+        <details class="solution-box">
+
+            <summary>View Solution</summary>
+
+<pre><code class="code-panel__label">
+function* fibonacci() {
+
+  let a = 0;
+  let b = 1;
+
+  while (true) {
+
+    yield a;
+
+    [a, b] = [b, a + b];
+  }
+}
+
+console.log(
+  take(fibonacci(), 10)
+);
+
+// [0,1,1,2,3,5,8,13,21,34]
+</code></pre>
+
+        </details>
+
+    </section>
+
+</article>      
+
+</main>
 
                 <aside class="site-outline">
             <h2>Curriculum</h2>
@@ -459,24 +423,25 @@ console.log([...walk(tree)]);
                     <details>
                         <summary>Day 22 — Map / Set / WeakMap / WeakSet</summary>
                         <ul>
-                            <li><a href="../../day-22/html/lesson.html">Lesson</a></li>
-                            <li><a href="../../day-22/html/hands-on.html">Hands-on</a></li>
-                            <li><a href="../../day-22/html/homework.html">Homework</a></li>
+                            <li><a href="../../day-23/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-23/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-23/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
 
                     <details open>
-                        <summary>Day 23 — Iterators & Generators</summary>
+                        <summary>Day 23 — Iterators and Generators</summary>
                         <ul>
                             <li><a href="lesson.html">Lesson</a></li>
-                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
-                            <li><a href="homework.html">Homework</a></li>
+                            <li><a href="hands-on.html">Hands-on</a></li>
+                            <li><a href="homework.html" aria-current="page">Homework</a></li>
                         </ul>
                     </details>
+
                 </ul>
             </nav>
         </aside>
     </div>
-    <script src="../js/hands-on.js"></script>
+    <script src="../js/homework.js"></script>
 </body>
 </html>  

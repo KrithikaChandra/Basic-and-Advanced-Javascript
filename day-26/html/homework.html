@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Day 23 Hands-on | JavaScript Curriculum</title>
+    <title>Day 26 Homework | JavaScript Curriculum</title>
 
     <link rel="stylesheet" href="../../shared/css/style.css" />
-</head> 
+</head>
 
 <body>
 
@@ -14,56 +14,51 @@
 
         <!-- HEADER -->
         <header class="site-header">
-            <h1>Day 23: Iterators & Generators</h1>
-            <p class="subtitle">Hands-on: In-class Tasks</p>
+            <h1>Day 26: Design Patterns</h1>
+            <p class="subtitle">Homework: Take-home Practice</p>
         </header>
 
 
         <!-- MAIN CONTENT -->
         <main class="site-content">
 
-            <article>
+<article>
 
-                <h2>Hands-on: <code>In-class Tasks</code></h2>
+    <h2>Homework: <code>Functional Programming Practice</code></h2>
 
-                <div class="lab-intro">
-                    <p>
-                        Read each task carefully.
-                        Open the solution to compare your answer.
-                    </p>
+    <div class="lab-intro">
+        <p>
+            Read each task carefully.
+            Open the solution to compare your answer.
+        </p>
 
-                    <p>
-                        Open <strong>DevTools → Console</strong>
-                        to see outputs.
-                    </p>
-                </div>
+        <p>
+            Open <strong>DevTools → Console</strong>
+            to see outputs.
+        </p>
+    </div>
 
+    <!-- TASK 1 -->
 <section class="task-card">
 
-    <h3>Task 1 — Manual Iterator</h3>
+    <h3>Task 1 — EventEmitter with once()</h3>
 
     <div class="task-description">
 
         <p>
-            Build a <code>range(from, to)</code> ITERABLE OBJECT
-            (not a generator) using <code>[Symbol.iterator]</code>.
+            Extend <code>createEmitter()</code>
+            by adding a
+            <code>once(event, fn)</code>
+            method.
         </p>
 
         <p>
-            Test with <code>for...of</code> over
-            <code>range(3, 7)</code>.
+            The listener should automatically
+            unsubscribe after the first emit.
         </p>
 
         <p>
-            Should log:
-            <code>3, 4, 5, 6, 7</code>.
-        </p>
-
-        <p>
-            Test with:
-            <code>[...range(1, 3)]</code>
-            and verify:
-            <code>[1, 2, 3]</code>.
+            Verify that the listener executes only once.
         </p>
 
     </div>
@@ -72,52 +67,85 @@
 
         <summary>View Solution</summary>
 
-<pre><code class="code-panel__label">
-function range(from, to) {
-  return {
-    [Symbol.iterator]() {
-      let current = from;
+<pre><code>
+function createEmitter() {
+  const events = {};
 
-      return {
-        next() {
-          return current <= to
-            ? { value: current++, done: false }
-            : { done: true };
-        }
+  return {
+    on(event, fn) {
+      if (!events[event]) {
+        events[event] = [];
+      }
+
+      events[event].push(fn);
+    },
+
+    off(event, fn) {
+      if (!events[event]) return;
+
+      events[event] =
+        events[event].filter(
+          listener => listener !== fn
+        );
+    },
+
+    once(event, fn) {
+      const wrapper = (...args) => {
+        fn(...args);
+        this.off(event, wrapper);
       };
+
+      this.on(event, wrapper);
+    },
+
+    emit(event, ...args) {
+      if (!events[event]) return;
+
+      events[event].forEach(listener =>
+        listener(...args)
+      );
     }
   };
 }
 
-for (const n of range(3, 7)) {
-  console.log(n);
-}
+const emitter = createEmitter();
 
-console.log([...range(1, 3)]);
+emitter.once("hello", msg =>
+  console.log("Once:", msg)
+);
+
+emitter.emit("hello", "First");
+emitter.emit("hello", "Second");
 </code></pre>
 
     </details>
 
 </section>
+
+    <!-- TASK 2 -->
 <section class="task-card">
 
-    <h3>Task 2 — Range Generator</h3>
+    <h3>Task 2 — Cache Factory with TTL</h3>
 
     <div class="task-description">
 
         <p>
-            Re-do Task 1 using a
-            <code>function*</code> generator.
+            Build a cache factory that accepts a
+            TTL (time-to-live).
         </p>
 
         <p>
-            Verify the same
-            <code>for...of</code>
-            and spread tests pass.
+            Every cached entry should expire
+            automatically after the TTL.
         </p>
 
         <p>
-            Compare the line count with the manual iterator.
+            Implement:
+            <code>set</code>,
+            <code>get</code>,
+            <code>has</code>,
+            and
+            <code>size</code>.
         </p>
 
     </div>
@@ -126,156 +154,134 @@ console.log([...range(1, 3)]);
 
         <summary>View Solution</summary>
 
-<pre><code class="code-panel__label">
-function* rangeGenerator(from, to) {
-  for (let i = from; i <= to; i++) {
-    yield i;
-  }
-}
+<pre><code>
+function cacheFactory(ttl) {
+  const store = new Map();
 
-for (const n of rangeGenerator(3, 7)) {
-  console.log(n);
-}
-
-console.log([...rangeGenerator(1, 3)]);
-
-// Generator version is much shorter because
-// JavaScript creates the iterator automatically.
-</code></pre>
-
-    </details>
-
-</section>
-
-
-<section class="task-card">
-
-    <h3>Task 3 — Take from Infinite</h3>
-
-    <div class="task-description">
-
-        <p>
-            Write <code>take(iter, n)</code>
-            that takes only the first
-            <code>n</code> values from any iterator.
-        </p>
-
-        <p>
-            Build an infinite
-            <code>naturals()</code>
-            generator:
-            <code>1, 2, 3, ...</code>
-        </p>
-
-        <p>
-            Use:
-            <code>take(naturals(), 5)</code>
-            to safely get:
-            <code>[1, 2, 3, 4, 5]</code>.
-        </p>
-
-    </div>
-
-    <details class="solution-box">
-
-        <summary>View Solution</summary>
-
-<pre><code class="code-panel__label">
-function* naturals() {
-  let n = 1;
-
-  while (true) {
-    yield n++;
-  }
-}
-
-function take(iter, count) {
-  const result = [];
-
-  for (const value of iter) {
-    result.push(value);
-
-    if (result.length === count) {
-      break;
-    }
-  }
-
-  return result;
-}
-
-console.log(take(naturals(), 5));
-</code></pre>
-
-    </details>
-
-</section>
-
-<section class="task-card">
-
-    <h3>Bonus — Tree Walk with yield*</h3>
-
-    <div class="task-description">
-
-        <p>
-            Build a tree structure and traverse it
-            in depth-first order.
-        </p>
-
-        <p>
-            Use a generator and
-            <code>yield*</code>
-            for recursion.
-        </p>
-
-        <p>
-            The result should be:
-            <code>[1, 2, 3, 4]</code>.
-        </p>
-
-    </div>
-
-    <details class="solution-box">
-
-        <summary>View Solution</summary>
-
-<pre><code class="code-panel__label">
-const tree = {
-  value: 1,
-  children: [
-    {
-      value: 2,
-      children: [
-        {
-          value: 3,
-          children: []
-        }
-      ]
+  return {
+    set(key, value) {
+      store.set(key, {
+        value,
+        expiresAt: Date.now() + ttl
+      });
     },
-    {
-      value: 4,
-      children: []
+
+    get(key) {
+      const item = store.get(key);
+
+      if (!item) return undefined;
+
+      if (Date.now() > item.expiresAt) {
+        store.delete(key);
+        return undefined;
+      }
+
+      return item.value;
+    },
+
+    has(key) {
+      return this.get(key) !== undefined;
+    },
+
+    size() {
+      return store.size;
     }
-  ]
-};
-
-function* walk(node) {
-  yield node.value;
-
-  for (const child of node.children) {
-    yield* walk(child);
-  }
+  };
 }
 
-console.log([...walk(tree)]);
+const cache = cacheFactory(2000);
+
+cache.set("user", "Krithika");
+
+console.log(cache.get("user"));
 </code></pre>
 
     </details>
 
 </section>
 
-            </article>
+    <!-- TASK 3 -->
+<section class="task-card">
 
-        </main>
+    <h3>Task 3 — Debug Array with Proxy</h3>
+
+    <div class="task-description">
+
+        <p>
+            Wrap an array in a
+            <code>Proxy</code>.
+        </p>
+
+        <p>
+            Log every read, write,
+            and delete operation.
+        </p>
+
+        <p>
+            Use it to help debug
+            unexpected mutations.
+        </p>
+
+    </div>
+
+    <details class="solution-box">
+
+        <summary>View Solution</summary>
+
+<pre><code>
+function debugArray(arr) {
+  return new Proxy(arr, {
+
+    get(target, prop) {
+      console.log(
+        `READ -> ${String(prop)}`
+      );
+
+      return target[prop];
+    },
+
+    set(target, prop, value) {
+      console.log(
+        `WRITE -> ${String(prop)} = ${value}`
+      );
+
+      target[prop] = value;
+
+      return true;
+    },
+
+    deleteProperty(target, prop) {
+      console.log(
+        `DELETE -> ${String(prop)}`
+      );
+
+      delete target[prop];
+
+      return true;
+    }
+
+  });
+}
+
+const numbers =
+  debugArray([10, 20, 30]);
+
+console.log(numbers[0]);
+
+numbers[1] = 99;
+
+numbers.push(40);
+
+delete numbers[2];
+</code></pre>
+
+    </details>
+
+</section>
+
+</article>    
+
+</main>
 
                 <aside class="site-outline">
             <h2>Curriculum</h2>
@@ -459,24 +465,59 @@ console.log([...walk(tree)]);
                     <details>
                         <summary>Day 22 — Map / Set / WeakMap / WeakSet</summary>
                         <ul>
-                            <li><a href="../../day-22/html/lesson.html">Lesson</a></li>
-                            <li><a href="../../day-22/html/hands-on.html">Hands-on</a></li>
-                            <li><a href="../../day-22/html/homework.html">Homework</a></li>
+                            <li><a href="../../day-23/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-23/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-23/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
 
                     <details open>
-                        <summary>Day 23 — Iterators & Generators</summary>
+                        <summary>Day 23 — Iterators and Generators</summary>
                         <ul>
                             <li><a href="lesson.html">Lesson</a></li>
-                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
-                            <li><a href="homework.html">Homework</a></li>
+                            <li><a href="hands-on.html">Hands-on</a></li>
+                            <li><a href="homework.html" aria-current="page">Homework</a></li>
                         </ul>
                     </details>
+                    <details>
+                        <summary>Day 24 — ES Modules</summary>
+                        <ul>
+                            <li><a href="../../day-24/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-24/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-24/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+
+                    <details>
+                        <summary>Day 25 — Functional Programming Patterns</summary>
+                        <ul>
+                            <li><a href="../../day-25/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-25/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-25/html/homework.html" >Homework</a></li>
+                        </ul>
+                    </details>
+                    <details open>
+                        <summary>Day 26 — Design Patterns</summary>
+                        <ul>
+                            <li><a href="lesson.html">Lesson</a></li>
+                            <li><a href="hands-on.html">Hands-on</a></li>
+                            <li><a href="homework.html" aria-current="page">Homework</a></li>
+                        </ul>
+                    </details>
+
+                    <details>
+                        <summary>Day 27 — Performance & Best Practices</summary>
+                        <ul>
+                            <li><a href="../../day-27/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-27/html/hands-on.html" aria-current="page">Hands-on</a></li>
+                            <li><a href="../../day-27/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+
                 </ul>
             </nav>
         </aside>
     </div>
-    <script src="../js/hands-on.js"></script>
+    <script src="../js/homework.js"></script>
 </body>
 </html>  
