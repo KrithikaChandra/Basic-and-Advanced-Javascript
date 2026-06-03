@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Day 23 Hands-on | JavaScript Curriculum</title>
+
+    <title>Day 27 Lesson | JavaScript Curriculum</title>
 
     <link rel="stylesheet" href="../../shared/css/style.css" />
-</head> 
+
+</head>
 
 <body>
 
@@ -14,269 +16,256 @@
 
         <!-- HEADER -->
         <header class="site-header">
-            <h1>Day 23: Iterators & Generators</h1>
-            <p class="subtitle">Hands-on: In-class Tasks</p>
+
+            <h1>Day 27: Performance & Best Practices</h1>
+
+            <p class="subtitle">Lesson:Topics and Demo Code</p>
+
         </header>
-
-
         <!-- MAIN CONTENT -->
         <main class="site-content">
-
             <article>
 
-                <h2>Hands-on: <code>In-class Tasks</code></h2>
+    <h2>Lesson</h2>
 
-                <div class="lab-intro">
-                    <p>
-                        Read each task carefully.
-                        Open the solution to compare your answer.
-                    </p>
+    <div class="lab-intro">
+        <p>
+            Same source as <code>lesson.js</code> (loaded at the bottom of this page).
+            <strong>Topics</strong> are explained below.
+            Open <strong>DevTools (F12) → Console</strong> for output.
+        </p>
+    </div>
 
-                    <p>
-                        Open <strong>DevTools → Console</strong>
-                        to see outputs.
-                    </p>
-                </div>
-
+    <!-- Topic 1 -->
 <section class="task-card">
 
-    <h3>Task 1 — Manual Iterator</h3>
+    <h3>Topic 1 — Debounce vs Throttle</h3>
 
     <div class="task-description">
 
-        <p>
-            Build a <code>range(from, to)</code> ITERABLE OBJECT
-            (not a generator) using <code>[Symbol.iterator]</code>.
-        </p>
-
-        <p>
-            Test with <code>for...of</code> over
-            <code>range(3, 7)</code>.
-        </p>
-
-        <p>
-            Should log:
-            <code>3, 4, 5, 6, 7</code>.
-        </p>
-
-        <p>
-            Test with:
-            <code>[...range(1, 3)]</code>
-            and verify:
-            <code>[1, 2, 3]</code>.
-        </p>
-
-    </div>
-
-    <details class="solution-box">
-
-        <summary>View Solution</summary>
-
 <pre><code class="code-panel__label">
-function range(from, to) {
-  return {
-    [Symbol.iterator]() {
-      let current = from;
+// DEBOUNCE — only fire after delay ms of silence
+function debounce(fn, delay) {
+  let timer;
 
-      return {
-        next() {
-          return current <= to
-            ? { value: current++, done: false }
-            : { done: true };
-        }
-      };
-    }
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(
+      () => fn.apply(this, args),
+      delay
+    );
   };
 }
 
-for (const n of range(3, 7)) {
-  console.log(n);
-}
+// THROTTLE — fire at most once per delay ms
+function throttle(fn, delay) {
+  let lastCall = 0;
 
-console.log([...range(1, 3)]);
+  return function (...args) {
+    const now = Date.now();
+
+    if (now - lastCall < delay) return;
+
+    lastCall = now;
+    fn.apply(this, args);
+  };
+}
 </code></pre>
 
-    </details>
+<pre><code class="language-js">
+// Debounce:
+// Search box, autocomplete, resize events
 
-</section>
-<section class="task-card">
-
-    <h3>Task 2 — Range Generator</h3>
-
-    <div class="task-description">
-
-        <p>
-            Re-do Task 1 using a
-            <code>function*</code> generator.
-        </p>
-
-        <p>
-            Verify the same
-            <code>for...of</code>
-            and spread tests pass.
-        </p>
-
-        <p>
-            Compare the line count with the manual iterator.
-        </p>
+// Throttle:
+// Scroll, mousemove, resize tracking
+</code></pre>
 
     </div>
 
-    <details class="solution-box">
-
-        <summary>View Solution</summary>
-
-<pre><code class="code-panel__label">
-function* rangeGenerator(from, to) {
-  for (let i = from; i <= to; i++) {
-    yield i;
-  }
-}
-
-for (const n of rangeGenerator(3, 7)) {
-  console.log(n);
-}
-
-console.log([...rangeGenerator(1, 3)]);
-
-// Generator version is much shorter because
-// JavaScript creates the iterator automatically.
-</code></pre>
-
-    </details>
-
 </section>
 
-
+    <!-- Topic 2 -->
 <section class="task-card">
 
-    <h3>Task 3 — Take from Infinite</h3>
+    <h3>Topic 2 — Memory Leaks</h3>
 
     <div class="task-description">
 
-        <p>
-            Write <code>take(iter, n)</code>
-            that takes only the first
-            <code>n</code> values from any iterator.
-        </p>
+<pre><code class="language-js">
+// Common causes of memory leaks:
 
-        <p>
-            Build an infinite
-            <code>naturals()</code>
-            generator:
-            <code>1, 2, 3, ...</code>
-        </p>
+// 1. Forgotten globals
+function leaky() {
+  user = { name: "Priya" };
+}
 
-        <p>
-            Use:
-            <code>take(naturals(), 5)</code>
-            to safely get:
-            <code>[1, 2, 3, 4, 5]</code>.
-        </p>
+// 2. Forgotten intervals
+const id = setInterval(() => {
+  doStuff();
+}, 1000);
+
+clearInterval(id);
+
+// 3. Detached DOM listeners
+const btn = document.querySelector("#save");
+
+btn.addEventListener("click", handler);
+
+btn.remove();
+
+// 4. Closures holding large data
+function makeHandler(largeData) {
+  return () => largeData.length;
+}
+</code></pre>
+
+<pre><code class="language-js">
+// Fixes:
+// - Use let/const
+// - Clear timers
+// - Remove listeners
+// - Avoid unnecessary references
+</code></pre>
 
     </div>
 
-    <details class="solution-box">
-
-        <summary>View Solution</summary>
-
-<pre><code class="code-panel__label">
-function* naturals() {
-  let n = 1;
-
-  while (true) {
-    yield n++;
-  }
-}
-
-function take(iter, count) {
-  const result = [];
-
-  for (const value of iter) {
-    result.push(value);
-
-    if (result.length === count) {
-      break;
-    }
-  }
-
-  return result;
-}
-
-console.log(take(naturals(), 5));
-</code></pre>
-
-    </details>
-
 </section>
 
+    <!-- Topic 3 -->
 <section class="task-card">
 
-    <h3>Bonus — Tree Walk with yield*</h3>
+    <h3>Topic 3 — Garbage Collection</h3>
 
     <div class="task-description">
 
-        <p>
-            Build a tree structure and traverse it
-            in depth-first order.
-        </p>
+<pre><code class="language-js">
+// JavaScript uses Tracing Garbage Collection
 
-        <p>
-            Use a generator and
-            <code>yield*</code>
-            for recursion.
-        </p>
+// Roots:
+// - Globals
+// - Call Stack
+// - Active Closures
 
-        <p>
-            The result should be:
-            <code>[1, 2, 3, 4]</code>.
-        </p>
+// Reachable objects stay alive.
+// Unreachable objects are collected.
+
+// Modern engines use Generational GC:
+// Young Generation
+// Old Generation
+</code></pre>
 
     </div>
 
-    <details class="solution-box">
+</section>
 
-        <summary>View Solution</summary>
+    <!-- Topic 4 -->
+<section class="task-card">
+
+    <h3>Topic 4 — DevTools Performance Tab</h3>
+
+    <div class="task-description">
 
 <pre><code class="code-panel__label">
-const tree = {
-  value: 1,
-  children: [
-    {
-      value: 2,
-      children: [
-        {
-          value: 3,
-          children: []
-        }
-      ]
-    },
-    {
-      value: 4,
-      children: []
-    }
-  ]
-};
+performance.mark("compute-start");
 
-function* walk(node) {
-  yield node.value;
+expensiveComputation();
 
-  for (const child of node.children) {
-    yield* walk(child);
-  }
-}
+performance.mark("compute-end");
 
-console.log([...walk(tree)]);
+performance.measure(
+  "compute",
+  "compute-start",
+  "compute-end"
+);
 </code></pre>
 
-    </details>
+<pre><code class="language-js">
+// Performance Tab shows:
+
+// Frames
+// Main Thread
+// Network
+// Memory
+// JS Heap
+
+// User Timing API helps measure
+// custom application code.
+</code></pre>
+
+    </div>
 
 </section>
 
-            </article>
+    <!-- Topic 5 -->
+<section class="task-card">
 
+    <h3>Topic 5 — Security: XSS, eval & Sanitisation</h3>
+
+    <div class="task-description">
+
+<pre><code class="code-panel__label">
+const userComment =
+  '&lt;img src=x onerror="alert(`pwned`)"&gt;';
+
+// UNSAFE
+commentEl.innerHTML = userComment;
+
+// SAFE
+commentEl.textContent = userComment;
+</code></pre>
+
+<pre><code class="language-js">
+// Never use:
+
+eval(userInput);
+
+new Function(userInput);
+
+// Always use:
+
+JSON.parse(serverJSON);
+
+// Sanitise HTML before rendering.
+</code></pre>
+
+    </div>
+
+</section>
+
+    <!-- Topic 6 -->
+<section class="task-card">
+
+    <h3>Topic 6 — ESLint & Prettier</h3>
+
+    <div class="task-description">
+
+<pre><code class="language-js">
+// Install
+
+npm i -D eslint prettier eslint-config-prettier
+
+npx eslint --init
+</code></pre>
+
+<pre><code class="language-js">
+// Benefits:
+
+// ✔ catches unused variables
+// ✔ catches no-undef
+// ✔ prefer-const
+// ✔ React Hooks rules
+// ✔ formatting consistency
+
+// VS Code:
+// "editor.formatOnSave": true
+</code></pre>
+
+    </div>
+
+</section>
+
+</article>
         </main>
-
                 <aside class="site-outline">
             <h2>Curriculum</h2>
             <nav>
@@ -459,24 +448,58 @@ console.log([...walk(tree)]);
                     <details>
                         <summary>Day 22 — Map / Set / WeakMap / WeakSet</summary>
                         <ul>
-                            <li><a href="../../day-22/html/lesson.html">Lesson</a></li>
-                            <li><a href="../../day-22/html/hands-on.html">Hands-on</a></li>
-                            <li><a href="../../day-22/html/homework.html">Homework</a></li>
+                            <li><a href="lesson.html" >Lesson</a></li>
+                            <li><a href="hands-on.html">Hands-on</a></li>
+                            <li><a href="homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+
+                    <details >
+                        <summary>Day 23 — Iterators and Generators</summary>
+                        <ul>
+                            <li><a href="../../day-23/html/lesson.html" aria-current="page">Lesson</a></li>
+                            <li><a href="../../day-23/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-23/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 24 — ES Modules</summary>
+                        <ul>
+                            <li><a href="../../day-24/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-24/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-24/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 25 — Functional Programming Patterns</summary>
+                        <ul>
+                            <li><a href="../../day-24/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-24/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-24/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 26 — Design Patterns</summary>
+                        <ul>
+                            <li><a href="../../day-24/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-24/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-24/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
 
                     <details open>
-                        <summary>Day 23 — Iterators & Generators</summary>
+                        <summary>Day 27 — Performance & Best Practices</summary>
                         <ul>
-                            <li><a href="lesson.html">Lesson</a></li>
-                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
+                            <li><a href="lesson.html" aria-current="page">Lesson</a></li>
+                            <li><a href="hands-on.html">Hands-on</a></li>
                             <li><a href="homework.html">Homework</a></li>
                         </ul>
                     </details>
+
                 </ul>
             </nav>
         </aside>
     </div>
-    <script src="../js/hands-on.js"></script>
+    <script src="../js/lesson.js"></script>
 </body>
 </html>  

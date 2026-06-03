@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Day 23 Hands-on | JavaScript Curriculum</title>
+    <title>Day 25 Homework | JavaScript Curriculum</title>
 
     <link rel="stylesheet" href="../../shared/css/style.css" />
-</head> 
+</head>
 
 <body>
 
@@ -14,268 +14,285 @@
 
         <!-- HEADER -->
         <header class="site-header">
-            <h1>Day 23: Iterators & Generators</h1>
-            <p class="subtitle">Hands-on: In-class Tasks</p>
+            <h1>Day 25: Functional Programming</h1>
+            <p class="subtitle">Homework: Take-home Practice</p>
         </header>
 
 
         <!-- MAIN CONTENT -->
         <main class="site-content">
 
-            <article>
+<article>
 
-                <h2>Hands-on: <code>In-class Tasks</code></h2>
+    <h2>Homework: <code>Functional Programming Practice</code></h2>
 
-                <div class="lab-intro">
-                    <p>
-                        Read each task carefully.
-                        Open the solution to compare your answer.
-                    </p>
-
-                    <p>
-                        Open <strong>DevTools → Console</strong>
-                        to see outputs.
-                    </p>
-                </div>
-
-<section class="task-card">
-
-    <h3>Task 1 — Manual Iterator</h3>
-
-    <div class="task-description">
-
+    <div class="lab-intro">
         <p>
-            Build a <code>range(from, to)</code> ITERABLE OBJECT
-            (not a generator) using <code>[Symbol.iterator]</code>.
+            Read each task carefully.
+            Open the solution to compare your answer.
         </p>
 
         <p>
-            Test with <code>for...of</code> over
-            <code>range(3, 7)</code>.
+            Open <strong>DevTools → Console</strong>
+            to see outputs.
         </p>
-
-        <p>
-            Should log:
-            <code>3, 4, 5, 6, 7</code>.
-        </p>
-
-        <p>
-            Test with:
-            <code>[...range(1, 3)]</code>
-            and verify:
-            <code>[1, 2, 3]</code>.
-        </p>
-
     </div>
 
-    <details class="solution-box">
+    <!-- TASK 1 -->
+    <section class="task-card">
 
-        <summary>View Solution</summary>
+        <h3>Task 1 — Implement compose()</h3>
+
+        <div class="task-description">
+
+            <p>
+                Implement a
+                <code>compose(...fns)</code>
+                function that executes functions
+                from right to left.
+            </p>
+
+            <p>
+                Use the functions:
+                <code>addOne</code>,
+                <code>square</code>,
+                and
+                <code>negate</code>.
+            </p>
+
+            <p>
+                Verify:
+                <code>compose(negate, square, addOne)(5)</code>
+                returns
+                <code>-36</code>.
+            </p>
+
+            <p>
+                Compare the execution order with
+                <code>pipe()</code>.
+            </p>
+
+        </div>
+
+        <details class="solution-box">
+
+            <summary>View Solution</summary>
 
 <pre><code class="code-panel__label">
-function range(from, to) {
-  return {
-    [Symbol.iterator]() {
-      let current = from;
+function compose(...fns) {
+  return input =>
+    fns.reduceRight((acc, fn) => fn(acc), input);
+}
 
-      return {
-        next() {
-          return current <= to
-            ? { value: current++, done: false }
-            : { done: true };
-        }
-      };
+const addOne = x => x + 1;
+const square = x => x * x;
+const negate = x => -x;
+
+const result = compose(
+  negate,
+  square,
+  addOne
+);
+
+console.log(result(5));
+// -36
+</code></pre>
+
+        </details>
+
+    </section>
+
+    <!-- TASK 2 -->
+    <section class="task-card">
+
+        <h3>Task 2 — Refactor to a Pure Function</h3>
+
+        <div class="task-description">
+
+            <p>
+                Convert an impure array-sorting function
+                into a pure version.
+            </p>
+
+            <p>
+                The original function should mutate
+                the array.
+            </p>
+
+            <p>
+                The new version should leave the
+                original array unchanged.
+            </p>
+
+            <p>
+                Verify both behaviours in the console.
+            </p>
+
+        </div>
+
+        <details class="solution-box">
+
+            <summary>View Solution</summary>
+
+<pre><code class="code-panel__label">
+// Impure
+function sortNumbers(arr) {
+  return arr.sort((a, b) => a - b);
+}
+
+const nums1 = [3, 1, 2];
+sortNumbers(nums1);
+
+console.log(nums1);
+// [1, 2, 3]
+
+// Pure
+function sortNumbersPure(arr) {
+  return [...arr].sort((a, b) => a - b);
+}
+
+const nums2 = [3, 1, 2];
+const sorted = sortNumbersPure(nums2);
+
+console.log(nums2);
+// [3, 1, 2]
+
+console.log(sorted);
+// [1, 2, 3]
+</code></pre>
+
+        </details>
+
+    </section>
+
+    <!-- TASK 3 -->
+    <section class="task-card">
+
+        <h3>Task 3 — Generic curry()</h3>
+
+        <div class="task-description">
+
+            <p>
+                Implement a generic
+                <code>curry(fn)</code>
+                utility.
+            </p>
+
+            <p>
+                It should work with any function
+                that accepts multiple arguments.
+            </p>
+
+            <p>
+                Test it with:
+                <code>curry(add)(1)(2)(3)</code>.
+            </p>
+
+        </div>
+
+        <details class="solution-box">
+
+            <summary>View Solution</summary>
+
+<pre><code class="code-panel__label">
+function curry(fn) {
+  return function curried(...args) {
+
+    if (args.length >= fn.length) {
+      return fn(...args);
     }
+
+    return (...nextArgs) =>
+      curried(...args, ...nextArgs);
   };
 }
 
-for (const n of range(3, 7)) {
-  console.log(n);
+function add(a, b, c) {
+  return a + b + c;
 }
 
-console.log([...range(1, 3)]);
+const curriedAdd = curry(add);
+
+console.log(
+  curriedAdd(1)(2)(3)
+);
+// 6
 </code></pre>
 
-    </details>
+        </details>
 
-</section>
-<section class="task-card">
+    </section>
 
-    <h3>Task 2 — Range Generator</h3>
+    <!-- TASK 4 -->
+    <section class="task-card">
 
-    <div class="task-description">
+        <h3>Task 4 — Average Order Value Pipeline</h3>
 
-        <p>
-            Re-do Task 1 using a
-            <code>function*</code> generator.
-        </p>
+        <div class="task-description">
 
-        <p>
-            Verify the same
-            <code>for...of</code>
-            and spread tests pass.
-        </p>
+            <p>
+                Given an array of order objects,
+                calculate the average order value.
+            </p>
 
-        <p>
-            Compare the line count with the manual iterator.
-        </p>
+            <p>
+                Exclude GST and use only:
+                <code>price × quantity</code>.
+            </p>
 
-    </div>
+            <p>
+                Build the solution using small
+                pure functions.
+            </p>
 
-    <details class="solution-box">
+            <p>
+                Compute the final average value.
+            </p>
 
-        <summary>View Solution</summary>
+        </div>
+
+        <details class="solution-box">
+
+            <summary>View Solution</summary>
 
 <pre><code class="code-panel__label">
-function* rangeGenerator(from, to) {
-  for (let i = from; i <= to; i++) {
-    yield i;
-  }
-}
+const orders = [
+  { id: 1, item: "Pen",  price: 50,  quantity: 2 },
+  { id: 2, item: "Book", price: 200, quantity: 1 },
+  { id: 3, item: "Bag",  price: 800, quantity: 1 },
+  { id: 4, item: "Mug",  price: 150, quantity: 3 },
+];
 
-for (const n of rangeGenerator(3, 7)) {
-  console.log(n);
-}
+const orderValue = order =>
+  order.price * order.quantity;
 
-console.log([...rangeGenerator(1, 3)]);
+const sum = numbers =>
+  numbers.reduce(
+    (total, num) => total + num,
+    0
+  );
 
-// Generator version is much shorter because
-// JavaScript creates the iterator automatically.
+const average = numbers =>
+  sum(numbers) / numbers.length;
+
+const averageOrderValue =
+  average(
+    orders.map(orderValue)
+  );
+
+console.log(
+  averageOrderValue
+);
+// 387.5
 </code></pre>
 
-    </details>
+        </details>
 
-</section>
+    </section>
 
+</article>    
 
-<section class="task-card">
-
-    <h3>Task 3 — Take from Infinite</h3>
-
-    <div class="task-description">
-
-        <p>
-            Write <code>take(iter, n)</code>
-            that takes only the first
-            <code>n</code> values from any iterator.
-        </p>
-
-        <p>
-            Build an infinite
-            <code>naturals()</code>
-            generator:
-            <code>1, 2, 3, ...</code>
-        </p>
-
-        <p>
-            Use:
-            <code>take(naturals(), 5)</code>
-            to safely get:
-            <code>[1, 2, 3, 4, 5]</code>.
-        </p>
-
-    </div>
-
-    <details class="solution-box">
-
-        <summary>View Solution</summary>
-
-<pre><code class="code-panel__label">
-function* naturals() {
-  let n = 1;
-
-  while (true) {
-    yield n++;
-  }
-}
-
-function take(iter, count) {
-  const result = [];
-
-  for (const value of iter) {
-    result.push(value);
-
-    if (result.length === count) {
-      break;
-    }
-  }
-
-  return result;
-}
-
-console.log(take(naturals(), 5));
-</code></pre>
-
-    </details>
-
-</section>
-
-<section class="task-card">
-
-    <h3>Bonus — Tree Walk with yield*</h3>
-
-    <div class="task-description">
-
-        <p>
-            Build a tree structure and traverse it
-            in depth-first order.
-        </p>
-
-        <p>
-            Use a generator and
-            <code>yield*</code>
-            for recursion.
-        </p>
-
-        <p>
-            The result should be:
-            <code>[1, 2, 3, 4]</code>.
-        </p>
-
-    </div>
-
-    <details class="solution-box">
-
-        <summary>View Solution</summary>
-
-<pre><code class="code-panel__label">
-const tree = {
-  value: 1,
-  children: [
-    {
-      value: 2,
-      children: [
-        {
-          value: 3,
-          children: []
-        }
-      ]
-    },
-    {
-      value: 4,
-      children: []
-    }
-  ]
-};
-
-function* walk(node) {
-  yield node.value;
-
-  for (const child of node.children) {
-    yield* walk(child);
-  }
-}
-
-console.log([...walk(tree)]);
-</code></pre>
-
-    </details>
-
-</section>
-
-            </article>
-
-        </main>
+</main>
 
                 <aside class="site-outline">
             <h2>Curriculum</h2>
@@ -459,24 +476,59 @@ console.log([...walk(tree)]);
                     <details>
                         <summary>Day 22 — Map / Set / WeakMap / WeakSet</summary>
                         <ul>
-                            <li><a href="../../day-22/html/lesson.html">Lesson</a></li>
-                            <li><a href="../../day-22/html/hands-on.html">Hands-on</a></li>
-                            <li><a href="../../day-22/html/homework.html">Homework</a></li>
+                            <li><a href="../../day-23/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-23/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-23/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+
+                    <details>
+                        <summary>Day 23 — Iterators and Generators</summary>
+                        <ul>
+                            <li><a href="../../day-23/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-23/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-23/html/homework.html" aria-current="page">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 24 — ES Modules</summary>
+                        <ul>
+                            <li><a href="../../day-24/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-24/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-24/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+
+                    <details>
+                        <summary>Day 25 — Functional Programming Patterns</summary>
+                        <ul>
+                            <li><a href="../../day-25/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-25/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-25/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 26 — Design Patterns</summary>
+                        <ul>
+                            <li><a href="../../day-26/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-26/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-26/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
 
                     <details open>
-                        <summary>Day 23 — Iterators & Generators</summary>
+                        <summary>Day 27 — Performance & Best Practices</summary>
                         <ul>
                             <li><a href="lesson.html">Lesson</a></li>
-                            <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
-                            <li><a href="homework.html">Homework</a></li>
+                            <li><a href="hands-on.html">Hands-on</a></li>
+                            <li><a href="homework.html" aria-current="page">Homework</a></li>
                         </ul>
                     </details>
+
                 </ul>
             </nav>
         </aside>
     </div>
-    <script src="../js/hands-on.js"></script>
+    <script src="../js/homework.js"></script>
 </body>
 </html>  

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Day 23 Hands-on | JavaScript Curriculum</title>
+    <title>Day 25 Hands-on | JavaScript Curriculum</title>
 
     <link rel="stylesheet" href="../../shared/css/style.css" />
 </head> 
@@ -14,7 +14,7 @@
 
         <!-- HEADER -->
         <header class="site-header">
-            <h1>Day 23: Iterators & Generators</h1>
+            <h1>Day 25: Functional Programming Patterns </h1>
             <p class="subtitle">Hands-on: In-class Tasks</p>
         </header>
 
@@ -40,30 +40,84 @@
 
 <section class="task-card">
 
-    <h3>Task 1 — Manual Iterator</h3>
+    <h3>Task 1 — Pure or Impure?</h3>
 
     <div class="task-description">
 
         <p>
-            Build a <code>range(from, to)</code> ITERABLE OBJECT
-            (not a generator) using <code>[Symbol.iterator]</code>.
+            Given the following functions, identify whether each is
+            <strong>pure</strong> or <strong>impure</strong>.
+        </p>
+
+        <ul>
+            <li><code>(a, b) => a + b</code></li>
+            <li><code>() => Date.now()</code></li>
+            <li><code>(arr) => arr.sort()</code></li>
+            <li><code>(arr) => [...arr].sort()</code></li>
+            <li><code>(x) => { console.log(x); return x; }</code></li>
+        </ul>
+
+        <p>
+            For impure functions, explain why they are impure.
+        </p>
+
+    </div>
+
+    <details class="solution-box">
+
+        <summary>View Solution</summary>
+
+<pre><code class="code-panel__label">
+// (a, b) => a + b
+// Pure
+
+// () => Date.now()
+// Impure — returns different values each call
+
+// (arr) => arr.sort()
+// Impure — mutates the original array
+
+// (arr) => [...arr].sort()
+// Pure — creates and sorts a copy
+
+// (x) => { console.log(x); return x; }
+// Impure — has a side effect (console output)
+</code></pre>
+
+    </details>
+
+</section>
+<section class="task-card">
+
+    <h3>Task 2 — Pipe from Scratch</h3>
+
+    <div class="task-description">
+
+        <p>
+            Implement <code>pipe(...fns)</code>.
         </p>
 
         <p>
-            Test with <code>for...of</code> over
-            <code>range(3, 7)</code>.
+            The returned function should pass a value through
+            each function from left to right.
         </p>
 
         <p>
-            Should log:
-            <code>3, 4, 5, 6, 7</code>.
+            Create:
+            <code>addOne</code>,
+            <code>square</code>,
+            and
+            <code>negate</code>.
         </p>
 
         <p>
             Test with:
-            <code>[...range(1, 3)]</code>
-            and verify:
-            <code>[1, 2, 3]</code>.
+            <code>pipe(addOne, square, negate)(5)</code>
+        </p>
+
+        <p>
+            Expected output:
+            <code>-36</code>
         </p>
 
     </div>
@@ -73,137 +127,23 @@
         <summary>View Solution</summary>
 
 <pre><code class="code-panel__label">
-function range(from, to) {
-  return {
-    [Symbol.iterator]() {
-      let current = from;
-
-      return {
-        next() {
-          return current <= to
-            ? { value: current++, done: false }
-            : { done: true };
-        }
-      };
-    }
-  };
+function pipe(...fns) {
+  return input =>
+    fns.reduce((acc, fn) => fn(acc), input);
 }
 
-for (const n of range(3, 7)) {
-  console.log(n);
-}
+const addOne = x => x + 1;
+const square = x => x * x;
+const negate = x => -x;
 
-console.log([...range(1, 3)]);
-</code></pre>
+const result = pipe(
+  addOne,
+  square,
+  negate
+);
 
-    </details>
-
-</section>
-<section class="task-card">
-
-    <h3>Task 2 — Range Generator</h3>
-
-    <div class="task-description">
-
-        <p>
-            Re-do Task 1 using a
-            <code>function*</code> generator.
-        </p>
-
-        <p>
-            Verify the same
-            <code>for...of</code>
-            and spread tests pass.
-        </p>
-
-        <p>
-            Compare the line count with the manual iterator.
-        </p>
-
-    </div>
-
-    <details class="solution-box">
-
-        <summary>View Solution</summary>
-
-<pre><code class="code-panel__label">
-function* rangeGenerator(from, to) {
-  for (let i = from; i <= to; i++) {
-    yield i;
-  }
-}
-
-for (const n of rangeGenerator(3, 7)) {
-  console.log(n);
-}
-
-console.log([...rangeGenerator(1, 3)]);
-
-// Generator version is much shorter because
-// JavaScript creates the iterator automatically.
-</code></pre>
-
-    </details>
-
-</section>
-
-
-<section class="task-card">
-
-    <h3>Task 3 — Take from Infinite</h3>
-
-    <div class="task-description">
-
-        <p>
-            Write <code>take(iter, n)</code>
-            that takes only the first
-            <code>n</code> values from any iterator.
-        </p>
-
-        <p>
-            Build an infinite
-            <code>naturals()</code>
-            generator:
-            <code>1, 2, 3, ...</code>
-        </p>
-
-        <p>
-            Use:
-            <code>take(naturals(), 5)</code>
-            to safely get:
-            <code>[1, 2, 3, 4, 5]</code>.
-        </p>
-
-    </div>
-
-    <details class="solution-box">
-
-        <summary>View Solution</summary>
-
-<pre><code class="code-panel__label">
-function* naturals() {
-  let n = 1;
-
-  while (true) {
-    yield n++;
-  }
-}
-
-function take(iter, count) {
-  const result = [];
-
-  for (const value of iter) {
-    result.push(value);
-
-    if (result.length === count) {
-      break;
-    }
-  }
-
-  return result;
-}
-
-console.log(take(naturals(), 5));
+console.log(result(5));
+// -36
 </code></pre>
 
     </details>
@@ -212,24 +152,35 @@ console.log(take(naturals(), 5));
 
 <section class="task-card">
 
-    <h3>Bonus — Tree Walk with yield*</h3>
+    <h3>Task 3 — Curry It</h3>
 
     <div class="task-description">
 
         <p>
-            Build a tree structure and traverse it
-            in depth-first order.
+            Write a curried function:
+            <code>volume(l)(w)(h)</code>
         </p>
 
         <p>
-            Use a generator and
-            <code>yield*</code>
-            for recursion.
+            It should return:
+            <code>l * w * h</code>.
         </p>
 
         <p>
-            The result should be:
-            <code>[1, 2, 3, 4]</code>.
+            Pre-apply:
+            <code>l = 5</code>
+            and
+            <code>w = 3</code>.
+        </p>
+
+        <p>
+            Finally call it with:
+            <code>h = 2</code>.
+        </p>
+
+        <p>
+            Verify the result is:
+            <code>30</code>.
         </p>
 
     </div>
@@ -239,34 +190,103 @@ console.log(take(naturals(), 5));
         <summary>View Solution</summary>
 
 <pre><code class="code-panel__label">
-const tree = {
-  value: 1,
-  children: [
-    {
-      value: 2,
-      children: [
-        {
-          value: 3,
-          children: []
-        }
-      ]
-    },
-    {
-      value: 4,
-      children: []
-    }
-  ]
-};
+const volume =
+  l => w => h =>
+    l * w * h;
 
-function* walk(node) {
-  yield node.value;
+const lengthOf5 = volume(5);
 
-  for (const child of node.children) {
-    yield* walk(child);
-  }
+const lengthOf5width3 =
+  lengthOf5(3);
+
+console.log(
+  lengthOf5width3(2)
+);
+
+// 30
+</code></pre>
+
+    </details>
+
+</section>
+
+<section class="task-card">
+
+    <h3>Bonus — Real Pipeline</h3>
+
+    <div class="task-description">
+
+        <p>
+            Given an array of users:
+        </p>
+
+        <ul>
+            <li>Filter users with age ≥ 18</li>
+            <li>Capitalize names</li>
+            <li>Sort by age descending</li>
+            <li>Return only the names</li>
+        </ul>
+
+        <p>
+            Use
+            <code>pipe</code>
+            and small pure functions only.
+        </p>
+
+    </div>
+
+    <details class="solution-box">
+
+        <summary>View Solution</summary>
+
+<pre><code class="code-panel__label">
+const users = [
+  { name: "priya", age: 25 },
+  { name: "aarav", age: 17 },
+  { name: "riya", age: 30 }
+];
+
+function pipe(...fns) {
+  return input =>
+    fns.reduce(
+      (acc, fn) => fn(acc),
+      input
+    );
 }
 
-console.log([...walk(tree)]);
+const adults = users =>
+  users.filter(
+    user => user.age >= 18
+  );
+
+const capitalizeNames = users =>
+  users.map(user => ({
+    ...user,
+    name:
+      user.name[0].toUpperCase() +
+      user.name.slice(1)
+  }));
+
+const sortByAgeDesc = users =>
+  [...users].sort(
+    (a, b) => b.age - a.age
+  );
+
+const namesOnly = users =>
+  users.map(user => user.name);
+
+const getNames = pipe(
+  adults,
+  capitalizeNames,
+  sortByAgeDesc,
+  namesOnly
+);
+
+console.log(
+  getNames(users)
+);
+
+// ["Riya", "Priya"]
 </code></pre>
 
     </details>
@@ -464,9 +484,25 @@ console.log([...walk(tree)]);
                             <li><a href="../../day-22/html/homework.html">Homework</a></li>
                         </ul>
                     </details>
+                    <details>
+                        <summary>Day 23 — Iterators and Generators</summary>
+                        <ul>
+                            <li><a href="../../day-23/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-23/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-23/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
+                    <details>
+                        <summary>Day 24 — ES Modules</summary>
+                        <ul>
+                            <li><a href="../../day-24/html/lesson.html">Lesson</a></li>
+                            <li><a href="../../day-24/html/hands-on.html">Hands-on</a></li>
+                            <li><a href="../../day-24/html/homework.html">Homework</a></li>
+                        </ul>
+                    </details>
 
                     <details open>
-                        <summary>Day 23 — Iterators & Generators</summary>
+                        <summary>Day 25 — Functional Programming Patterns</summary>
                         <ul>
                             <li><a href="lesson.html">Lesson</a></li>
                             <li><a href="hands-on.html" aria-current="page">Hands-on</a></li>
